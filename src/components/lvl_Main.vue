@@ -1,14 +1,14 @@
 <template>
-  <div id="headerComp">
-    Place for header    
+  <div id="lvl_Main" class="lvl_container">
+    <div id="subTitle">{{texts.subTitle}}</div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'headerComp',
+  name: 'lvl_Main',
   props: {
-    skin: String
+    texts: Object
   }
 }
 </script>
@@ -18,5 +18,9 @@ export default {
 #headerComp {  
   height: 100px;
   background-color: grey
+}
+#subTitle{
+  margin-left: 10px;
+  font-weight: bold;
 }
 </style>

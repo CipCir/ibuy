@@ -1,12 +1,12 @@
 <template>
-  <div id="headerComp">
-    Place for header    
+  <div id="footerComp">
+    Place for footer    
   </div>
 </template>
 
 <script>
 export default {
-  name: 'headerComp',
+  name: 'footerComp',
   props: {
     skin: String
   }
@@ -15,7 +15,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-#headerComp {  
+#footerComp {  
   height: 100px;
   background-color: grey
 }

@@ -25,6 +25,9 @@ var inputObj = {
          }
     },
     texts:{
+        lvl_Main:{
+           subTitle:"All categories" 
+        }
 
     }
 }

@@ -3,18 +3,26 @@
     <headerComp
       :skin="setup.skin"
     />
-    body
-    footer
+    <lvlMain
+      v-if="controls.showLevel=='Main'"
+      :texts=inputObj.texts.lvl_Main
+    />
+
+    <footerComp/>
   </div>
 </template>
 
 <script>
 import headerComp from './components/headerComp.vue'
+import lvlMain from './components/lvl_Main.vue'
+import footerComp from './components/footerComp.vue'
 
 export default {
   name: 'app',
   components: {
-    headerComp
+    headerComp,
+    footerComp,
+    lvlMain
   },
   data(){
     return{
@@ -34,3 +42,11 @@ export default {
 
 }
 </script>
+<style>
+#app{
+  width: 100%
+}
+.lvl_container{
+  width: 100%
+}
+</style>
