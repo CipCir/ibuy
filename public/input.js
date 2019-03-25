@@ -27,6 +27,15 @@ var inputObj = {
     texts:{
         lvl_Main:{
            subTitle:"All categories" 
+        },
+        lvl_Aisle:{
+            subTitle:"The baby store" 
+        },
+        lvl_Shelf:{
+            subTitle:"The shelf level" 
+        },
+        lvl_Prod:{
+            subTitle:"The product level" 
         }
 
     }
