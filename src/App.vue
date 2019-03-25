@@ -1,7 +1,10 @@
 <template>
   <div id="app">
-    <headerComp
-      :skin="setup.skin"
+    <headerComp      
+      :texts="inputObj.texts.Header"
+      :skin="inputObj.generalInfo.skin"
+      :skinProps="inputObj.generalInfo.skinProps"
+      :nr_cart="5"
     />
     <lvlMain
       v-if="controls.showLevel=='Main'"
@@ -34,7 +37,8 @@
 
       v-on:selProd="SetShelfCat($event)"
       v-on:updtLvl="UpdateLvl($event)"
-    />
+     
+    />   
 
     <footerComp/>
   </div>
@@ -51,7 +55,7 @@ import lvlProd from './components/lvl_4_Prod.vue'
 import footerComp from './components/footerComp.vue'
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
     headerComp,
     footerComp,
@@ -60,14 +64,11 @@ export default {
     lvlShelf,
     lvlProd
   },
-  data(){
-    return{
+  data() {
+    return {
       inputObj,
       prodDB,
-      output:{},
-      setup:{
-        skin:"Amazon"
-      },
+      output:{},      
       controls:{
         showLevel:"Main", // "Aisle","Shelf","Product","Enlarge","Cart"
         selected1_Cat:null,
@@ -95,14 +96,13 @@ export default {
   // created(){
   //   console.log(inputObj)
   // }
-
-}
+};
 </script>
 <style>
-#app{
-  width: 100%
+#app {
+  width: 100%;
 }
-.lvl_container{
-  width: 100%
+.lvl_container {
+  width: 100%;
 }
 </style>

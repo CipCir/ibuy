@@ -1,22 +1,155 @@
 <template>
   <div id="headerComp">
-    Place for header    
+    <div class="row_header_first row" v-bind:style="{'background-color':bk_color}">
+      <div class="col s10 m3 l3 valign-wrapper" v-bind:style="{'background-color':bk_color}">
+        <img :src="logo_img" alt="logo image here">
+      </div>
+      <div class="col hide-on-med-and-up s1 valign-wrapper" v-bind:style="{'background-color':bk_color,'color':cart_color}">{{nr_cart}} <i class="material-icons small ">shopping_cart</i></div>
+      <div
+        class="col s12 l6 m6 valign-wrapper"
+        v-bind:style="{'background-color':bk_color}"
+        v-if="show_search"
+      >
+        <div
+          class="col s2 searchbar valign-wrapper"
+          v-html="texts.search_all_text"
+          v-bind:style="{'background-color':search_color1}"
+        ></div>
+        <div
+          class="col s12 searchbar valign-wrapper"
+          v-bind:style="{'background-color':search_color2}"
+        >
+          <input type="text" id="search_txt" :placeholder="texts.placeholder_search"/>
+        </div>
+        <div
+          class="col s2 searchbar valign-wrapper"
+          v-bind:style="{'background-color':search_color3}"
+        >
+          <img :src="'./img/search.png'">
+        </div>
+      </div>
+      <div
+        class="col hide-on-small-only m3 l3 right right-align"
+        v-bind:style="{'background-color':bk_color}"
+        v-html="texts.opt0"
+      ></div>
+    </div>
+    <div class="row_header_second row" v-bind:style="{'background-color':bk_color}">
+      <div
+        class="col hide-on-small-only m3 l3"
+        v-bind:style="{'background-color':bk_color}"
+        v-html="texts.opt1"
+      ></div>
+      <div
+        class="col hide-on-small-only m6 l6"
+        v-bind:style="{'background-color':bk_color}"
+        v-html="texts.opt2"
+      ></div>
+      <div
+        class="col hide-on-small-only m2 l2"
+        v-bind:style="{'background-color':bk_color}"
+        v-html="texts.opt3"
+      ></div>
+      <div class="col hide-on-small-only m1 l1 valign-wrapper" v-bind:style="{'background-color':bk_color,'color':cart_color}">{{nr_cart}} <i class="material-icons small ">shopping_cart</i></div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'headerComp',
+  name: "headerComp",
   props: {
-    skin: String
+    skin: String,
+    skinProps: Object,
+    texts: Object,
+    nr_cart:Number
+  },
+  data() {
+    return {
+      logo_img: "",
+      bk_color: "",
+      show_search: false,
+      search_color1: "#f3f3f3",
+      search_color2: "white",
+      search_color3: "#febd69",
+      cart_color: ""
+    };
+  },
+  mounted() {
+    switch (this.skin) {
+      case "Amazon":
+        // console.log("Amazon");
+        this.logo_img = "./img/amazon_logo_150x50.png";
+        this.bk_color = "#233040";
+        this.show_search = true;
+        this.cart_color="white";
+        break;
+      case "MarketPlace":
+        // console.log("MarketPlace");
+        this.logo_img = "./img/marketplace_logo_150x50.png";
+        this.bk_color = "#6ab1e9";
+        this.show_search = false;
+        this.cart_color="white";
+        break;
+      default:
+        // console.log("Custom");
+        this.logo_img = this.skinProps.logo_img;
+        this.bk_color = this.skinProps.bk_color;
+        this.show_search = this.skinProps.show_search;
+        this.cart_color=this.skinProps.cart_color
+    }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-#headerComp {  
-  height: 100px;
-  background-color: grey
+.row_header_first {
+    padding-top:10px;
+}
+.row_header_second {
+  padding-bottom: 10px; 
+}
+#search_txt {
+  width: 100%;
+  height: 100%;
+  resize: none;
+  border: none;
+   text-overflow: ellipsis;
+}
+#search_txt:focus {
+ box-shadow:none;
+}
+.searchbar {
+ 
+  height: 40px;
+  margin-top: 5px;
+  
+}
+.searchbar:first-child {
+  width: 50px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  padding-left: 5px;
+}
+
+.searchbar:nth-child(2) {
+ border: 1px solid darkgray;
+}
+.searchbar:last-child {
+  width: 50px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+#headerComp > div {
+  margin: 0px;
+}
+/* img {
+  border: 1px solid black;
+} */
+#headerComp {
+  background-color: grey;
+  /* height: 50px; */
+
 }
 </style>
