@@ -16,25 +16,25 @@ var prodDB = {
       id: 2,
       lbl: "tools & home improvement",
       img: "toolsCat.jpg",
-      isClickable: true
+      isClickable: false
     },
     {
       id: 3,
       lbl: "home & kitchen",
       img: "homeCat.jpg",
-      isClickable: true
+      isClickable: false
     },
     {
       id: 4,
       lbl: "fashion",
       img: "fashionCat.jpg",
-      isClickable: true
+      isClickable: false
     },
     {
       id: 5,
       lbl: "sports and outdors",
       img: "sportsCat.jpg",
-      isClickable: true
+      isClickable: false
     }
   ],
   AisleCat: [
@@ -98,38 +98,44 @@ var prodDB = {
       id: 0,
       aisleId: 5,
       lbl: "PAMPERS NAPPIES & PANTS",
-      img: "shelf1.jpg"
+      img: "Sub_diaper.jpg"
     },
     {
-      id: 0,
+      id: 1,
       aisleId: 5,
       lbl: "PAMPERS NAPPIES",
-      img: "shelf2.jpg"
+      img: "Sub_diaper.jpg"
+    },
+    {
+      id: 2,
+      aisleId: 3,
+      lbl: "Aisle 3 PAMPERS NAPPIES",
+      img: "Sub_diaper.jpg"
     }
   ],
   Products: [
     {
       id: 0,
-      shelfId: [0, 1],
-      lbl: "prod 1.1",
+      shelfId: [0],
+      lbl: "prod 1.1 - 0",
       img: "Sub_diaper.jpg"
     },
     {
       id: 1,
-      shelfId: [0],
-      lbl: "prod 1.2",
+      shelfId: [1],
+      lbl: "prod 1.2 - 1",
       img: "Sub_diaper.jpg"
     },
     {
       id: 2,
       shelfId: [0, 1],
-      lbl: "prod 2.1",
+      lbl: "prod 2.1 - 0,1",
       img: "Sub_diaper.jpg"
     },
     {
       id: 3,
       shelfId: [1],
-      lbl: "prod 2.2",
+      lbl: "prod 2.2 - 1",
       img: "Sub_diaper.jpg"
     }
   ]

@@ -2,8 +2,8 @@
   <div id="lvl_Main" class="lvl_container">
     <div id="subTitle">{{texts.subTitle}}</div>
     <div class="row">
-      <div class="col s12 m4 l3 CategCont" v-for="cat in prods.categ" :key="cat.lbl"
-      :class="{'CanSelect':cat.AisleCat.length>0}"
+      <div class="col s12 m4 l3 CategCont" v-for="cat in prods.MainCat" :key="cat.id"
+      :class="{'CanSelect':cat.isClickable}"
       @click="Selected(cat)"
       >
         <div class="catLbl">{{cat.lbl}}</div>
@@ -22,7 +22,7 @@ export default {
   },
   methods:{
     Selected(cat){
-      if (cat.AisleCat.length==0){
+      if (!cat.isClickable){
         return false
         }        
       this.$emit('setCateg',cat)

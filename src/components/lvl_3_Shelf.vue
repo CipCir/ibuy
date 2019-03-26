@@ -2,7 +2,7 @@
   <div id="lvl_Main" class="lvl_container">
     <div id="subTitle">{{texts.subTitle}}</div>
     <div class="row">
-      <div class="col s12 m4 l3 CategCont CanSelect" v-for="cat in SelAisle.ShelfCat" :key="cat.lbl"      
+      <div class="col s12 m4 l3 CategCont CanSelect" v-for="cat in Shelfs.filter(Shelf=>{ return Shelf.aisleId ==SelAisleId})" :key="cat.id"      
       @click="Selected(cat)"
       >
         <div class="catLbl">{{cat.lbl}}</div>
@@ -17,11 +17,11 @@ export default {
   name: 'lvl_Shelf',
   props: {
     texts: Object,
-    SelAisle:Object
+    Shelfs:Array,
+    SelAisleId:Number
   },
   methods:{
     Selected(cat){
-      if (cat.prods.length==0){return false}
       this.$emit('selShelf',cat)
       this.$emit('updtLvl',{lvl:'Product'})
     },

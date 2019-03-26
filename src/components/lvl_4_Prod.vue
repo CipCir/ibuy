@@ -2,11 +2,11 @@
   <div id="lvl_Main" class="lvl_container">
     <div id="subTitle">{{texts.subTitle}}</div>
     <div class="row">
-      <div class="col s12 m4 l3 CategCont CanSelect" v-for="cat in SelShelf.prods" :key="cat.lbl"      
-      @click="Selected(cat)"
+      <div class="col s12 m4 l3 prodegCont CanSelect" v-for="prod in SelProducts" :key="prod.id"      
+      @click="Selected(prod)"
       >
-        <div class="catLbl">{{cat.lbl}}</div>
-        <div class="catImg"><img :src="'./img/'+cat.img"/></div>
+        <div class="prodLbl">{{prod.lbl}}</div>
+        <div class="prodImg"><img :src="'./img/'+prod.img"/></div>
       </div>
     </div>
   </div>
@@ -16,18 +16,27 @@
 export default {
   name: 'lvl_Prod',
   props: {
-    texts: Object,
-    SelShelf:Object
+    texts: Object,    
+    Prods:Array,
+    SelShelfId:Number
   },
   methods:{
-    Selected(cat){
-      // if (cat.prods.length==0){
+    Selected(prod){
+      // if (prod.prods.length==0){
         return false
         // }
-      // this.$emit('selShelf',cat)
+      // this.$emit('selShelf',prod)
       // this.$emit('updtLvl',{lvl:'Product'})
     },
   },
+  computed:{
+    SelProducts(){
+      let vueObj=this
+      return this.Prods.filter(prod=>{
+        return prod.shelfId.indexOf(vueObj.SelShelfId)>-1
+      })
+    }
+  }
 }
 </script>
 
@@ -43,16 +52,16 @@ export default {
   margin-bottom: 10px;
   font-weight: bold;
 }
-.CategCont{  
+.prodegCont{  
   /* background: lightblue; */
   text-align: center;
   padding: 0 20px;
   height: 150px;
 }
-.catLbl{
+.prodLbl{
   text-transform:uppercase;
 }
-.catImg>img{
+.prodImg>img{
   /* width: 100% */
   height: 100px;
 }

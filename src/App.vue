@@ -16,21 +16,27 @@
     <lvlAisle
       v-if="controls.showLevel=='Aisle'"
       :texts="inputObj.texts.lvl_Aisle"
-      :SelCat="controls.selected1_Cat"
+      :Aisles="prodDB.AisleCat"
+      :SelCatId="controls.selected1_Cat.id"
+
       v-on:setAisleCat="SetAisleCat($event)"
       v-on:updtLvl="UpdateLvl($event)"
     />
     <lvlShelf
       v-if="controls.showLevel=='Shelf'"
       :texts="inputObj.texts.lvl_Shelf"
-      :SelAisle="controls.selected2_AisleCat"
+      :Shelfs="prodDB.ShelfCat"
+      :SelAisleId="controls.selected2_AisleCat.id"
+
       v-on:selShelf="SetShelfCat($event)"
       v-on:updtLvl="UpdateLvl($event)"
     />
     <lvlProd
       v-if="controls.showLevel=='Product'"
       :texts="inputObj.texts.lvl_Prod"
-      :SelShelf="controls.selected3_ShelfCat"
+      :Prods="prodDB.Products"
+      :SelShelfId="controls.selected3_ShelfCat.id"
+
       v-on:selProd="SetShelfCat($event)"
       v-on:updtLvl="UpdateLvl($event)"
     />

@@ -2,7 +2,9 @@
   <div id="lvl_Main" class="lvl_container">
     <div id="subTitle">{{texts.subTitle}}</div>
     <div class="row">
-      <div class="col s12 m4 l3 CategCont CanSelect" v-for="cat in SelCat.AisleCat" :key="cat.lbl"      
+      <div class="col s12 m4 l3 CategCont CanSelect" 
+        v-for="cat in Aisles.filter(Aisle=>{ return Aisle.categId ==SelCatId})" 
+        :key="cat.id"      
       @click="Selected(cat)"
       >
         <div class="catLbl">{{cat.lbl}}</div>
@@ -17,11 +19,12 @@ export default {
   name: 'lvl_Aisle',
   props: {
     texts: Object,
-    SelCat:Object
+    Aisles:Array,
+    SelCatId:Number
   },
   methods:{
     Selected(cat){
-      if (cat.ShelfCat.length==0){return false}
+      // if (cat.ShelfCat.length==0){return false}
       this.$emit('setAisleCat',cat)
       this.$emit('updtLvl',{lvl:'Shelf'})
     },
