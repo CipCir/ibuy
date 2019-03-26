@@ -31,7 +31,7 @@
       v-on:selShelf="SetShelfCat($event)"
       v-on:updtLvl="UpdateLvl($event)"
     />
-    <lvlProd
+    <lvlProds
       v-if="controls.showLevel=='Product'"
       :texts="inputObj.texts.lvl_Prod"
       :Prods="prodDB.Products"
@@ -55,7 +55,7 @@ import headerComp from "./components/headerComp.vue";
 import lvlMain from "./components/lvl_1_Main.vue";
 import lvlAisle from "./components/lvl_2_Aisle.vue";
 import lvlShelf from "./components/lvl_3_Shelf.vue";
-import lvlProd from "./components/lvl_4_Prod.vue";
+import lvlProds from "./components/lvl_4_Products.vue";
 
 import footerComp from "./components/footerComp.vue";
 
@@ -67,7 +67,7 @@ export default {
     lvlMain,
     lvlAisle,
     lvlShelf,
-    lvlProd
+    lvlProds
   },
   data() {
     return {
