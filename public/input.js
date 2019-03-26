@@ -27,21 +27,26 @@ var inputObj = {
       subTitle: "The product level"
     },
     Header: {
-      opt0: "<span style='color:white;'>Optional 0<br>Second row</span>",
-      opt1: "<span style='color:white;'>Optional 1</span>",
-      opt2: "<span style='color:white;'>Optional 2</span>",
-      opt3: "<span style='color:white;'>Optional 3</span>",
+      opt0:
+        "<span style='color:white;'>24/7 Customer service. Learn more</span>",
+      opt1:
+        "<span style='color:white;'><img src='./img/amazon_opt_1.png'></span>",
+      opt2:
+        "<br/><span style='color:white;'><b>Departments▾   </b></span><span style='color:lightgray;'>Your Amazon.com Today's Deals   Gift Cards   Registry   Sell   Help</span>",
+      opt3:
+        "<span style='color:white;'><img src='./img/amazon_opt_3.png'></span>",
       search_all_text: "All▾",
       placeholder_search: "Placeholder text here..."
     },
     Footer: {
       col1:
-        "<span style='color:white;'><u>AAA</u><br/>second row<br/>third row</span>",
+        "<span style='color:white;'><b>Get to Know Us</b><br/><br/>Careers<br/>Blog<br/>About Amazon</span>",
       col2:
-        "<span style='color:white;'><u>BBB</u><br/><br/>third on second<br/>fourth on second</span>",
-      col3: "<span style='color:white;'><u>CCC</u><br/><br/>third row</span>",
+        "<span style='color:white;'><b>Make Money with Us</b><br/><br/>Sell on Amazon<br/>Sell Your Services on Amazon<br/>Sell on Amazon Business<br/>Sell Your Apps on Amazon</span>",
+      col3:
+        "<span style='color:white;'><b>Amazon Payment Products</b><br/><br/>Amazon Business Card<br/>Shop with Points<br/></span>",
       col4:
-        "<span style='color:white;'><u>DDD</u><br/>second row last col<br/><br/>fourth row</span>"
+        "<span style='color:white;'><b>Let Us Help You</b><br/><br/>Your Account<br/>Your Orders</span>"
     }
   }
 };

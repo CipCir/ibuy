@@ -4,7 +4,13 @@
       <div class="col s10 m3 l3 valign-wrapper" v-bind:style="{'background-color':bk_color}">
         <img :src="logo_img" alt="logo image here">
       </div>
-      <div class="col hide-on-med-and-up s1 valign-wrapper" v-bind:style="{'background-color':bk_color,'color':cart_color}">{{nr_cart}} <i class="material-icons small ">shopping_cart</i></div>
+      <div
+        class="col hide-on-med-and-up s1 valign-wrapper cart_container"
+        v-bind:style="{'background-color':bk_color,'color':cart_color}"
+      >
+        {{nr_cart}}
+        <i class="material-icons small">shopping_cart</i>
+      </div>
       <div
         class="col s12 l6 m6 valign-wrapper"
         v-bind:style="{'background-color':bk_color}"
@@ -19,7 +25,7 @@
           class="col s12 searchbar valign-wrapper"
           v-bind:style="{'background-color':search_color2}"
         >
-          <input type="text" id="search_txt" :placeholder="texts.placeholder_search"/>
+          <input type="text" id="search_txt" :placeholder="texts.placeholder_search">
         </div>
         <div
           class="col s2 searchbar valign-wrapper"
@@ -36,21 +42,27 @@
     </div>
     <div class="row_header_second row" v-bind:style="{'background-color':bk_color}">
       <div
-        class="col hide-on-small-only m3 l3"
+        class="col hide-on-small-only m3 l3 white_space_pre"
         v-bind:style="{'background-color':bk_color}"
         v-html="texts.opt1"
       ></div>
       <div
-        class="col hide-on-small-only m6 l6"
+        class="col hide-on-small-only m6 l6 white_space_pre"
         v-bind:style="{'background-color':bk_color}"
         v-html="texts.opt2"
       ></div>
       <div
-        class="col hide-on-small-only m2 l2"
+        class="col hide-on-small-only m2 l2 white_space_pre"
         v-bind:style="{'background-color':bk_color}"
         v-html="texts.opt3"
       ></div>
-      <div class="col hide-on-small-only m1 l1 valign-wrapper" v-bind:style="{'background-color':bk_color,'color':cart_color}">{{nr_cart}} <i class="material-icons small ">shopping_cart</i></div>
+      <div
+        class="col hide-on-small-only m1 l1 valign-wrapper cart_container"
+        v-bind:style="{'background-color':bk_color,'color':cart_color}"
+      >
+        {{nr_cart}}
+        <i class="material-icons small">shopping_cart</i>
+      </div>
     </div>
   </div>
 </template>
@@ -62,7 +74,7 @@ export default {
     skin: String,
     skinProps: Object,
     texts: Object,
-    nr_cart:Number
+    nr_cart: Number
   },
   data() {
     return {
@@ -82,21 +94,21 @@ export default {
         this.logo_img = "./img/amazon_logo_150x50.png";
         this.bk_color = "#233040";
         this.show_search = true;
-        this.cart_color="white";
+        this.cart_color = "white";
         break;
       case "MarketPlace":
         // console.log("MarketPlace");
         this.logo_img = "./img/marketplace_logo_150x50.png";
         this.bk_color = "#6ab1e9";
         this.show_search = false;
-        this.cart_color="white";
+        this.cart_color = "white";
         break;
       default:
         // console.log("Custom");
         this.logo_img = this.skinProps.logo_img;
         this.bk_color = this.skinProps.bk_color;
         this.show_search = this.skinProps.show_search;
-        this.cart_color=this.skinProps.cart_color
+        this.cart_color = this.skinProps.cart_color;
     }
   }
 };
@@ -104,27 +116,28 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.cart_container {
+  height: 40px;
+}
 .row_header_first {
-    padding-top:10px;
+  padding-top: 10px;
 }
 .row_header_second {
-  padding-bottom: 10px; 
+  padding-bottom: 10px;
 }
 #search_txt {
   width: 100%;
   height: 100%;
   resize: none;
   border: none;
-   text-overflow: ellipsis;
+  text-overflow: ellipsis;
 }
 #search_txt:focus {
- box-shadow:none;
+  box-shadow: none;
 }
 .searchbar {
- 
   height: 40px;
   margin-top: 5px;
-  
 }
 .searchbar:first-child {
   width: 50px;
@@ -134,7 +147,7 @@ export default {
 }
 
 .searchbar:nth-child(2) {
- border: 1px solid darkgray;
+  border: 1px solid darkgray;
 }
 .searchbar:last-child {
   width: 50px;
@@ -150,6 +163,10 @@ export default {
 #headerComp {
   background-color: grey;
   /* height: 50px; */
-
+}
+.white_space_pre {
+  /* white-space: pre; */
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 </style>
