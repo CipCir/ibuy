@@ -9,15 +9,15 @@
         <div class="row">
           <div
             class="col CanSelect"
-            :class="{'m3':inputOBJ.generalInfo.productView=='Grid'}"
+            :class="inputOBJ.generalInfo.productView=='Grid'?'m3':'m12'"
             v-for="prod in Prods"
             :key="prod.id"
             @click="Selected(prod)"
           >
-            <div class="prodLbl">{{prod.lbl}}</div>
             <div class="prodImg">
               <img :src="'./img/'+prod.img">
             </div>
+            <div class="prodLbl">{{prod.lbl}}</div>
           </div>
         </div>
       </div>
