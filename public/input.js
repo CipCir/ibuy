@@ -7,7 +7,9 @@ var inputObj = {
       cart_color: "white",
       show_search: true,
       footer_color: "#005eb8"
-    }
+    },
+    currency:"$",
+    productView:"Grid"//"Grid" "List"
   },
   layout: {
     header: {},

@@ -6,7 +6,7 @@
       :skinProps="inputObj.generalInfo.skinProps"
       :nr_cart="5"
     />
-    <lvlMain
+    <!-- <lvlMain
       v-if="controls.showLevel=='Main'"
       :texts="inputObj.texts.lvl_Main"
       :prods="prodDB"
@@ -30,12 +30,13 @@
 
       v-on:selShelf="SetShelfCat($event)"
       v-on:updtLvl="UpdateLvl($event)"
-    />
+    /> -->
     <lvlProds
       v-if="controls.showLevel=='Product'"
       :texts="inputObj.texts.lvl_Prod"
       :Prods="prodDB.Products"
-      :SelShelfId="controls.selected3_ShelfCat.id"
+      :SelShelfId="controls.selected3_ShelfCat"
+      :inputOBJ="inputObj"
 
       v-on:selProd="SetShelfCat($event)"
       v-on:updtLvl="UpdateLvl($event)"
@@ -75,7 +76,7 @@ export default {
       prodDB,
       output: {},
       controls: {
-        showLevel: "Main", // "Aisle","Shelf","Product","Enlarge","Cart"
+        showLevel: "Product", // "Main","Aisle","Shelf","Product","Enlarge","Cart"
         selected1_Cat: null,
         selected2_AisleCat: null,
         selected3_ShelfCat: null
