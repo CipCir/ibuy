@@ -32,7 +32,7 @@ export default {
 
     if (hasHalf){this.halfstars=1}
     this.fullstars=parseInt(rateArr[0])
-    if (this.fullstars<this.maxStars){
+    if (this.fullstars<=this.maxStars){
       this.remaining=this.maxStars-this.fullstars-this.halfstars
     }else{
       this.remaining=0
