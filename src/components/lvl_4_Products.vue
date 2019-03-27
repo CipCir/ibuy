@@ -1,9 +1,9 @@
 <template>
-  <div id="lvl_Main" class="lvl_container">    
+  <div id="lvl_Main" class="lvl_container">
     <div class="row">
       <div id="Spons_Mob" class="col s12 hide-on-med-and-up">Sponsored on mobile</div>
       <div id="FiltersCont_Desk" class="col m3 l2 hide-on-small-only">Desktop Filters go here</div>
-      <div id="FiltersCont_Mob" class="col s12 hide-on-med-and-up">Mobile Filters </div>
+      <div id="FiltersCont_Mob" class="col s12 hide-on-med-and-up">Mobile Filters</div>
       <div id="ProdsCont" class="col s12 m9 l10">
         <div id="Spons_Desk" class="row hide-on-small-only">Sponsored on desktop</div>
         <div class="row">
@@ -22,12 +22,18 @@
         </div>
       </div>
     </div>
+    <!-- <stars :fullstars="2" :halfstars="1"></stars> -->
   </div>
 </template>
 
 <script>
+import stars from "./stars.vue";
+
 export default {
   name: "lvl_Prod",
+  components: {
+    stars
+  },
   props: {
     texts: Object,
     Prods: Array,
@@ -85,17 +91,17 @@ export default {
   background: lightblue;
   cursor: pointer;
 }
-#FiltersCont_Desk{
+#FiltersCont_Desk {
   background: lightgray;
-  min-height: 200px;  
+  min-height: 200px;
 }
-#FiltersCont_Mob{
+#FiltersCont_Mob {
   background: lightgray;
-  min-height: 50px;  
+  min-height: 50px;
 }
-#Spons_Desk,#Spons_Mob{
-  background:lightcyan;
+#Spons_Desk,
+#Spons_Mob {
+  background: lightcyan;
   min-height: 100px;
 }
-
 </style>
