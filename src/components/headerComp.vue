@@ -12,7 +12,7 @@
         <i class="material-icons small">shopping_cart</i>
       </div>
       <div
-        class="col s12 l6 m6 valign-wrapper"
+        class="col s12 m8 l6 valign-wrapper"
         v-bind:style="{'background-color':bk_color}"
         v-if="show_search"
       >
@@ -35,7 +35,7 @@
         </div>
       </div>
       <div
-        class="col hide-on-small-only m3 l3 right right-align"
+        class="col hide-on-med-and-down l3 right right-align"
         v-bind:style="{'background-color':bk_color}"
         v-html="texts.opt0"
       ></div>
@@ -52,12 +52,12 @@
         v-html="texts.opt2"
       ></div>
       <div
-        class="col hide-on-small-only m2 l2 white_space_pre"
+        class="col hide-on-med-and-down l2 white_space_pre"
         v-bind:style="{'background-color':bk_color}"
         v-html="texts.opt3"
       ></div>
       <div
-        class="col hide-on-small-only m1 l1 valign-wrapper cart_container"
+        class="col hide-on-small-only m1 l1 valign-wrapper cart_container right"
         v-bind:style="{'background-color':bk_color,'color':cart_color}"
       >
         {{nr_cart}}
@@ -81,9 +81,9 @@ export default {
       logo_img: "",
       bk_color: "",
       show_search: false,
-      search_color1: "#f3f3f3",
-      search_color2: "white",
-      search_color3: "#febd69",
+      search_color1: "",
+      search_color2: "",
+      search_color3: "",
       cart_color: ""
     };
   },
@@ -95,13 +95,9 @@ export default {
         this.bk_color = "#233040";
         this.show_search = true;
         this.cart_color = "white";
-        break;
-      case "MarketPlace":
-        // console.log("MarketPlace");
-        this.logo_img = "./img/marketplace_logo_150x50.png";
-        this.bk_color = "#6ab1e9";
-        this.show_search = false;
-        this.cart_color = "white";
+        this.search_color1 = "#f3f3f3";
+        this.search_color2 = "white";
+        this.search_color3 = "#febd69";
         break;
       default:
         // console.log("Custom");
@@ -109,6 +105,10 @@ export default {
         this.bk_color = this.skinProps.bk_color;
         this.show_search = this.skinProps.show_search;
         this.cart_color = this.skinProps.cart_color;
+        this.search_color1 = this.skinProps.search_bk_color1;
+        this.search_color2 = this.skinProps.search_bk_color2;
+        this.search_color3 = this.skinProps.search_bk_color3;
+        break;
     }
   }
 };

@@ -27,9 +27,6 @@ export default {
       case "Amazon":
         this.footer_color = "#233040";
         break;
-      case "MarketPlace":
-        this.footer_color = "#6ab1e9";
-        break;
       default:
         this.footer_color = this.skinProps.footer_color;
         break;
