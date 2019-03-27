@@ -30,12 +30,20 @@
       v-on:updtLvl="UpdateLvl($event)"
     />-->
     <lvlProds
-      v-if="controls.showLevel=='Product'"
+      v-if="controls.showLevel=='Products'"
       :texts="inputObj.texts.lvl_Prod"
       :Prods="prodDB.Products"
       :SelShelfId="controls.selected3_ShelfCat"
       :inputOBJ="inputObj"
-      v-on:selProd="SetShelfCat($event)"
+      v-on:selProd="SetPrdct($event)"
+      v-on:updtLvl="UpdateLvl($event)"
+    />
+    <lvlPrdct
+      v-if="controls.showLevel=='Prdct'"
+      :texts="inputObj.texts.lvl_Prod"
+      :Prdct="controls.sel_Prdct"      
+      :inputOBJ="inputObj"
+      v-on:addInCart="AddProdInCart()"
       v-on:updtLvl="UpdateLvl($event)"
     />
 
@@ -54,6 +62,7 @@ import lvlMain from "./components/lvl_1_Main.vue";
 import lvlAisle from "./components/lvl_2_Aisle.vue";
 import lvlShelf from "./components/lvl_3_Shelf.vue";
 import lvlProds from "./components/lvl_4_Products.vue";
+import lvlPrdct from "./components/lvl_5_Product.vue";
 
 import footerComp from "./components/footerComp.vue";
 
@@ -65,7 +74,8 @@ export default {
     lvlMain,
     lvlAisle,
     lvlShelf,
-    lvlProds
+    lvlProds,
+    lvlPrdct
   },
   data() {
     return {
@@ -73,22 +83,33 @@ export default {
       prodDB,
       output: {},
       controls: {
-        showLevel: "Product", // "Main","Aisle","Shelf","Product","Enlarge","Cart"
+        showLevel: "Products", // "Main","Aisle","Shelf","Products","Prdct","Cart"
         selected1_Cat: null,
         selected2_AisleCat: null,
-        selected3_ShelfCat: null
+        selected3_ShelfCat: null,
+        sel_Prdct:null,
+        cart:[]
       }
     };
   },
   methods: {
-    SetShelfCat(pay) {
-      this.controls.selected3_ShelfCat = pay;
+    // SetShelfCat(pay) {
+    //   this.controls.selected3_ShelfCat = pay;
+    // },
+    // SetAisleCat(pay) {
+    //   this.controls.selected2_AisleCat = pay;
+    // },
+    // SetCategory(pay) {
+    //   this.controls.selected1_Cat = pay;
+    // },
+    SetPrdct(pay){
+      this.controls.sel_Prdct=pay;
     },
-    SetAisleCat(pay) {
-      this.controls.selected2_AisleCat = pay;
-    },
-    SetCategory(pay) {
-      this.controls.selected1_Cat = pay;
+    AddProdInCart(){
+      // add in cart
+      this.controls.cart.push(this.controls.sel_Prdct)
+      // reset selected
+      this.controls.sel_Prdct=null
     },
     UpdateLvl(pay) {
       this.controls.showLevel = pay.lvl;

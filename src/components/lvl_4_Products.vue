@@ -7,7 +7,6 @@
       <div class="row">
         <div id="ProdsCont" class="col s12 m9 l10">
           <div id="Spons_Desk" class="row hide-on-small-only">Sponsored on desktop</div>
-
           <div
             class="col CanSelect"
             :class="[inputOBJ.generalInfo.productView=='Grid'?'m3':'m12', ((index % 4)==0&&(index>0))?'clear_left':'']"
@@ -49,21 +48,10 @@ export default {
   methods: {
     Selected(prod) {
       // if (prod.prods.length==0){
-      return false;
+      // return false;
       // }
-      // this.$emit('selShelf',prod)
-      // this.$emit('updtLvl',{lvl:'Product'})
-    }
-  },
-  computed: {
-    SelProducts() {
-      return false;
-      /*
-      let vueObj=this
-      return this.Prods.filter(prod=>{
-        return prod.shelfId.indexOf(vueObj.SelShelfId)>-1
-      })
-      */
+       this.$emit('selProd',prod)
+       this.$emit('updtLvl',{lvl:'Prdct'})
     }
   }
 };
