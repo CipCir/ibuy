@@ -4,25 +4,31 @@
       <div id="Spons_Mob" class="col s12 hide-on-med-and-up">Sponsored on mobile</div>
       <div id="FiltersCont_Desk" class="col m3 l2 hide-on-small-only">Desktop Filters go here</div>
       <div id="FiltersCont_Mob" class="col s12 hide-on-med-and-up">Mobile Filters</div>
-      <div id="ProdsCont" class="col s12 m9 l10">
-        <div id="Spons_Desk" class="row hide-on-small-only">Sponsored on desktop</div>
-        <div class="row">
+      <div class="row">
+        <div id="ProdsCont" class="col s12 m9 l10">
+          <div id="Spons_Desk" class="row hide-on-small-only">Sponsored on desktop</div>
+
           <div
             class="col CanSelect"
-            :class="inputOBJ.generalInfo.productView=='Grid'?'m3':'m12'"
-            v-for="prod in Prods"
+            :class="[inputOBJ.generalInfo.productView=='Grid'?'m3':'m12', ((index % 4)==0&&(index>0))?'clear_left':'']"
+            v-for="(prod,index) in Prods"
             :key="prod.id"
             @click="Selected(prod)"
           >
+            <hr v-if="inputOBJ.generalInfo.productView=='Grid' && index>3">
             <div class="prodImg">
               <img :src="'./img/'+prod.img">
             </div>
-            <div class="prodLbl">{{prod.lbl}}</div>
+            <div v-html="prod.lbl"></div>
+            <div v-html="prod.by"></div>
+            <!-- <stars :fullstars="2" :halfstars="1"></stars> -->
+            <div v-html="prod.addInf1"></div>
+            <div v-html="prod.price"></div>
+            <div v-html="prod.addInf2"></div>
           </div>
         </div>
       </div>
     </div>
-    <stars :fullstars="2" :halfstars="1"></stars>
   </div>
 </template>
 
@@ -64,6 +70,18 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.CanSelect {
+  /* border: 1px solid red; */
+  padding: 5px;
+}
+.CanSelect img {
+  /* border: 1px solid blue; */
+  margin: 0 auto;
+  display: block;
+}
+.clear_left {
+  clear: left;
+}
 #headerComp {
   height: 100px;
   background-color: grey;
@@ -80,9 +98,9 @@ export default {
   padding: 0 20px;
   height: 150px;
 }
-.prodLbl {
+/* .prodLbl {
   text-transform: uppercase;
-}
+} */
 .prodImg > img {
   /* width: 100% */
   height: 100px;
