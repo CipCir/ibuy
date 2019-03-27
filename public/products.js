@@ -121,12 +121,13 @@ var prodDB = {
       img: "R0.jpg",
       by: "<span style='color:blue;font-size:12px;'>by Rexona</span>",
       rating: 5,
-      reviews: 4,
-      price: 14.55,
+      reviews: "v 4",
+      price: 6.99,
+
       addInf1:
         "<span style='color:blue;font-size:12px;'><b>Blue all out</b></span>",
       addInf2:
-        "More Buying Choices<br>$6.60 <span style='text-color:blue'>(5 new offers)</style>"
+        "<span style='color:#4c4c4c;'>More Buying Choices<br>$6.60 </span><span style='color:blue;font-size:12px;'>(5 new offers)</style>"
     },
     {
       id: 1,
@@ -136,7 +137,7 @@ var prodDB = {
       by: null,
       rating: 3.5,
       reviews: 6,
-      price: 14.49,
+      price: 14,
       addInf1: null,
       addInf2: null
     },
