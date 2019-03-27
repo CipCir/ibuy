@@ -1,34 +1,54 @@
 <template>
   <div id="lvl_Main" class="lvl_container">
     <div class="row">
-      <div id="Spons_Mob" class="col s12 hide-on-med-and-up">Sponsored on mobile</div>
-      <div id="FiltersCont_Desk" class="col m3 l2 hide-on-small-only">Desktop Filters go here</div>
-      <div id="FiltersCont_Mob" class="col s12 hide-on-med-and-up">Mobile Filters</div>
+      <div id="FiltersCont" class="col s12 m3 l2">Filters go here</div>
+
       <div class="row">
         <div id="ProdsCont" class="col s12 m9 l10">
-          <div id="Spons_Desk" class="row hide-on-small-only">Sponsored on desktop</div>
+          <div id="SponsCont" class="row s12">Sponsored</div>
+
           <div
-            class="col CanSelect"
+            class="col CanSelect s12"
             :class="[inputOBJ.generalInfo.productView=='Grid'?'m3':'m12', ((index % 4)==0&&(index>0))?'clear_left':'']"
             v-for="(prod,index) in Prods"
             :key="prod.id"
             @click="Selected(prod)"
           >
-            <hr v-if="inputOBJ.generalInfo.productView=='Grid' && index>3">
-            <div class="prodImg">
-              <img :src="'./img/'+prod.img">
+            <hr>
+            <!-- <hr v-if="inputOBJ.generalInfo.productView=='Grid' && index>3"> -->
+            <div
+              class="prodImg col s4 m12"
+              :style="{'background-image': 'url(' + './img/'+prod.img+ ')'}"
+            >
+              <!-- <img :src="'./img/'+prod.img"> -->
             </div>
-            <div v-html="prod.lbl"></div>
-            <div v-html="prod.by"></div>            
-            <div v-html="prod.addInf1"></div>
-             <stars v-if="prod.rating != null" :rating="prod.rating"></stars>
-            <div v-html="prod.price"></div>
-            <div v-html="prod.addInf2"></div>
+            <div class="col s8 m12">
+              <div v-html="prod.lbl"></div>
+              <div v-html="prod.by"></div>
+              <stars v-if="prod.rating != null" :rating="prod.rating"></stars>
+              <div v-html="prod.addInf1"></div>
+              <div id="prodPrice">
+                <span
+                  v-if="inputOBJ.generalInfo.currecySide=='left'"
+                  v-html="inputOBJ.generalInfo.currency"
+                ></span>
+                <span v-if="prod.price.toString().indexOf('.')>-1">
+                  <span v-html="prod.price.toString().split('.')[0]"></span>
+                  <sup class="suprascript" v-html="prod.price.toString().split('.')[1]"></sup>
+                </span>
+                <span v-else v-html="prod.price"></span>
+                <span
+                  v-if="inputOBJ.generalInfo.currecySide=='right'"
+                  v-html="inputOBJ.generalInfo.currency"
+                ></span>
+              </div>
+
+              <div v-html="prod.addInf2"></div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    
   </div>
 </template>
 
@@ -90,24 +110,24 @@ export default {
 /* .prodLbl {
   text-transform: uppercase;
 } */
-.prodImg > img {
+.prodImg {
   /* width: 100% */
-  height: 100px;
+  min-height: 200px;
+  height: 200px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 50%;
 }
 .CanSelect:hover {
-  background: lightblue;
+  /* background: lightblue; */
   cursor: pointer;
 }
-#FiltersCont_Desk {
+#FiltersCont {
   background: lightgray;
-  min-height: 200px;
+  min-height: 100px;
 }
-#FiltersCont_Mob {
-  background: lightgray;
-  min-height: 50px;
-}
-#Spons_Desk,
-#Spons_Mob {
+
+#SponsCont {
   background: lightcyan;
   min-height: 100px;
 }

@@ -11,8 +11,9 @@ var inputObj = {
       search_bk_color2: "whitesmoke",
       search_bk_color3: "lightblue"
     },
-    currency:"$",
-    productView:"Grid"//"Grid" "List"
+    currency: "$",
+    currecySide: "left",
+    productView: "Grid" //"Grid" "List"
   },
   layout: {
     header: {},
