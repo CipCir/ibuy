@@ -18,7 +18,6 @@
       :texts="inputObj.texts.lvl_Aisle"
       :Aisles="prodDB.AisleCat"
       :SelCatId="controls.selected1_Cat.id"
-
       v-on:setAisleCat="SetAisleCat($event)"
       v-on:updtLvl="UpdateLvl($event)"
     />
@@ -27,7 +26,6 @@
       :texts="inputObj.texts.lvl_Shelf"
       :Shelfs="prodDB.ShelfCat"
       :SelAisleId="controls.selected2_AisleCat.id"
-
       v-on:selShelf="SetShelfCat($event)"
       v-on:updtLvl="UpdateLvl($event)"
     />
@@ -36,7 +34,6 @@
       :texts="inputObj.texts.lvl_Prod"
       :Prods="prodDB.Products"
       :SelShelfId="controls.selected3_ShelfCat.id"
-
       v-on:selProd="SetShelfCat($event)"
       v-on:updtLvl="UpdateLvl($event)"
     />
@@ -46,6 +43,7 @@
       :skinProps="inputObj.generalInfo.skinProps"
       :texts="inputObj.texts.Footer"
     />
+    <stars :fullstars="fullstars" :halfstars="halfstars"></stars>
   </div>
 </template>
 
@@ -58,6 +56,7 @@ import lvlShelf from "./components/lvl_3_Shelf.vue";
 import lvlProds from "./components/lvl_4_Products.vue";
 
 import footerComp from "./components/footerComp.vue";
+import stars from "./components/stars.vue";
 
 export default {
   name: "app",
