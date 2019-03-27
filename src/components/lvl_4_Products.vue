@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-    <!-- <stars :fullstars="2" :halfstars="1"></stars> -->
+    <stars :fullstars="2" :halfstars="1"></stars>
   </div>
 </template>
 

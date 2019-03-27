@@ -12,14 +12,6 @@ export default {
   props: {
     fullstars: Number,
     halfstars: Number
-  },
-  data() {
-    return {
-      msg: "Welcome to Your Vue.js App mau mau mauuuu"
-    };
-  },
-  created: function() {
-    console.log("in stars created");
   }
 };
 </script>
