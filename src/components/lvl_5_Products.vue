@@ -17,13 +17,12 @@
             <hr>
             <!-- <hr v-if="inputOBJ.generalInfo.productView=='Grid' && index>3"> -->
             <div
-              class="prodImg col"
-              :class="inputOBJ.generalInfo.productView=='Grid'?'s4 m12':'s4 m3'"
+              class="prodImg col s4 m12"
               :style="{'background-image': 'url(' + './img/'+prod.img+ ')'}"
             >
               <!-- <img :src="'./img/'+prod.img"> -->
             </div>
-            <div class="col" :class="inputOBJ.generalInfo.productView=='Grid'?'s8 m12':'s8 m9'">
+            <div class="col s8 m12">
               <div class="ProdLbl" v-html="prod.lbl"></div>
               <div v-html="prod.by"></div>
               <div>
@@ -32,7 +31,7 @@
               </div>
 
               <div v-html="prod.addInf1"></div>
-              <div class="prodPrice">
+              <div id="prodPrice">
                 <span
                   v-if="inputOBJ.generalInfo.currecySide=='left'"
                   v-html="inputOBJ.generalInfo.currency"
@@ -73,7 +72,7 @@ export default {
   methods: {
     Selected(prod) {
       // if (prod.prods.length==0){
-      return false;
+      // return false;
       // }
       this.$emit("selProd", prod);
       this.$emit("updtLvl", { lvl: "Prdct" });
@@ -84,31 +83,14 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.ProdLbl::before {
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, white 58%);
-  content: "\2026";
-  /* content: "\200C"; */
-  display: block;
-  position: absolute;
-  right: 0;
-  top: 55px;
-  width: 100%;
-  text-align: center;
-  font-size: 25px;
-}
-.prodPrice {
-  font-size: 21px;
-}
 .ProdLbl {
   font-weight: bold;
   font-size: 15px !important;
   line-height: 1.4 !important;
-  max-height: 88px;
-  overflow: hidden;
-  position: relative;
-  display: block;
 }
-
+.prodPrice {
+  font-size: 21px;
+}
 .CanSelect {
   /* border: 1px solid red; */
   font-size: 13px;

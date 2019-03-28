@@ -2,82 +2,117 @@ var prodDB = {
   Products: [
     {
       id: 0,
+      brand: "Rexona",
       lbl:
         "Rexona Women Biorythm Ultra Dry Deo Stick Anti-Perspirant 48h 40 ml",
       img: "R0.jpg",
-      by: "<span style='color:blue;font-size:12px;'>by Rexona</span>",
+      by: null,
       rating: 5,
-      reviews: "v 4",
+      reviews: "&nbsp;<span style='color:blue;'>4</span>",
       price: 6.99,
-
-      addInf1:
-        "<span style='color:blue;font-size:12px;'><b>Blue all out</b></span>",
+      addInf1: "",
       addInf2:
-        "<span style='color:#4c4c4c;'>More Buying Choices<br>$6.60 </span><span style='color:blue;font-size:12px;'>(5 new offers)</style>"
+        "<span style='color:#4c4c4c;'>More Buying Choices<br>$6.60 </span><span style='color:blue;'>(5 new offers)</span>"
     },
     {
       id: 1,
+      brand: "Rexona",
       lbl:
         "Rexona Women's Maximum Protection -Clinical- deodorant : CONFIDENCE",
       img: "R1.jpg",
       by: null,
       rating: 3.5,
-      reviews: 6,
-      price: 14,
+      reviews: "&nbsp;<span style='color:blue;'>6</span>",
+      price: 14.49,
       addInf1: null,
       addInf2: null
     },
     {
       id: 2,
+      brand: "Rexona",
       lbl:
         "Rexona Women MotionSense Aloe Vera 48H Anti-Perspirant Solid Stick 40 ml",
       img: "R2.jpg",
       by: null,
       rating: null,
-      reviews: 3,
+      reviews: "&nbsp;<span style='color:blue;'>5</span>",
       price: 2.69,
       addInf1: null,
-      addInf2: null
+      addInf2:
+        "<span style='color:#4c4c4c;'>More Buying Choices<br>$2.69 </span><span style='color:blue;'>(3 new offers)</span>"
     },
     {
       id: 3,
+      brand: "Rexona",
       lbl:
         "Rexona Women Cotton 48h Anti-perspirant Deodorant Roll-on 40ml. (Pack of 3)",
       img: "R3.jpg",
       by: null,
       rating: 5,
-      reviews: 1,
-      price: 20.51,
+      reviews: "&nbsp;<span style='color:blue;'>1</span>",
+      price: 24.95,
       addInf1: null,
       addInf2:
-        "<span style='color:#B12704'>Only 19 left in stock - order soon.</span>"
+        "<span style='color:#4c4c4c;'>Free shipping with purchase of 1 items<br/>More Buying Choices<br>$20.51 </span><span style='color:blue;'>(3 new offers)</span>"
     },
     {
       id: 4,
+      brand: "Rexona",
       lbl:
         "Degree Women Clinical Antiperspirant Deodorant, Shower Clean, 1.7 oz",
       img: "R4.jpg",
       by: null,
       rating: 4,
-      reviews: 144,
+      reviews: "&nbsp;<span style='color:blue;'>144</span>",
       price: 7.96,
       addInf1: null,
       addInf2:
-        "Save 5% more with Subscribe &amp; Save<br/>Eligible for Shipping to United Kingdom<br/><span style='color:#B12704'>Only 8 left in stock - order soon.</span>"
+        "<span style='color:#4c4c4c;'>Save 5% more with Subscribe & Save<br/>Eligible for Shipping to United Kingdom<br/>More Buying Choices<br>$7.63 </span><span style='color:blue;'>(17 new offers)</span>"
     },
 
     {
       id: 5,
+      brand: "Rexona",
       lbl:
         "Rexona Women's Maximum Protection -Clinical- deodorant : STRESS CONTROL",
       img: "R5.jpg",
       by: null,
       rating: 3,
-      reviews: 1,
+      reviews: "&nbsp;<span style='color:blue;'>1</span>",
       price: 17.29,
       addInf1: null,
       addInf2:
-        "<span style='color:#B12704'>Only 3 left in stock - order soon.</span><br/>More Buying Choices<br/>$10.97 (3 new offers)"
+        "<span style='color:#B12704'>Only 3 left in stock - order soon.</span><br/><span style='color:#4c4c4c;'>More Buying Choices<br/>$10.97 </span><span style='color:blue;'>(3 new offers)</span>"
+    },
+
+    {
+      id: 6,
+      brand: "Rexona",
+      lbl:
+        "REXONA Women Sexy Bouquet Deodorant Roll-on 50ml -Smell Sexy and Confident Throughout The Day with Rexona's Sexy Bouquet antiperspirant Deodorant for Women",
+      img: "R6.jpg",
+      by: "<span style='color:gray;'>by Rexona</span>",
+      rating: null,
+      reviews: null,
+      price: 14.99,
+      addInf1: null,
+      addInf2: "Ages: 7 years and up"
+    },
+
+    {
+      id: 7,
+      brand: "Nivea",
+      lbl:
+        "Nivea Dry Comfort Stick products perspirant and deodorant stick formula Extra Whitening 1.4 Oz",
+      img: "N1.jpg",
+      by: null,
+      rating: 4,
+      reviews: "1",
+      price: 13.8,
+      addInf1: null,
+      addInf2: null
     }
   ]
 };
+
+//"<span style='color:blue;'>by Rexona</span>"
