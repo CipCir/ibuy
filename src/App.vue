@@ -40,7 +40,7 @@
     />
     <lvlPrdct
       v-if="controls.showLevel=='Prdct'"
-      :texts="inputObj.texts.lvl_Prod"
+      :texts="inputObj.texts"
       :Prdct="controls.sel_Prdct"      
       :inputOBJ="inputObj"
       v-on:addInCart="AddProdInCart()"
@@ -128,5 +128,17 @@ export default {
 }
 .lvl_container {
   width: 100%;
+}
+.CstmRev{
+  color:#0066c0;
+}
+
+@media only screen and (max-width: 1200px){
+  .hide-on-large-and-down {
+    display: none !important;
+  }
+}
+.mark{
+  background:lightgrey;
 }
 </style>

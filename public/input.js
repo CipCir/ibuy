@@ -20,15 +20,7 @@ var inputObj = {
     footer: {}
   },
   texts: {
-    lvl_Main: {
-      subTitle: "All categories"
-    },
-    lvl_Aisle: {
-      subTitle: "The baby store"
-    },
-    lvl_Shelf: {
-      subTitle: "The shelf level"
-    },
+    CustmrsRev:"customer reviews",
     lvl_Prod: {
       subTitle: "The product level"
     },
