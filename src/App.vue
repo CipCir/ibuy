@@ -87,8 +87,8 @@ export default {
         selected1_Cat: null,
         selected2_AisleCat: null,
         selected3_ShelfCat: null,
-        sel_Prdct:null,
-        cart:[]
+        sel_Prdct: null,
+        cart: []
       }
     };
   },
@@ -102,14 +102,14 @@ export default {
     // SetCategory(pay) {
     //   this.controls.selected1_Cat = pay;
     // },
-    SetPrdct(pay){
-      this.controls.sel_Prdct=pay;
+    SetPrdct(pay) {
+      this.controls.sel_Prdct = pay;
     },
-    AddProdInCart(){
+    AddProdInCart() {
       // add in cart
-      this.controls.cart.push(this.controls.sel_Prdct)
+      this.controls.cart.push(this.controls.sel_Prdct);
       // reset selected
-      this.controls.sel_Prdct=null
+      this.controls.sel_Prdct = null;
     },
     UpdateLvl(pay) {
       this.controls.showLevel = pay.lvl;
@@ -126,6 +126,9 @@ export default {
 #app {
   width: 100%;
 }
+body {
+  font-family: "Amazon Ember", Arial, sans-serif;
+}
 .lvl_container {
   width: 100%;
 }
@@ -141,4 +144,5 @@ export default {
 .mark{
   background:lightgrey;
 }
+
 </style>
