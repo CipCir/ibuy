@@ -18,8 +18,11 @@
             <span v-html="Prdct.by"></span>
           </div>
           <div>
-            <stars v-if="Prdct.rating != null" :rating="Prdct.rating"></stars>
-            <span class="CstmRev">{{Prdct.reviews}} {{texts.CustmrsRev}}</span>
+            <stars v-if="Prdct.rating != null" :rating="Prdct.rating"></stars>&nbsp;
+            <span>
+              <span v-html="Prdct.reviews"></span>&nbsp;
+              <span v-html="texts.CustmrsRev"></span>
+              </span>
           </div>
         </div>
         <!-- prod images -->

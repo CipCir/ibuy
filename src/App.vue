@@ -132,9 +132,7 @@ body {
 .lvl_container {
   width: 100%;
 }
-.CstmRev{
-  color:#0066c0;
-}
+
 
 @media only screen and (max-width: 1200px){
   .hide-on-large-and-down {

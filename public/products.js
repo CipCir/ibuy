@@ -8,11 +8,11 @@ var prodDB = {
       img: "R0.jpg",
       by: null,
       rating: 5,
-      reviews: "&nbsp;<span style='color:blue;'>4</span>",
+      reviews: "<span style='color:#0066c0;'>4</span>",
       price: 6.99,
       addInf1: "",
       addInf2:
-        "<span style='color:#4c4c4c;'>More Buying Choices<br>$6.60 </span><span style='color:blue;'>(5 new offers)</span>"
+        "<span style='color:#4c4c4c;'>More Buying Choices<br>$6.60 </span><span style='color:#0066c0;'>(5 new offers)</span>"
     },
     {
       id: 1,
@@ -22,7 +22,7 @@ var prodDB = {
       img: "R1.jpg",
       by: null,
       rating: 3.5,
-      reviews: "&nbsp;<span style='color:blue;'>6</span>",
+      reviews: "<span style='color:#0066c0;'>6</span>",
       price: 14.49,
       addInf1: null,
       addInf2: null
@@ -35,11 +35,11 @@ var prodDB = {
       img: "R2.jpg",
       by: null,
       rating: null,
-      reviews: "&nbsp;<span style='color:blue;'>5</span>",
+      reviews: "<span style='color:#0066c0;'>5</span>",
       price: 2.69,
       addInf1: null,
       addInf2:
-        "<span style='color:#4c4c4c;'>More Buying Choices<br>$2.69 </span><span style='color:blue;'>(3 new offers)</span>"
+        "<span style='color:#4c4c4c;'>More Buying Choices<br>$2.69 </span><span style='color:#0066c0;'>(3 new offers)</span>"
     },
     {
       id: 3,
@@ -49,11 +49,11 @@ var prodDB = {
       img: "R3.jpg",
       by: null,
       rating: 5,
-      reviews: "&nbsp;<span style='color:blue;'>1</span>",
+      reviews: "<span style='color:#0066c0;'>1</span>",
       price: 24.95,
       addInf1: null,
       addInf2:
-        "<span style='color:#4c4c4c;'>Free shipping with purchase of 1 items<br/>More Buying Choices<br>$20.51 </span><span style='color:blue;'>(3 new offers)</span>"
+        "<span style='color:#4c4c4c;'>Free shipping with purchase of 1 items<br/>More Buying Choices<br>$20.51 </span><span style='color:#0066c0;'>(3 new offers)</span>"
     },
     {
       id: 4,
@@ -63,11 +63,11 @@ var prodDB = {
       img: "R4.jpg",
       by: null,
       rating: 4,
-      reviews: "&nbsp;<span style='color:blue;'>144</span>",
+      reviews: "<span style='color:#0066c0;'>144</span>",
       price: 7.96,
       addInf1: null,
       addInf2:
-        "<span style='color:#4c4c4c;'>Save 5% more with Subscribe & Save<br/>Eligible for Shipping to United Kingdom<br/>More Buying Choices<br>$7.63 </span><span style='color:blue;'>(17 new offers)</span>"
+        "<span style='color:#4c4c4c;'>Save 5% more with Subscribe & Save<br/>Eligible for Shipping to United Kingdom<br/>More Buying Choices<br>$7.63 </span><span style='color:#0066c0;'>(17 new offers)</span>"
     },
 
     {
@@ -78,11 +78,11 @@ var prodDB = {
       img: "R5.jpg",
       by: null,
       rating: 3,
-      reviews: "&nbsp;<span style='color:blue;'>1</span>",
+      reviews: "<span style='color:#0066c0;'>1</span>",
       price: 17.29,
       addInf1: null,
       addInf2:
-        "<span style='color:#B12704'>Only 3 left in stock - order soon.</span><br/><span style='color:#4c4c4c;'>More Buying Choices<br/>$10.97 </span><span style='color:blue;'>(3 new offers)</span>"
+        "<span style='color:#B12704'>Only 3 left in stock - order soon.</span><br/><span style='color:#4c4c4c;'>More Buying Choices<br/>$10.97 </span><span style='color:#0066c0;'>(3 new offers)</span>"
     },
 
     {
@@ -115,4 +115,4 @@ var prodDB = {
   ]
 };
 
-//"<span style='color:blue;'>by Rexona</span>"
+//"<span style='color:#0066c0;'>by Rexona</span>"

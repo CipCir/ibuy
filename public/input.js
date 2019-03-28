@@ -20,7 +20,7 @@ var inputObj = {
     footer: {}
   },
   texts: {
-    CustmrsRev:"customer reviews",
+    CustmrsRev:"<span style='color:#0066c0;'>customer reviews</span>",
     lvl_Prod: {
       subTitle: "The product level"
     },
