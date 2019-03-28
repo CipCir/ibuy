@@ -3,17 +3,20 @@ var inputObj = {
     skin: "Amazon", // "Amazon" "Custom",
     skinProps: {
       logo_img: "./img/emag_logo_150x50.png",
-      bk_color: "#005eb8",
+      header_bk_color: "#005eb8",
       cart_color: "white",
       show_search: true,
       footer_color: "#005eb8",
       search_bk_color1: "lightblue",
       search_bk_color2: "whitesmoke",
-      search_bk_color3: "lightblue"
+      search_bk_color3: "lightblue",
+      bk_top_show: false,
+      bk_top_color: "lightblue"
     },
     currency: "$",
     currecySide: "left",    
-    productView: "List" //"Grid" "List"
+    productView: "List", //"Grid" "List"
+    body_bk_color: "white"
   },
   layout: {
     header: {},
@@ -38,6 +41,7 @@ var inputObj = {
       placeholder_search: "Placeholder text here..."
     },
     Footer: {
+      back_to_top: "<span style='color:white;'>Back to top</span>",
       col1:
         "<span style='color:white;'><b>Get to Know Us</b><br/><br/>Careers<br/>Blog<br/>About Amazon</span>",
       col2:

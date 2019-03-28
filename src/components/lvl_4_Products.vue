@@ -5,32 +5,31 @@
 
       <div class="row">
         <div id="ProdsCont" class="col s12 m9 l10">
-          <div id="SponsCont" class="row s12">Sponsored</div>          
-            <div class="col l12 xl11 ">
-            
-                      <div
-                      class="col CanSelect s12"
-                      :class="[inputOBJ.generalInfo.productView=='Grid'?'m3':'m12', ((index % 4)==0&&(index>0))?'clear_left':'']"
-                      v-for="(prod,index) in Prods"
-                      :key="prod.id"
-                      @click="Selected(prod)"
-                    >
-                      <hr>
-                      <!-- <hr v-if="inputOBJ.generalInfo.productView=='Grid' && index>3"> -->
-                      <div
-                        class="prodImg col"
-                        :class="inputOBJ.generalInfo.productView=='Grid'?'s4 m12':'s4 m3'"
-                        :style="{'background-image': 'url(' + './img/'+prod.img+ ')'}"
-                      >
-                        <!-- <img :src="'./img/'+prod.img"> -->
-                      </div>
-                      <div class="col" :class="inputOBJ.generalInfo.productView=='Grid'?'s8 m12':'s8 m9'">
-                        <div class="ProdLbl" v-html="prod.lbl"></div>
-                        <div v-html="prod.by"></div>
-                        <div>
-                          <stars v-if="prod.rating != null" :rating="prod.rating"></stars>&nbsp;
-                          <span v-html="prod.reviews"></span>
-                        </div>
+          <div id="SponsCont" class="row s12">Sponsored</div>
+          <div class="col l12 xl11">
+            <div
+              class="col CanSelect s12"
+              :class="[inputOBJ.generalInfo.productView=='Grid'?'m3':'m12', ((index % 4)==0&&(index>0))?'clear_left':'']"
+              v-for="(prod,index) in Prods"
+              :key="prod.id"
+              @click="Selected(prod)"
+            >
+              <hr>
+              <!-- <hr v-if="inputOBJ.generalInfo.productView=='Grid' && index>3"> -->
+              <div
+                class="prodImg col"
+                :class="inputOBJ.generalInfo.productView=='Grid'?'s4 m12':'s4 m3'"
+                :style="{'background-image': 'url(' + './img/'+prod.img+ ')'}"
+              >
+                <!-- <img :src="'./img/'+prod.img"> -->
+              </div>
+              <div class="col" :class="inputOBJ.generalInfo.productView=='Grid'?'s8 m12':'s8 m9'">
+                <div class="ProdLbl" v-html="prod.lbl"></div>
+                <div v-html="prod.by"></div>
+                <div>
+                  <stars v-if="prod.rating != null" :rating="prod.rating"></stars>&nbsp;
+                  <span v-html="prod.reviews"></span>
+                </div>
 
                         <div v-html="prod.addInf1"></div>
                         <div class="prodPrice">
@@ -49,10 +48,10 @@
                           </span>
                         </div>
 
-                        <div v-html="prod.addInf2"></div>
-                      </div>
-                    </div>
+                <div v-html="prod.addInf2"></div>
+              </div>
             </div>
+          </div>
         </div>
       </div>
     </div>
