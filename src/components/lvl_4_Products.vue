@@ -35,18 +35,18 @@
                         <div v-html="prod.addInf1"></div>
                         <div class="prodPrice">
                           <span
-                            v-if="inputOBJ.generalInfo.currecySide=='left'"
-                            v-html="inputOBJ.generalInfo.currency"
-                          ></span>
+                            v-if="inputOBJ.generalInfo.currecySide=='left'"                            
+                          ><sup v-html="inputOBJ.generalInfo.currency"></sup></span>
                           <span v-if="prod.price.toString().indexOf('.')>-1">
                             <span v-html="prod.price.toString().split('.')[0]"></span>
                             <sup class="suprascript" v-html="prod.price.toString().split('.')[1]"></sup>
                           </span>
                           <span v-else v-html="prod.price"></span>
                           <span
-                            v-if="inputOBJ.generalInfo.currecySide=='right'"
-                            v-html="inputOBJ.generalInfo.currency"
-                          ></span>
+                            v-if="inputOBJ.generalInfo.currecySide=='right'"                            
+                          >
+                          <sup v-html="inputOBJ.generalInfo.currency"></sup>
+                          </span>
                         </div>
 
                         <div v-html="prod.addInf2"></div>

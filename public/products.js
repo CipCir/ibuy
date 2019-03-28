@@ -10,7 +10,7 @@ var prodDB = {
       rating: 5,
       reviews: "<span style='color:#0066c0;'>4</span>",
       price: 6.99,
-      addInf1: "",
+      addInf1: null,
       addInf2:
         "<span style='color:#4c4c4c;'>More Buying Choices<br>$6.60 </span><span style='color:#0066c0;'>(5 new offers)</span>"
     },

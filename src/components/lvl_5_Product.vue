@@ -28,7 +28,16 @@
         <!-- prod images -->
         <div class="row">
           <!-- thumbs -->
-          <div class="col m2 l1" style="background:lightblue">
+          <div id="tumbCont" class="col m2 l2 center-align" >
+            <div class="tumbImg">
+              <img :src="'./img/'+Prdct.img">
+            </div>
+            <div class="tumbImg">
+              <img :src="'./img/'+Prdct.img">
+            </div>
+            <div class="tumbImg">
+              <img :src="'./img/'+Prdct.img">
+            </div>
             <div class="tumbImg">
               <img :src="'./img/'+Prdct.img">
             </div>
@@ -37,21 +46,33 @@
             </div>
           </div>
           <!-- main img -->
-          <div class="col m10 l11 center-align">
+          <div class="col m10 l10 center-align">
             <div class="prodImg">
               <img :src="'./img/'+Prdct.img">
             </div>
           </div>
         </div>
       </div>
-      <div class="col s12 m5 l4" style="background:lightsalmon">cart cont</div>
+      <!-- cart container -->
+      <div id="cartCont" class="col s12 m5 l4 center-align" style="background:lightsalmon">    
+        <div class="row">
+          <span class="lowTxt" v-html="texts.price"></span> :
+          <span class="prodPrice">{{inputOBJ.generalInfo.currency}} {{Prdct.price}} </span>
+        </div>    
+        <div class="row center-align">
+          Quantity
+          <select>
+            <option v-for="n in 10" :key="n" value="n">{{n}}</option>
+          </select>
+        </div>
+
+
+        <!-- <div v-html="Prdct.addInf2"></div> -->
+      </div>
       <div class="col l1 hide-on-large-and-down mark" style="height:300px">Empty col</div>
     </div>
 
-    <div v-html="Prdct.addInf1"></div>
-
-    <div v-html="Prdct.price"></div>
-    <div v-html="Prdct.addInf2"></div>
+    
     <div class="btn" @click="addToCart()">add to cart</div>
   </div>
 </template>
@@ -135,17 +156,21 @@ export default {
   background: lightcyan;
   min-height: 100px;
 }
-
+#tumbCont{
+  display: flex;    
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
 .tumbImg {
   display: flex;
   justify-content: center;
   align-items: center;
 
-  width: 50px;
+  width: 45%;
   height: 50px;
   border-color: #a2a6ac;
   border-radius: 2px;
-  background: #e7e9ec;
+  /* background: #e7e9ec; */
   border-style: solid;
   border-width: 1px;
   cursor: pointer;
@@ -153,12 +178,39 @@ export default {
   text-align: center;
   text-decoration: none !important;
   vertical-align: middle;
+  margin: 2px;
 }
 .tumbImg:hover {
   border-color: #a2a6ac #979aa1 #82858a;
 }
 .tumbImg > img {
-  height: 90%;
+  max-height: 90%;
+  max-width: 100%
+}
+.lowTxt{
+    font-size: 13px;
+    line-height: 19px;
+    color: #555;
+}
+.prodPrice{
+    font-size: 21px;
+    line-height: 1.3;
+    color: #B12704;
+}
+
+#cartCont{
+  padding-left: 5px;
+    box-shadow: -4px 0px 3px -2px #ccc;
+}
+select{
+  display: block;
+  background-color:white; 
+  border: 1px solid #DDD;
+  width: unset; 
+  padding: 5px;
+  border: unset;
+  border-radius: 2px;
+  height: 3rem; 
 }
 </style>
 

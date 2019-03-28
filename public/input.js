@@ -11,8 +11,8 @@ var inputObj = {
       search_bk_color2: "whitesmoke",
       search_bk_color3: "lightblue"
     },
-    currency: "<sup>$</sup>",
-    currecySide: "left",
+    currency: "$",
+    currecySide: "left",    
     productView: "List" //"Grid" "List"
   },
   layout: {
@@ -21,6 +21,7 @@ var inputObj = {
   },
   texts: {
     CustmrsRev:"<span style='color:#0066c0;'>customer reviews</span>",
+    price:"Price",
     lvl_Prod: {
       subTitle: "The product level"
     },
