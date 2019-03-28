@@ -9,7 +9,7 @@ var prodDB = {
       by: null,
       rating: 5,
       reviews: "<span style='color:#0066c0;'>4</span>",
-      price: 6.99,
+      price: "6.99",
       addInf1: "",
       addInf2:
         "<span style='color:#4c4c4c;'>More Buying Choices<br>$6.60 </span><span style='color:#0066c0;'>(5 new offers)</span>"
@@ -23,7 +23,7 @@ var prodDB = {
       by: null,
       rating: 3.5,
       reviews: "<span style='color:#0066c0;'>6</span>",
-      price: 14.49,
+      price: "14.49",
       addInf1: null,
       addInf2: null
     },
@@ -34,9 +34,9 @@ var prodDB = {
         "Rexona Women MotionSense Aloe Vera 48H Anti-Perspirant Solid Stick 40 ml",
       img: "R2.jpg",
       by: null,
-      rating: null,
-      reviews: "<span style='color:#0066c0;'>5</span>",
-      price: 2.69,
+      rating: 5,
+      reviews: "<span style='color:#0066c0;'>3</span>",
+      price: "2.69",
       addInf1: null,
       addInf2:
         "<span style='color:#4c4c4c;'>More Buying Choices<br>$2.69 </span><span style='color:#0066c0;'>(3 new offers)</span>"
@@ -50,7 +50,7 @@ var prodDB = {
       by: null,
       rating: 5,
       reviews: "<span style='color:#0066c0;'>1</span>",
-      price: 24.95,
+      price: "24.95",
       addInf1: null,
       addInf2:
         "<span style='color:#4c4c4c;'>Free shipping with purchase of 1 items<br/>More Buying Choices<br>$20.51 </span><span style='color:#0066c0;'>(3 new offers)</span>"
@@ -64,7 +64,7 @@ var prodDB = {
       by: null,
       rating: 4,
       reviews: "<span style='color:#0066c0;'>144</span>",
-      price: 7.96,
+      price: " 7.96",
       addInf1: null,
       addInf2:
         "<span style='color:#4c4c4c;'>Save 5% more with Subscribe & Save<br/>Eligible for Shipping to United Kingdom<br/>More Buying Choices<br>$7.63 </span><span style='color:#0066c0;'>(17 new offers)</span>"
@@ -79,7 +79,7 @@ var prodDB = {
       by: null,
       rating: 3,
       reviews: "<span style='color:#0066c0;'>1</span>",
-      price: 17.29,
+      price: "17.29",
       addInf1: null,
       addInf2:
         "<span style='color:#B12704'>Only 3 left in stock - order soon.</span><br/><span style='color:#4c4c4c;'>More Buying Choices<br/>$10.97 </span><span style='color:#0066c0;'>(3 new offers)</span>"
@@ -94,7 +94,7 @@ var prodDB = {
       by: "<span style='color:gray;'>by Rexona</span>",
       rating: null,
       reviews: null,
-      price: 14.99,
+      price: "14.99",
       addInf1: null,
       addInf2: "Ages: 7 years and up"
     },
@@ -107,8 +107,8 @@ var prodDB = {
       img: "N1.jpg",
       by: null,
       rating: 4,
-      reviews: "1",
-      price: 13.8,
+      reviews: "<span style='color:#0066c0;'>1</span>",
+      price: "13.80",
       addInf1: null,
       addInf2: null
     }

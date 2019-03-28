@@ -1,19 +1,19 @@
 <template>
   <div id="headerComp">
-    <div class="row_header_first row" v-bind:style="{'background-color':bk_color}">
-      <div class="col s10 m3 l3 valign-wrapper" v-bind:style="{'background-color':bk_color}">
+    <div class="row_header_first row" v-bind:style="{'background-color':header_bk_color}">
+      <div class="col s10 m3 l3 valign-wrapper" v-bind:style="{'background-color':header_bk_color}">
         <img :src="logo_img" alt="logo image here">
       </div>
       <div
         class="col hide-on-med-and-up s1 valign-wrapper cart_container"
-        v-bind:style="{'background-color':bk_color,'color':cart_color}"
+        v-bind:style="{'background-color':header_bk_color,'color':cart_color}"
       >
         {{nr_cart}}
         <i class="material-icons small">shopping_cart</i>
       </div>
       <div
         class="col s12 m8 l6 valign-wrapper"
-        v-bind:style="{'background-color':bk_color}"
+        v-bind:style="{'background-color':header_bk_color}"
         v-if="show_search"
       >
         <div
@@ -36,29 +36,29 @@
       </div>
       <div
         class="col hide-on-med-and-down l3 right right-align"
-        v-bind:style="{'background-color':bk_color}"
+        v-bind:style="{'background-color':header_bk_color}"
         v-html="texts.opt0"
       ></div>
     </div>
-    <div class="row_header_second row" v-bind:style="{'background-color':bk_color}">
+    <div class="row_header_second row" v-bind:style="{'background-color':header_bk_color}">
       <div
         class="col hide-on-small-only m3 l3 white_space_pre"
-        v-bind:style="{'background-color':bk_color}"
+        v-bind:style="{'background-color':header_bk_color}"
         v-html="texts.opt1"
       ></div>
       <div
         class="col hide-on-small-only m6 l6 white_space_pre"
-        v-bind:style="{'background-color':bk_color}"
+        v-bind:style="{'background-color':header_bk_color}"
         v-html="texts.opt2"
       ></div>
       <div
         class="col hide-on-med-and-down l2 white_space_pre"
-        v-bind:style="{'background-color':bk_color}"
+        v-bind:style="{'background-color':header_bk_color}"
         v-html="texts.opt3"
       ></div>
       <div
         class="col hide-on-small-only m1 l1 valign-wrapper cart_container right"
-        v-bind:style="{'background-color':bk_color,'color':cart_color}"
+        v-bind:style="{'background-color':header_bk_color,'color':cart_color}"
       >
         {{nr_cart}}
         <i class="material-icons small">shopping_cart</i>
@@ -79,7 +79,7 @@ export default {
   data() {
     return {
       logo_img: "",
-      bk_color: "",
+      header_bk_color: "",
       show_search: false,
       search_color1: "",
       search_color2: "",
@@ -92,7 +92,7 @@ export default {
       case "Amazon":
         // console.log("Amazon");
         this.logo_img = "./img/amazon_logo_150x50.png";
-        this.bk_color = "#233040";
+        this.header_bk_color = "#233040";
         this.show_search = true;
         this.cart_color = "white";
         this.search_color1 = "#f3f3f3";
@@ -102,12 +102,12 @@ export default {
       default:
         // console.log("Custom");
         this.logo_img = this.skinProps.logo_img;
-        this.bk_color = this.skinProps.bk_color;
+        this.header_bk_color = this.skinProps.header_bk_color;
         this.show_search = this.skinProps.show_search;
         this.cart_color = this.skinProps.cart_color;
-        this.search_color1 = this.skinProps.search_bk_color1;
-        this.search_color2 = this.skinProps.search_bk_color2;
-        this.search_color3 = this.skinProps.search_bk_color3;
+        this.search_color1 = this.skinProps.search_header_bk_color1;
+        this.search_color2 = this.skinProps.search_header_bk_color2;
+        this.search_color3 = this.skinProps.search_header_bk_color3;
         break;
     }
   }

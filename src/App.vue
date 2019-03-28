@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" v-bind:style="{'background-color':inputObj.generalInfo.body_bk_color}">
     <headerComp
       :texts="inputObj.texts.Header"
       :skin="inputObj.generalInfo.skin"
@@ -41,7 +41,7 @@
     <lvlPrdct
       v-if="controls.showLevel=='Prdct'"
       :texts="inputObj.texts"
-      :Prdct="controls.sel_Prdct"      
+      :Prdct="controls.sel_Prdct"
       :inputOBJ="inputObj"
       v-on:addInCart="AddProdInCart()"
       v-on:updtLvl="UpdateLvl($event)"
@@ -133,14 +133,12 @@ body {
   width: 100%;
 }
 
-
-@media only screen and (max-width: 1200px){
+@media only screen and (max-width: 1200px) {
   .hide-on-large-and-down {
     display: none !important;
   }
 }
-.mark{
-  background:lightgrey;
+.mark {
+  background: lightgrey;
 }
-
 </style>
