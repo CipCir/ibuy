@@ -5,7 +5,28 @@
 
       <div class="row">
         <div id="ProdsCont" class="col s12 m9 l10">
-          <div id="SponsCont" class="row s12">Sponsored</div>
+          <div class="row s12 banner_img_cont" v-if="show_banner">
+            <img
+              class="banner_img show-on-small"
+              :src="inputOBJ.banner.img1"
+              alt="banner image 1 here"
+            >
+            <img
+              class="banner_img show-on-medium"
+              :src="inputOBJ.banner.img2"
+              alt="banner image 2 here"
+            >
+            <img
+              class="banner_img show-on-large"
+              :src="inputOBJ.banner.img3"
+              alt="banner image 3 here"
+            >
+            <img
+              class="banner_img show-on-extra-large"
+              :src="inputOBJ.banner.img4"
+              alt="banner image 4 here"
+            >
+          </div>
           <div class="col l12 xl11">
             <div
               class="col CanSelect s12"
@@ -31,22 +52,20 @@
                   <span v-html="prod.reviews"></span>
                 </div>
 
-                        <div v-html="prod.addInf1"></div>
-                        <div class="prodPrice">
-                          <span
-                            v-if="inputOBJ.generalInfo.currecySide=='left'"                            
-                          ><sup v-html="inputOBJ.generalInfo.currency"></sup></span>
-                          <span v-if="prod.price.toString().indexOf('.')>-1">
-                            <span v-html="prod.price.toString().split('.')[0]"></span>
-                            <sup class="suprascript" v-html="prod.price.toString().split('.')[1]"></sup>
-                          </span>
-                          <span v-else v-html="prod.price"></span>
-                          <span
-                            v-if="inputOBJ.generalInfo.currecySide=='right'"                            
-                          >
-                          <sup v-html="inputOBJ.generalInfo.currency"></sup>
-                          </span>
-                        </div>
+                <div v-html="prod.addInf1"></div>
+                <div class="prodPrice">
+                  <span v-if="inputOBJ.generalInfo.currecySide=='left'">
+                    <sup v-html="inputOBJ.generalInfo.currency"></sup>
+                  </span>
+                  <span v-if="prod.price.toString().indexOf('.')>-1">
+                    <span v-html="prod.price.toString().split('.')[0]"></span>
+                    <sup class="suprascript" v-html="prod.price.toString().split('.')[1]"></sup>
+                  </span>
+                  <span v-else v-html="prod.price"></span>
+                  <span v-if="inputOBJ.generalInfo.currecySide=='right'">
+                    <sup v-html="inputOBJ.generalInfo.currency"></sup>
+                  </span>
+                </div>
 
                 <div v-html="prod.addInf2"></div>
               </div>
@@ -71,6 +90,13 @@ export default {
     Prods: Array,
     inputOBJ: Object
   },
+  data() {
+    return {
+      show_banner: this.inputOBJ.generalInfo.show_banner
+    };
+  },
+
+  created() {},
   methods: {
     Selected(prod) {
       // if (prod.prods.length==0){
@@ -85,6 +111,16 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.banner_img_cont {
+  width: 100%;
+}
+.banner_img {
+  margin: 0 auto;
+  position: relative;
+  max-width: 100%;
+  display: none;
+}
+
 .ProdLbl::before {
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, white 58%);
   content: "\2026";

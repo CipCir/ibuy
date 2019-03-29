@@ -11,20 +11,29 @@ var inputObj = {
       search_bk_color2: "whitesmoke",
       search_bk_color3: "lightblue",
       bk_top_show: false,
-      bk_top_color: "lightblue"
+      bk_top_color: "lightblue",
+      show_footer_text: true,
+      show_footer_image: false
     },
     currency: "$",
-    currecySide: "left",    
+    currecySide: "left",
     productView: "List", //"Grid" "List"
-    body_bk_color: "white"
+    body_bk_color: "white",
+    show_banner: true
   },
   layout: {
     header: {},
     footer: {}
   },
+  banner: {
+    img1: "./img/banner_s.png",
+    img2: "./img/banner_m.png",
+    img3: "./img/banner_l.png",
+    img4: "./img/banner_xl.png"
+  },
   texts: {
-    CustmrsRev:"<span style='color:#0066c0;'>customer reviews</span>",
-    price:"Price",
+    CustmrsRev: "<span style='color:#0066c0;'>customer reviews</span>",
+    price: "Price",
     lvl_Prod: {
       subTitle: "The product level"
     },
@@ -33,8 +42,10 @@ var inputObj = {
         "<span style='color:white;'>24/7 Customer service. Learn more</span>",
       opt1:
         "<span style='color:white;'><img src='./img/amazon_opt_1.png'></span>",
+      // opt2:
+      //   "<br/>sadkasodkpoaskd okaspodkaspodka poaksdp okaspodkaspodk poaskdopakdpo kasopdkaspo kas fgdfg dfg df",
       opt2:
-        "<br/><span style='color:white;'><b>Departments▾   </b></span><span style='color:lightgray;'>Your Amazon.com Today's Deals   Gift Cards   Registry     Help</span>",
+        "<br/><div style='color:white;'><b>Departments▾ </b></span><span style='color:lightgray;'>Your Amazon.com Today's Deals Gift Cards Registry Help</span>",
       opt3:
         "<span style='color:white;'><img src='./img/amazon_opt_3.png'></span>",
       search_all_text: "All▾",
@@ -49,7 +60,11 @@ var inputObj = {
       col3:
         "<span style='color:white;'><b>Amazon Payment Products</b><br/><br/>Amazon Business Card<br/>Shop with Points<br/></span>",
       col4:
-        "<span style='color:white;'><b>Let Us Help You</b><br/><br/>Your Account<br/>Your Orders</span>"
+        "<span style='color:white;'><b>Let Us Help You</b><br/><br/>Your Account<br/>Your Orders</span>",
+      img1: "./img/footer_s.png",
+      img2: "./img/footer_m.png",
+      img3: "./img/footer_l.png",
+      img4: "./img/footer_xl.png"
     }
   }
 };
