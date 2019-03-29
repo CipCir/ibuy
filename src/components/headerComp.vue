@@ -48,7 +48,7 @@
         v-html="texts.opt1"
       ></div>
       <div
-        class="col hide-on-small-only m6 l6 white_space_pre"
+        class="col hide-on-small-only m7 l6 white_space_pre forced_line"
         v-bind:style="{'background-color':header_bk_color}"
         v-html="texts.opt2"
       ></div>
@@ -123,6 +123,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.forced_line {
+  overflow: hidden;
+  white-space: nowrap;
+}
 .cart_container {
   height: 40px;
 }

@@ -188,13 +188,25 @@ body {
 .lvl_container {
   width: 100%;
 }
-
-@media only screen and (max-width: 993px) {
+@media only screen and (min-width: 1200px) {
+  .show-on-extra-large {
+    display: block !important;
+  }
+  .show-on-large {
+    display: none !important;
+  }
+}
+@media only screen and (max-width: 1200px) and (min-width: 993px) {
+  .show-on-large {
+    display: block !important;
+  }
+}
+@media only screen and (max-width: 1200px) {
   .hide-on-large-and-down {
     display: none !important;
   }
 }
-.clickable{
+.clickable {
   cursor: pointer;
 }
 .mark {
