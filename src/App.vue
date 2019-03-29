@@ -4,7 +4,8 @@
       :texts="inputObj.texts.Header"
       :skin="inputObj.generalInfo.skin"
       :skinProps="inputObj.generalInfo.skinProps"
-      :nr_cart="5"
+      :nr_cart="cartNumb"
+      v-on:updtLvl="UpdateLvl($event)"
     />
     <!-- <lvlMain
       v-if="controls.showLevel=='Main'"
@@ -43,7 +44,15 @@
       :texts="inputObj.texts"
       :Prdct="controls.sel_Prdct"
       :inputOBJ="inputObj"
-      v-on:addInCart="AddProdInCart()"
+      v-on:addInCart="AddProdInCart($event)"
+      v-on:updtLvl="UpdateLvl($event)"
+    />
+      <lvlCart
+      v-if="controls.showLevel=='Cart'"
+      :texts="inputObj.texts"
+      :Cart="cart"
+      :inputOBJ="inputObj"
+      v-on:addInCart="AddProdInCart($event)"
       v-on:updtLvl="UpdateLvl($event)"
     />
 
@@ -58,11 +67,12 @@
 <script>
 import headerComp from "./components/headerComp.vue";
 
-import lvlMain from "./components/lvl_1_Main.vue";
-import lvlAisle from "./components/lvl_2_Aisle.vue";
-import lvlShelf from "./components/lvl_3_Shelf.vue";
+// import lvlMain from "./components/lvl_1_Main.vue";
+// import lvlAisle from "./components/lvl_2_Aisle.vue";
+// import lvlShelf from "./components/lvl_3_Shelf.vue";
 import lvlProds from "./components/lvl_4_Products.vue";
 import lvlPrdct from "./components/lvl_5_Product.vue";
+import lvlCart from "./components/lvl_6_Cart.vue";
 
 import footerComp from "./components/footerComp.vue";
 
@@ -71,11 +81,12 @@ export default {
   components: {
     headerComp,
     footerComp,
-    lvlMain,
-    lvlAisle,
-    lvlShelf,
+    // lvlMain,
+    // lvlAisle,
+    // lvlShelf,
     lvlProds,
-    lvlPrdct
+    lvlPrdct,
+    lvlCart
   },
   data() {
     return {
@@ -88,8 +99,9 @@ export default {
         selected2_AisleCat: null,
         selected3_ShelfCat: null,
         sel_Prdct: null,
-        cart: []
-      }
+      },
+      cart: [{id:-1,quantity:0}],
+      cartSum:0
     };
   },
   methods: {
@@ -103,18 +115,62 @@ export default {
     //   this.controls.selected1_Cat = pay;
     // },
     SetPrdct(pay) {
+      // pay prouct object
       this.controls.sel_Prdct = pay;
     },
-    AddProdInCart() {
-      // add in cart
-      this.controls.cart.push(this.controls.sel_Prdct);
+    AddProdInCart(pay) {
+      // check if prod exists in cart
+      let index=this.cart.findIndex(i => i.id === this.controls.sel_Prdct.id);
+
+       this.controls.sel_Prdct.quantity=pay
+      if (index>-1){
+        //update quantinty
+        this.cart[index].quantity=pay
+      }else{
+        // add in cart      
+        this.cart.push(this.controls.sel_Prdct);
+      }
+      // debugger
+      this.cart.shift()
+      this.cart.unshift({id:-1,quantity:0})
+
       // reset selected
+      // this.cartSum=this.cartNumb
       this.controls.sel_Prdct = null;
     },
     UpdateLvl(pay) {
       this.controls.showLevel = pay.lvl;
       // this.controls.selected1_Cat=payload.cat
       // this.controls.selected2_AisleCat=pay.AisleCat
+    }
+  },
+  //  watch: {
+  //   cart: {
+  //     deep:true,
+  //     handler: function (val) {
+  //       var sum=0      
+  //       this.cart.forEach(itm=>{
+  //         sum=sum+itm.quantity
+  //       })
+  //       debugger
+  //       this.cartSum=sum
+  //     }
+
+  //   }},
+  
+   computed:{
+    cartNumb(){
+      
+      var sum=0      
+      this.cart.forEach(itm=>{
+        sum=sum+itm.quantity
+      })
+      
+      return sum
+      // if (this.cart.length==0){
+      //   return 0
+      // }
+      // return this.cart.map(item => item.quantity).reduce((total, amount) => total + amount);
     }
   }
   // created(){
@@ -133,7 +189,7 @@ body {
   width: 100%;
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 993px) {
   .hide-on-large-and-down {
     display: none !important;
   }

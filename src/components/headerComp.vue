@@ -5,8 +5,9 @@
         <img :src="logo_img" alt="logo image here">
       </div>
       <div
-        class="col hide-on-med-and-up s1 valign-wrapper cart_container"
+        class="col hide-on-med-and-up s1 valign-wrapper cart_container clickable"
         v-bind:style="{'background-color':header_bk_color,'color':cart_color}"
+        @click="UpdateLvl()"
       >
         {{nr_cart}}
         <i class="material-icons small">shopping_cart</i>
@@ -57,8 +58,9 @@
         v-html="texts.opt3"
       ></div>
       <div
-        class="col hide-on-small-only m1 l1 valign-wrapper cart_container right"
+        class="col hide-on-small-only m1 l1 valign-wrapper cart_container right clickable"
         v-bind:style="{'background-color':header_bk_color,'color':cart_color}"
+        @click="UpdateLvl()"
       >
         {{nr_cart}}
         <i class="material-icons small">shopping_cart</i>
@@ -109,6 +111,11 @@ export default {
         this.search_color2 = this.skinProps.search_header_bk_color2;
         this.search_color3 = this.skinProps.search_header_bk_color3;
         break;
+    }
+  },
+  methods:{
+    UpdateLvl(){
+      this.$emit("updtLvl", { lvl: "Cart" })
     }
   }
 };
