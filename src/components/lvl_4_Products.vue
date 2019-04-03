@@ -40,7 +40,7 @@
               <div
                 class="prodImg col"
                 :class="inputOBJ.generalInfo.productView=='Grid'?'s4 m12':'s4 m3'"
-                :style="{'background-image': 'url(' + './img/'+prod.img+ ')'}"
+                :style="{'background-image': 'url(' + './img/'+prod.imgArr[0]+ ')'}"
               >
                 <!-- <img :src="'./img/'+prod.img"> -->
               </div>

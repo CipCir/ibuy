@@ -9,10 +9,10 @@
       </span>
     </div>
     <div id="prodctCont" class="row">
-      <div class="col l1 hide-on-large-and-down"></div>
-      <div id="PrdctArea" class="col m12 l10">
+      <div class="col xl1 extraCol show-on-extra-large"></div>
+      <div id="PrdctArea" class="col m12 xl10">
         <div id ="PrdSplitCont" class="row">
-          <div id="ProdImgCont" class="col s12 m7 l6">
+          <div id="ProdImgCont" class="col s12 m7 ">
             <!-- prod name and review -->
             <div class="row">
               <div>
@@ -28,35 +28,28 @@
               </div>
             </div>
             <!-- prod images -->
-            <div class="row">
+            <div class="row" id="TumbAndProd">
               <!-- thumbs -->
-              <div id="tumbCont" class="col m2 l2 center-align">
-                <div class="tumbImg">
-                  <img :src="'./img/'+Prdct.img">
+              <div id="tumbCont" class="center-align">
+                <div v-for="(thumb,ind) in Prdct.imgArr" :key="ind" 
+                class="tumbImg"
+                :class="{'selected':PrdImg==thumb}"
+                @click="PrdImg=thumb"
+                >
+                  <img :src="'./img/'+thumb">
                 </div>
-                <div class="tumbImg">
-                  <img :src="'./img/'+Prdct.img">
-                </div>
-                <div class="tumbImg">
-                  <img :src="'./img/'+Prdct.img">
-                </div>
-                <div class="tumbImg">
-                  <img :src="'./img/'+Prdct.img">
-                </div>
-                <div class="tumbImg">
-                  <img :src="'./img/'+Prdct.img">
-                </div>
+                
               </div>
               <!-- main img -->
-              <div class="col m10 l10 center-align">
+              <div id="mainImgCont" class="center-align">
                 <div class="prodImg">
-                  <img :src="'./img/'+Prdct.img">
+                  <img :src="'./img/'+PrdImg">
                 </div>
               </div>
             </div>
           </div>
           <!-- cart container -->
-          <div id="cartCont" class="col s12 m5 l4">
+          <div id="cartCont" class="col s12 m5 ">
             <div class="row center-align">
               <span class="lowTxt" v-html="texts.price"></span> :
               <span class="prodPrice">{{inputOBJ.generalInfo.currency}} {{Prdct.price}}</span>
@@ -82,7 +75,7 @@
           <img :src="'./img/ProdDetailsCart.jpg'" alt>
         </div>
       </div>
-      <div class="col l1 hide-on-large-and-down"></div>
+      <div class="col xl1 extraCol show-on-extra-large"></div>
     </div>
   </div>
 </template>
@@ -103,6 +96,7 @@ export default {
   data(){
     return{
       quantity:1,
+      PrdImg:this.Prdct.imgArr[0]
     }
   },
   methods: {
@@ -119,24 +113,42 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.selected{
+  border: 1px solid red;
+  box-shadow:0 0 3px 2px rgba(228,121,17,.5)
+}
+.extraCol{
+  display: none;
+}
 #PrdSplitCont {
   padding: 3px;
 }
+#TumbAndProd{
+  display: flex;
+    align-items: flex-start;
+}
 #tumbCont {
   display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
+  /* justify-content: flex-start;*/
+  flex-wrap: wrap; 
+  width: 110px;
+}
+#mainImgCont{
+  width: 100%
 }
 .tumbImg {
   display: flex;
+  /* background: red; */
+  /* flex: 1 1 35%; */
+    margin: 4px;
+  height: 50px;
   justify-content: center;
   align-items: center;
 
-  width: 45%;
-  height: 50px;
+  width: 35px;
   border-color: #a2a6ac;
   border-radius: 2px;
-  /* background: #e7e9ec; */
+  
   border-style: solid;
   border-width: 1px;
   cursor: pointer;
@@ -144,14 +156,14 @@ export default {
   text-align: center;
   text-decoration: none !important;
   vertical-align: middle;
-  margin: 2px;
+  
 }
 .tumbImg:hover {
   border-color: #a2a6ac #979aa1 #82858a;
 }
 .tumbImg > img {
   max-height: 90%;
-  max-width: 100%;
+  max-width: 90%;
 }
 .lowTxt {
   font-size: 13px;

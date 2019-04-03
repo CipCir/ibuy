@@ -206,6 +206,7 @@ body {
     display: none !important;
   }
 }
+
 .clickable {
   cursor: pointer;
 }
