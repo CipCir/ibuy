@@ -1,7 +1,22 @@
 <template>
   <div id="lvl_Main" class="lvl_container">
     <div class="row">
-      <div id="FiltersCont" class="col s12 m3 l2">Filters go here</div>
+      <filterComp
+        :inputOBJ="inputOBJ"
+        :isMobile="true"
+        v-on:brandF="brandFilter=$event"
+        v-on:priceF="priceFilter=$event"
+        v-on:ratingF="ratingFilter=$event"
+        class="row hide-on-med-and-up"
+      ></filterComp>
+      <filterComp
+        :inputOBJ="inputOBJ"
+        :isMobile="false"
+        v-on:brandF="brandFilter=$event"
+        v-on:priceF="priceFilter=$event"
+        v-on:ratingF="ratingFilter=$event"
+        class="row hide-on-small-only"
+      ></filterComp>
 
       <div class="row">
         <div id="ProdsCont" class="col s12 m9 l10">
@@ -31,7 +46,7 @@
             <div
               class="col CanSelect s12"
               :class="[inputOBJ.generalInfo.productView=='Grid'?'m3':'m12', ((index % 4)==0&&(index>0))?'clear_left':'']"
-              v-for="(prod,index) in Prods"
+              v-for="(prod,index) in prodFilterList"
               :key="prod.id"
               @click="Selected(prod)"
             >
@@ -79,11 +94,15 @@
 
 <script>
 import stars from "./stars.vue";
+import filterComp from "./filterComp.vue";
+import { close, closeSync } from "fs";
+import { debug } from "util";
 
 export default {
   name: "lvl_Prod",
   components: {
-    stars
+    stars,
+    filterComp
   },
   props: {
     texts: Object,
@@ -92,11 +111,57 @@ export default {
   },
   data() {
     return {
-      show_banner: this.inputOBJ.generalInfo.show_banner
+      show_banner: this.inputOBJ.generalInfo.show_banner,
+      brandFilter: [],
+      priceFilter: [],
+      ratingFilter: []
     };
   },
 
   created() {},
+  computed: {
+    prodFilterList() {
+      var vueObj = this;
+      var returned = this.Prods;
+
+      if (this.brandFilter.length > 0) {
+        returned = returned.filter(
+          prod => vueObj.brandFilter.indexOf(prod.brand) > -1
+        );
+      }
+
+      if (this.priceFilter.length > 0) {
+        var tempArr = [];
+        returned.forEach((prod, index) => {
+          var found_interval = false;
+          vueObj.priceFilter.forEach(elem => {
+            var splitted = elem.split("#");
+
+            if (
+              parseFloat(prod.price) >= splitted[0] &&
+              parseFloat(prod.price) <= splitted[1]
+            ) {
+              found_interval = true;
+              // console.log(splitted[0], splitted[1], parseFloat(prod.price));
+            }
+          });
+          if (found_interval) {
+            tempArr.push(returned[index]);
+          }
+        });
+        returned = tempArr;
+      }
+
+      if (this.ratingFilter.length > 0) {
+        // debugger;
+        var tempMin = Math.min(...vueObj.ratingFilter);
+        // console.log(vueObj.ratingFilter, tempMin);
+        returned = returned.filter(prod => prod.rating >= tempMin);
+      }
+
+      return returned;
+    }
+  },
   methods: {
     Selected(prod) {
       // if (prod.prods.length==0){
@@ -190,11 +255,11 @@ export default {
   /* background: lightblue; */
   cursor: pointer;
 }
-#FiltersCont {
-  background: lightgray;
-  min-height: 100px;
-}
 
+.paddingBox {
+  /* border: 1px solid red; */
+  padding: 0px 15px;
+}
 #SponsCont {
   background: lightcyan;
   min-height: 100px;
