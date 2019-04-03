@@ -66,5 +66,20 @@ var inputObj = {
       img3: "./img/footer_l.png",
       img4: "./img/footer_xl.png"
     }
+  },
+  Filters: {
+    FilterBrandLabel: "Brand",
+    brand: ["Rexona", "Nivea"],
+    FilterPriceLabel: "Price",
+    price: [
+      { lbl: "Under 5", val: "0#5" },
+      { lbl: "5 - 10.50", val: "5#10.50" },
+      { lbl: "10.50 - 15", val: "10.50#15" }
+    ],
+    FilterRatingLabel: "Avg. Customer Review",
+    RatingLabel: "&Up",
+    RatingMaxVal: 5,
+    FilterLbl1: "Filter >>",
+    FilterLbl2: "<< Back"
   }
 };
