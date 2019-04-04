@@ -190,7 +190,9 @@ select {
       color: #0066C0;
     cursor: pointer;
     font-size: 12px;
-        box-shadow: 0 0 5px 0.1px rgba(0, 0, 0, 0.1);
+        /* box-shadow: 0 0 5px 0.1px rgba(0, 0, 0, 0.1); */
+        border: solid 1px #babbbd;
+    border-radius: 5px;
     width: 63px;
     height: 27px;
     display: block;
