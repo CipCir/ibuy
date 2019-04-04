@@ -34,8 +34,15 @@ var inputObj = {
   texts: {
     CustmrsRev: "<span style='color:#0066c0;'>customer reviews</span>",
     price: "Price",
+    Quantity:"Quantity",
+    Dlt:"Delete",
     lvl_Prod: {
       subTitle: "The product level"
+    },
+    cart:{
+      cartTitle:"Shopping Cart",
+      empty:"Your cart is empty",
+      Checkout:"Checkout"
     },
     Header: {
       opt0:

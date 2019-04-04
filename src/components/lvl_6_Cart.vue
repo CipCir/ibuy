@@ -6,9 +6,14 @@
       </span>      
     </div>
     <div class="row" style="padding-left:15px">
-      <h5>Shopping Cart</h5>
+      <h5>
+        {{texts.cart.cartTitle}}
+      </h5>
+      <div v-if="Cart.length==1">        
+        {{texts.cart.empty}}
+      </div>
     </div>
-    <div id="cartRow" class="row">
+    <div id="cartRow" class="row" v-if="Cart.length>1">
       <div
         class="col s12 l10 prodCol"
         v-for="prod in Cart.filter(itm=>{return itm.id>-1})"
@@ -48,21 +53,21 @@
           <div v-html="prod.addInf2"></div>
           <!-- quantity -->
           <div>
-             Quantity
+             {{texts.Quantity}}
               <select v-model="prod.quantity">
                 <option v-for="n in 10" :key="n" :value="n">{{n}}</option>
               </select>
           </div>
           <!-- remove -->
           <div>
-            <span class="DelLbl" @click="DeleteProd(prod)">Delete</span>
+            <span class="DelLbl" @click="DeleteProd(prod)">{{texts.Dlt}}</span>
           </div>
         </div>
       </div>
     </div>
-    <div id="CheckoutRow" class="row"> 
+    <div id="CheckoutRow" class="row" v-if="Cart.length>1"> 
       <span id="CheckoutCol" class="col s12 m5 l3">
-        <span id="CheckoutBtn"  @click="$emit('updtLvl',{lvl:'Products'}),$emit('checkOut')">Checkout</span>
+        <span id="CheckoutBtn"  @click="$emit('updtLvl',{lvl:'Products'}),$emit('checkOut')">{{texts.cart.Checkout}}</span>
       </span>    
     </div>
   </div>

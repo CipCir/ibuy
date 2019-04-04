@@ -174,6 +174,7 @@ export default {
 } */
 #headerComp {
   background-color: grey;
+  user-select: none;
   /* height: 50px; */
 }
 .white_space_pre {
