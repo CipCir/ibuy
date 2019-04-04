@@ -45,7 +45,7 @@
           <div class="col l12 xl11">
             <div
               class="col CanSelect s12"
-              :class="[inputOBJ.generalInfo.productView=='Grid'?'m3':'m12', ((index % 4)==0&&(index>0))?'clear_left':'']"
+              :class="[inputOBJ.generalInfo.productView=='Grid'?'m4 l3':'m12', ((index % 4)==0&&(index>0))?'clear_left_4':'', ((index % 3)==0&&(index>0))?'clear_left_3':'']"
               v-for="(prod,index) in prodFilterList"
               :key="prod.id"
               @click="Selected(prod)"
@@ -119,7 +119,7 @@ export default {
   },
 
   created() {
-    window.scrollTo(0,0)
+    window.scrollTo(0, 0);
   },
   computed: {
     prodFilterList() {
@@ -223,9 +223,24 @@ export default {
   margin: 0 auto;
   display: block;
 }
-.clear_left {
-  clear: left;
+
+@media only screen and (min-width: 993px) {
+  .clear_left_3 {
+    clear: none;
+  }
+  .clear_left_4 {
+    clear: left;
+  }
 }
+@media only screen and (max-width: 992px) {
+  .clear_left_3 {
+    clear: left;
+  }
+  .clear_left_4 {
+    clear: none;
+  }
+}
+
 #headerComp {
   height: 100px;
   background-color: grey;
