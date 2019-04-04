@@ -26,7 +26,7 @@
           class="col s12 searchbar valign-wrapper"
           v-bind:style="{'background-color':search_color2}"
         >
-          <input type="text" id="search_txt" :placeholder="texts.placeholder_search">
+          <input type="text" id="search_txt" disabled :placeholder="texts.placeholder_search">
         </div>
         <div
           class="col s2 searchbar valign-wrapper"
@@ -113,9 +113,9 @@ export default {
         break;
     }
   },
-  methods:{
-    UpdateLvl(){
-      this.$emit("updtLvl", { lvl: "Cart" })
+  methods: {
+    UpdateLvl() {
+      this.$emit("updtLvl", { lvl: "Cart" });
     }
   }
 };
@@ -142,6 +142,7 @@ export default {
   resize: none;
   border: none;
   text-overflow: ellipsis;
+  user-select: none;
 }
 #search_txt:focus {
   box-shadow: none;
