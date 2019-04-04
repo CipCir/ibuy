@@ -17,7 +17,7 @@ var inputObj = {
     },
     currency: "$",
     currecySide: "left",
-    productView: "List", //"Grid" "List"
+    productView: "Grid", //"Grid" "List"
     body_bk_color: "white",
     show_banner: true
   },

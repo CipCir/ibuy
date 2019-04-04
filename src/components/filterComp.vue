@@ -2,13 +2,13 @@
   <div class="col s12 m3 l2 noPadding">
     <div v-if="isMobile">
       <div
-        class="MobFilter1"
+        class="MobFilter1 clickable"
         v-html="inputOBJ.Filters.FilterLbl1"
         v-if="!show_filters"
         @click="show_filters=!show_filters"
       ></div>
       <div
-        class="MobFilter2"
+        class="MobFilter2 clickable"
         v-html="inputOBJ.Filters.FilterLbl2"
         v-if="show_filters"
         @click="show_filters=!show_filters"
