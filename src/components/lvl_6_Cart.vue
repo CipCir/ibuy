@@ -60,6 +60,11 @@
         </div>
       </div>
     </div>
+    <div id="CheckoutRow" class="row"> 
+      <span id="CheckoutCol" class="col s12 m5 l3">
+        <span id="CheckoutBtn"  @click="$emit('updtLvl',{lvl:'Products'}),$emit('checkOut')">Checkout</span>
+      </span>    
+    </div>
   </div>
 </template>
 
@@ -96,6 +101,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
 select {
   display: inline-block;
   background-color: white;
@@ -175,8 +181,44 @@ select {
   margin-left: unset !important;
 }
 .DelLbl{
+  margin-top:10px;
       color: #0066C0;
     cursor: pointer;
     font-size: 12px;
+        box-shadow: 0 0 5px 0.1px rgba(0, 0, 0, 0.1);
+    width: 63px;
+    height: 27px;
+    display: block;
+    padding: 5px;
+    text-align: center;
+    background-color: #e7e9ec;
+}
+#CheckoutRow{
+      display: flex;
+    justify-content: center;
+}
+#CheckoutCol{
+      margin: unset;
+}
+#CheckoutBtn{
+    width: 100%;
+    padding: 5px;
+    background: #f0c14b;
+    /* border-color: #a88734 #9c7e31 #846a29; */
+    border-color: #ca7c1b #be751a #a56616;
+    /* background: linear-gradient(to bottom, #f7dfa5, #f0c14b); */
+    color: #111;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none!important;
+    vertical-align: middle;
+}
+#CheckoutBtn:hover {
+  border-color: #a88734 #9c7e31 #846a29;
+  background: linear-gradient(to bottom, #f5d78e, #eeb933);
 }
 </style>

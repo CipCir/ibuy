@@ -5,7 +5,7 @@
         <span class="btn orange" @click="$emit('updtLvl',{lvl:'Products'})">back to results</span>
       </span>
       <span class="right">
-        <span class="btn-flat orange"  @click="$emit('updtLvl',{lvl:'Cart'})">checkout</span>
+        <span class="btn-flat orange"  @click="$emit('updtLvl',{lvl:'Cart'})">go to checkout</span>
       </span>
     </div>
     <div id="prodctCont" class="row">
@@ -38,7 +38,7 @@
                 </div>
                 <div id="mainImgContMob" class="col s8 center-align">
                   <div>
-                    <img class="ProdImgMob" :src="'./img/'+PrdImg">
+                    <img class="ProdImgMob" :key="PrdImg" :src="'./img/'+PrdImg">
                   </div>
                 </div>
                 <div class="col s2 navContainer" @click="slideImg(1)">

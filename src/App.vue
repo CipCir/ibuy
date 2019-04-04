@@ -55,6 +55,7 @@
       v-on:addInCart="AddProdInCart($event)"
       v-on:updtLvl="UpdateLvl($event)"
       v-on:remProd="DeleteProdCart($event)"
+      v-on:checkOut="CheckOut()"
     />
 
     <footerComp
@@ -115,6 +116,10 @@ export default {
     // SetCategory(pay) {
     //   this.controls.selected1_Cat = pay;
     // },
+    CheckOut(){
+      this.cart=[{id:-1,quantity:0}]
+      this.cartSum=0
+    },
     SetPrdct(pay) {
       // pay prouct object
       this.controls.sel_Prdct = pay;
