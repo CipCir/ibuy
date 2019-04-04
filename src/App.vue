@@ -54,6 +54,7 @@
       :inputOBJ="inputObj"
       v-on:addInCart="AddProdInCart($event)"
       v-on:updtLvl="UpdateLvl($event)"
+      v-on:remProd="DeleteProdCart($event)"
     />
 
     <footerComp
@@ -138,6 +139,11 @@ export default {
       // this.cartSum=this.cartNumb
       this.controls.sel_Prdct = null;
     },
+    DeleteProdCart(prod){
+      let index=this.cart.findIndex(i => i.id === prod.id);
+      this.cart.splice(index, 1) 
+    },
+
     UpdateLvl(pay) {
       this.controls.showLevel = pay.lvl;
       // this.controls.selected1_Cat=payload.cat

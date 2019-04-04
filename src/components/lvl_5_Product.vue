@@ -5,7 +5,7 @@
         <span class="btn orange" @click="$emit('updtLvl',{lvl:'Products'})">back to results</span>
       </span>
       <span class="right">
-        <span class="btn-flat orange">checkout</span>
+        <span class="btn-flat orange"  @click="$emit('updtLvl',{lvl:'Cart'})">checkout</span>
       </span>
     </div>
     <div id="prodctCont" class="row">
@@ -98,6 +98,9 @@ export default {
       quantity:1,
       PrdImg:this.Prdct.imgArr[0]
     }
+  },
+   created() {
+    window.scrollTo(0,0)
   },
   methods: {
     addToCart() {

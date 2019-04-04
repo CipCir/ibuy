@@ -99,7 +99,7 @@ import { close, closeSync } from "fs";
 import { debug } from "util";
 
 export default {
-  name: "lvl_Prod",
+  name: "lvl_Prods",
   components: {
     stars,
     filterComp
@@ -118,7 +118,9 @@ export default {
     };
   },
 
-  created() {},
+  created() {
+    window.scrollTo(0,0)
+  },
   computed: {
     prodFilterList() {
       var vueObj = this;
