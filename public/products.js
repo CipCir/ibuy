@@ -1,13 +1,19 @@
 var prodDB = {
-  SponsoredProdId:8,
+  SponsoredProdId: 8,
   Products: [
     {
       id: 0,
       brand: "Rexona",
       lbl:
         "Rexona Women Biorythm Ultra Dry Deo Stick Anti-Perspirant 48h 40 ml",
-      
-      imgArr:["R0.jpg","R1.jpg","R2.jpg"],
+
+      imgArr: ["R0.jpg", "R1.jpg", "R2.jpg"],
+      detailsImgArr: [
+        "ProdDetailsCart_Mob.jpg",
+        "ProdDetailsCart_Mob.jpg",
+        "ProdDetailsCart.jpg",
+        "ProdDetailsCart.jpg"
+      ],
       by: null,
       rating: 5,
       reviews: "<span style='color:#0066c0;'>4</span>",
@@ -20,8 +26,14 @@ var prodDB = {
       id: 1,
       brand: "Rexona",
       lbl:
-        "Rexona Women's Maximum Protection -Clinical- deodorant : CONFIDENCE",      
-      imgArr:["R1.jpg","R0.jpg","R2.jpg"],
+        "Rexona Women's Maximum Protection -Clinical- deodorant : CONFIDENCE",
+      imgArr: ["R1.jpg", "R0.jpg", "R2.jpg"],
+      detailsImgArr: [
+        "ProdDetailsCart_Mob.jpg",
+        "ProdDetailsCart_Mob.jpg",
+        "ProdDetailsCart.jpg",
+        "ProdDetailsCart.jpg"
+      ],
       by: null,
       rating: 3.5,
       reviews: "<span style='color:#0066c0;'>6</span>",
@@ -33,8 +45,14 @@ var prodDB = {
       id: 2,
       brand: "Rexona",
       lbl:
-        "Rexona Women MotionSense Aloe Vera 48H Anti-Perspirant Solid Stick 40 ml",      
-      imgArr:["R2.jpg","R0.jpg","R1.jpg"],
+        "Rexona Women MotionSense Aloe Vera 48H Anti-Perspirant Solid Stick 40 ml",
+      imgArr: ["R2.jpg", "R0.jpg", "R1.jpg"],
+      detailsImgArr: [
+        "ProdDetailsCart_Mob.jpg",
+        "ProdDetailsCart_Mob.jpg",
+        "ProdDetailsCart.jpg",
+        "ProdDetailsCart.jpg"
+      ],
       by: null,
       rating: 5,
       reviews: "<span style='color:#0066c0;'>3</span>",
@@ -48,7 +66,13 @@ var prodDB = {
       brand: "Rexona",
       lbl:
         "Rexona Women Cotton 48h Anti-perspirant Deodorant Roll-on 40ml. (Pack of 3)",
-      imgArr: ["R3.jpg","R1.jpg","R2.jpg"],
+      imgArr: ["R3.jpg", "R1.jpg", "R2.jpg"],
+      detailsImgArr: [
+        "ProdDetailsCart_Mob.jpg",
+        "ProdDetailsCart_Mob.jpg",
+        "ProdDetailsCart.jpg",
+        "ProdDetailsCart.jpg"
+      ],
       by: null,
       rating: 5,
       reviews: "<span style='color:#0066c0;'>1</span>",
@@ -62,8 +86,14 @@ var prodDB = {
       brand: "Rexona",
       lbl:
         "Degree Women Clinical Antiperspirant Deodorant, Shower Clean, 1.7 oz",
-      
-      imgArr:["R4.jpg","R1.jpg","R2.jpg"],
+
+      imgArr: ["R4.jpg", "R1.jpg", "R2.jpg"],
+      detailsImgArr: [
+        "ProdDetailsCart_Mob.jpg",
+        "ProdDetailsCart_Mob.jpg",
+        "ProdDetailsCart.jpg",
+        "ProdDetailsCart.jpg"
+      ],
       by: null,
       rating: 4,
       reviews: "<span style='color:#0066c0;'>144</span>",
@@ -78,8 +108,14 @@ var prodDB = {
       brand: "Rexona",
       lbl:
         "Rexona Women's Maximum Protection -Clinical- deodorant : STRESS CONTROL",
-      
-      imgArr:["R5.jpg","R1.jpg","R2.jpg"],
+
+      imgArr: ["R5.jpg", "R1.jpg", "R2.jpg"],
+      detailsImgArr: [
+        "ProdDetailsCart_Mob.jpg",
+        "ProdDetailsCart_Mob.jpg",
+        "ProdDetailsCart.jpg",
+        "ProdDetailsCart.jpg"
+      ],
       by: null,
       rating: 3,
       reviews: "<span style='color:#0066c0;'>1</span>",
@@ -94,8 +130,14 @@ var prodDB = {
       brand: "Rexona",
       lbl:
         "REXONA Women Sexy Bouquet Deodorant Roll-on 50ml -Smell Sexy and Confident Throughout The Day with Rexona's Sexy Bouquet antiperspirant Deodorant for Women",
-      
-      imgArr:["R6.jpg","R1.jpg","R2.jpg"],
+
+      imgArr: ["R6.jpg", "R1.jpg", "R2.jpg"],
+      detailsImgArr: [
+        "ProdDetailsCart_Mob.jpg",
+        "ProdDetailsCart_Mob.jpg",
+        "ProdDetailsCart.jpg",
+        "ProdDetailsCart.jpg"
+      ],
       by: "<span style='color:gray;'>by Rexona</span>",
       rating: null,
       reviews: null,
@@ -109,8 +151,14 @@ var prodDB = {
       brand: "Nivea",
       lbl:
         "Nivea Dry Comfort Stick products perspirant and deodorant stick formula Extra Whitening 1.4 Oz",
-      
-      imgArr:["N1.jpg","R1.jpg","R2.jpg"],
+
+      imgArr: ["N1.jpg", "R1.jpg", "R2.jpg"],
+      detailsImgArr: [
+        "ProdDetailsCart_Mob.jpg",
+        "ProdDetailsCart_Mob.jpg",
+        "ProdDetailsCart.jpg",
+        "ProdDetailsCart.jpg"
+      ],
       by: null,
       rating: 4,
       reviews: "<span style='color:#0066c0;'>1</span>",
@@ -124,8 +172,14 @@ var prodDB = {
       brand: "Tom's",
       lbl:
         "Tom's of Maine Women's Antiperspirant Deodorant Stick, Fresh Meadow, 2 Count",
-      
-      imgArr:["T1.jpg","R1.jpg","R2.jpg"],
+
+      imgArr: ["T1.jpg", "R1.jpg", "R2.jpg"],
+      detailsImgArr: [
+        "ProdDetailsCart_Mob.jpg",
+        "ProdDetailsCart_Mob.jpg",
+        "ProdDetailsCart.jpg",
+        "ProdDetailsCart.jpg"
+      ],
       by: "<span style='color:gray;'>by Tom's of Maine</span>",
       rating: 4,
       reviews: "<span style='color:#0066c0;'>300</span>",

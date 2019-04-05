@@ -5,7 +5,7 @@
         <span class="btn orange" @click="$emit('updtLvl',{lvl:'Products'})">back to results</span>
       </span>
       <span class="right">
-        <span class="btn-flat orange"  @click="$emit('updtLvl',{lvl:'Cart'})">go to checkout</span>
+        <span class="btn-flat orange" @click="$emit('updtLvl',{lvl:'Cart'})">go to checkout</span>
       </span>
     </div>
     <div id="prodctCont" class="row">
@@ -104,8 +104,30 @@
           </div>
         </div>
         <!-- under the products -->
-        <div id="BtmProdCont" class="row">
+        <!-- <div id="BtmProdCont" class="row">
           <img :src="'./img/ProdDetailsCart.jpg'" alt>
+        </div>-->
+        <div id="BtmProdCont" class="row">
+          <img
+            class="btm_img show-on-small"
+            :src="'./img/'+Prdct.detailsImgArr[0]"
+            alt="additional image 1 here"
+          >
+          <img
+            class="btm_img show-on-medium"
+            :src="'./img/'+Prdct.detailsImgArr[1]"
+            alt="additional image 2 here"
+          >
+          <img
+            class="btm_img show-on-large"
+            :src="'./img/'+Prdct.detailsImgArr[2]"
+            alt="additional image 3 here"
+          >
+          <img
+            class="btm_img show-on-extra-large"
+            :src="'./img/'+Prdct.detailsImgArr[3]"
+            alt="additional image 4 here"
+          >
         </div>
       </div>
       <div class="col xl1 extraCol show-on-extra-large"></div>
@@ -132,8 +154,8 @@ export default {
       PrdImg: this.Prdct.imgArr[0]
     };
   },
-   created() {
-    window.scrollTo(0,0)
+  created() {
+    window.scrollTo(0, 0);
   },
   methods: {
     addToCart() {
@@ -158,6 +180,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.btm_img {
+  display: none;
+}
 #mainImgContMob {
   padding: 0px;
 }
