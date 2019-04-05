@@ -1,20 +1,26 @@
 <template>
   <div id="lvl_Main" class="lvl_container">
     <div class="row">
+      <!-- mobile filter -->
       <filterComp
         :inputOBJ="inputOBJ"
         :isMobile="true"
-        v-on:brandF="brandFilter=$event"
-        v-on:priceF="priceFilter=$event"
-        v-on:ratingF="ratingFilter=$event"
+        
+        v-on:brandF="UpdateFilter('brand',$event)"
+        v-on:priceF="UpdateFilter('price',$event)"
+        v-on:ratingF="UpdateFilter('rating',$event)"
+
         class="row hide-on-med-and-up"
       ></filterComp>
+      <!-- desktop filter -->
       <filterComp
         :inputOBJ="inputOBJ"
         :isMobile="false"
-        v-on:brandF="brandFilter=$event"
-        v-on:priceF="priceFilter=$event"
-        v-on:ratingF="ratingFilter=$event"
+        :scFilters="cFilters"
+        v-on:brandF="UpdateFilter('brand',$event)"
+        v-on:priceF="UpdateFilter('price',$event)"
+        v-on:ratingF="UpdateFilter('rating',$event)"
+
         class="row hide-on-small-only"
       ></filterComp>
 
@@ -107,14 +113,12 @@ export default {
   props: {
     texts: Object,
     Prods: Array,
-    inputOBJ: Object
+    inputOBJ: Object,
+    cFilters:Object,
   },
   data() {
     return {
       show_banner: this.inputOBJ.generalInfo.show_banner,
-      brandFilter: [],
-      priceFilter: [],
-      ratingFilter: []
     };
   },
 
@@ -126,17 +130,17 @@ export default {
       var vueObj = this;
       var returned = this.Prods;
 
-      if (this.brandFilter.length > 0) {
+      if (this.cFilters.brand.length > 0) {
         returned = returned.filter(
-          prod => vueObj.brandFilter.indexOf(prod.brand) > -1
+          prod => vueObj.cFilters.brand.indexOf(prod.brand) > -1
         );
       }
 
-      if (this.priceFilter.length > 0) {
+      if (this.cFilters.price.length > 0) {
         var tempArr = [];
         returned.forEach((prod, index) => {
           var found_interval = false;
-          vueObj.priceFilter.forEach(elem => {
+          vueObj.cFilters.price.forEach(elem => {
             var splitted = elem.split("#");
 
             if (
@@ -144,7 +148,6 @@ export default {
               parseFloat(prod.price) <= splitted[1]
             ) {
               found_interval = true;
-              // console.log(splitted[0], splitted[1], parseFloat(prod.price));
             }
           });
           if (found_interval) {
@@ -154,9 +157,9 @@ export default {
         returned = tempArr;
       }
 
-      if (this.ratingFilter.length > 0) {
+      if (this.cFilters.rating.length > 0) {
         // debugger;
-        var tempMin = Math.min(...vueObj.ratingFilter);
+        var tempMin = Math.min(...vueObj.cFilters.rating);
         // console.log(vueObj.ratingFilter, tempMin);
         returned = returned.filter(prod => prod.rating >= tempMin);
       }
@@ -165,10 +168,11 @@ export default {
     }
   },
   methods: {
+    UpdateFilter(filter,value){
+      this.$emit("updFilter",{fil:filter,val:value})
+      
+    },
     Selected(prod) {
-      // if (prod.prods.length==0){
-      // return false;
-      // }
       this.$emit("selProd", prod);
       this.$emit("updtLvl", { lvl: "Prdct" });
     }

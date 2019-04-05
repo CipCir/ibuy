@@ -32,7 +32,7 @@
                 class="filled-in"
                 :id="'price_'+index"
                 :value="inputOBJ.Filters.RatingMaxVal-rating"
-                v-model="ratingFilter"
+                v-model="scFilters.rating"
               >
               <span :for="'rating_'+index">
                 <stars :rating="inputOBJ.Filters.RatingMaxVal-rating"></stars>
@@ -53,7 +53,7 @@
                 class="filled-in"
                 :id="'brand_'+index"
                 :value="brand"
-                v-model="brandFilter"
+                v-model="scFilters.brand"
               >
               <span :for="'brand_'+index">{{brand}}</span>
             </label>
@@ -71,7 +71,7 @@
                 class="filled-in chec_box"
                 :id="'price_'+index"
                 :value="price.val"
-                v-model="priceFilter"
+                v-model="scFilters.price"
               >
               <span :for="'price_'+index">{{price.lbl}}</span>
             </label>
@@ -93,27 +93,14 @@ export default {
   },
   props: {
     inputOBJ: Object,
-    isMobile: Boolean
+    isMobile: Boolean,
+    scFilters:Object
   },
   data() {
-    return {
-      brandFilter: [],
-      priceFilter: [],
-      ratingFilter: [],
+    return {      
       show_filters: !this.isMobile
     };
-  },
-  watch: {
-    brandFilter: function(value) {
-      this.$emit("brandF", this.brandFilter);
-    },
-    priceFilter: function(value) {
-      this.$emit("priceF", this.priceFilter);
-    },
-    ratingFilter: function(value) {
-      this.$emit("ratingF", this.ratingFilter);
-    }
-  },
+  },  
   mounted() {}
 };
 </script>

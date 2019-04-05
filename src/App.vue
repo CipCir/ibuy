@@ -36,8 +36,11 @@
       :Prods="prodDB.Products"
       :SelShelfId="controls.selected3_ShelfCat"
       :inputOBJ="inputObj"
+      :cFilters="controls.filters"
+
       v-on:selProd="SetPrdct($event)"
       v-on:updtLvl="UpdateLvl($event)"
+      v-on:updFilter="UpdateFilters($event)"
     />
     <lvlPrdct
       v-if="controls.showLevel=='Prdct'"
@@ -101,6 +104,11 @@ export default {
         selected2_AisleCat: null,
         selected3_ShelfCat: null,
         sel_Prdct: null,
+        filters:{
+          rating: [],
+          brand: [],
+          price: []
+        }
       },
       cart: [{id:-1,quantity:0}],
       cartSum:0
@@ -116,9 +124,17 @@ export default {
     // SetCategory(pay) {
     //   this.controls.selected1_Cat = pay;
     // },
+    UpdateFilters(pay){
+      this.controls.filters[pay.fil]=pay.val
+    },
     CheckOut(){
       this.cart=[{id:-1,quantity:0}]
       this.cartSum=0
+      this.controls.filters={
+          rating: [],
+          brand: [],
+          price: []
+        }
     },
     SetPrdct(pay) {
       // pay prouct object
