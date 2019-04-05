@@ -37,6 +37,7 @@
       :SelShelfId="controls.selected3_ShelfCat"
       :inputOBJ="inputObj"
       :cFilters="controls.filters"
+      :SponsoredProdId="prodDB.SponsoredProdId"
 
       v-on:selProd="SetPrdct($event)"
       v-on:updtLvl="UpdateLvl($event)"

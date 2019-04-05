@@ -26,7 +26,7 @@
 
       <div class="row">
         <div id="ProdsCont" class="col s12 m9 l10">
-          <div class="row s12 banner_img_cont" v-if="show_banner">
+          <div class="row s12 banner_img_cont clickable" v-if="show_banner" @click="SelectSponsProd()">
             <img
               class="banner_img show-on-small"
               :src="inputOBJ.banner.img1"
@@ -113,6 +113,7 @@ export default {
   props: {
     texts: Object,
     Prods: Array,
+    SponsoredProdId:Number,
     inputOBJ: Object,
     cFilters:Object,
   },
@@ -171,6 +172,11 @@ export default {
     UpdateFilter(filter,value){
       this.$emit("updFilter",{fil:filter,val:value})
       
+    },
+    SelectSponsProd(){
+      let vueObj=this
+      let SponsProd=this.Prods.find(x=> x.id==vueObj.SponsoredProdId)
+      this.Selected(SponsProd)  
     },
     Selected(prod) {
       this.$emit("selProd", prod);

@@ -76,7 +76,7 @@ var inputObj = {
   },
   Filters: {
     FilterBrandLabel: "Brand",
-    brand: ["Rexona", "Nivea"],
+    brand: ["Rexona", "Nivea","Tom's"],
     FilterPriceLabel: "Price",
     price: [
       { lbl: "Under 5", val: "0#5" },

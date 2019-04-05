@@ -1,4 +1,5 @@
 var prodDB = {
+  SponsoredProdId:8,
   Products: [
     {
       id: 0,
@@ -116,6 +117,21 @@ var prodDB = {
       price: "13.80",
       addInf1: null,
       addInf2: null
+    },
+
+    {
+      id: 8,
+      brand: "Tom's",
+      lbl:
+        "Tom's of Maine Women's Antiperspirant Deodorant Stick, Fresh Meadow, 2 Count",
+      
+      imgArr:["T1.jpg","R1.jpg","R2.jpg"],
+      by: "<span style='color:gray;'>by Tom's of Maine</span>",
+      rating: 4,
+      reviews: "<span style='color:#0066c0;'>300</span>",
+      price: "8.49",
+      addInf1: null,
+      addInf2: "Save 5% more with Subscribe & Save"
     }
   ]
 };
