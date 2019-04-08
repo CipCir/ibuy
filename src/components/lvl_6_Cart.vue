@@ -54,7 +54,7 @@
           <!-- quantity -->
           <div>
              {{texts.Quantity}}
-              <select v-model="prod.quantity">
+              <select v-model="prod.quantity" @change="$emit('RCart')">
                 <option v-for="n in 10" :key="n" :value="n">{{n}}</option>
               </select>
           </div>

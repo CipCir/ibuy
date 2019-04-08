@@ -77,6 +77,7 @@ export default {
     skinProps: Object,
     texts: Object,
     nr_cart: Number
+    
   },
   data() {
     return {

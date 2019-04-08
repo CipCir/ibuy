@@ -4,7 +4,7 @@
       :texts="inputObj.texts.Header"
       :skin="inputObj.generalInfo.skin"
       :skinProps="inputObj.generalInfo.skinProps"
-      :nr_cart="cartNumb"
+      :nr_cart="cartNumb"      
       v-on:updtLvl="UpdateLvl($event)"
     />
     <!-- <lvlMain
@@ -60,6 +60,7 @@
       v-on:updtLvl="UpdateLvl($event)"
       v-on:remProd="DeleteProdCart($event)"
       v-on:checkOut="CheckOut()"
+      v-on:RCart="RefreshCart()"
     />
 
     <footerComp
@@ -140,6 +141,10 @@ export default {
     SetPrdct(pay) {
       // pay prouct object
       this.controls.sel_Prdct = pay;
+    },
+    RefreshCart(){
+      this.cart.shift()
+      this.cart.unshift({id:-1,quantity:0})
     },
     AddProdInCart(pay) {
       // check if prod exists in cart

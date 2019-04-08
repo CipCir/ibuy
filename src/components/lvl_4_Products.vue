@@ -5,6 +5,7 @@
       <filterComp
         :inputOBJ="inputOBJ"
         :isMobile="true"
+        :scFilters="cFilters"
         
         v-on:brandF="UpdateFilter('brand',$event)"
         v-on:priceF="UpdateFilter('price',$event)"
