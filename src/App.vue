@@ -4,7 +4,7 @@
       :texts="inputObj.texts.Header"
       :skin="inputObj.generalInfo.skin"
       :skinProps="inputObj.generalInfo.skinProps"
-      :nr_cart="cartNumb"      
+      :nr_cart="cartNumb"
       v-on:updtLvl="UpdateLvl($event)"
     />
     <!-- <lvlMain
@@ -38,7 +38,6 @@
       :inputOBJ="inputObj"
       :cFilters="controls.filters"
       :SponsoredProdId="prodDB.SponsoredProdId"
-
       v-on:selProd="SetPrdct($event)"
       v-on:updtLvl="UpdateLvl($event)"
       v-on:updFilter="UpdateFilters($event)"
@@ -51,7 +50,7 @@
       v-on:addInCart="AddProdInCart($event)"
       v-on:updtLvl="UpdateLvl($event)"
     />
-      <lvlCart
+    <lvlCart
       v-if="controls.showLevel=='Cart'"
       :texts="inputObj.texts"
       :Cart="cart"
@@ -106,14 +105,14 @@ export default {
         selected2_AisleCat: null,
         selected3_ShelfCat: null,
         sel_Prdct: null,
-        filters:{
+        filters: {
           rating: [],
           brand: [],
           price: []
         }
       },
-      cart: [{id:-1,quantity:0}],
-      cartSum:0
+      cart: [{ id: -1, quantity: 0 }],
+      cartSum: 0
     };
   },
   methods: {
@@ -126,52 +125,53 @@ export default {
     // SetCategory(pay) {
     //   this.controls.selected1_Cat = pay;
     // },
-    UpdateFilters(pay){
-      this.controls.filters[pay.fil]=pay.val
+    UpdateFilters(pay) {
+      this.controls.filters[pay.fil] = pay.val;
     },
-    CheckOut(){
-      this.cart=[{id:-1,quantity:0}]
-      this.cartSum=0
-      this.controls.filters={
-          rating: [],
-          brand: [],
-          price: []
-        }
+    CheckOut() {
+      this.cart = [{ id: -1, quantity: 0 }];
+      this.cartSum = 0;
+      this.controls.filters = {
+        rating: [],
+        brand: [],
+        price: []
+      };
     },
     SetPrdct(pay) {
       // pay prouct object
       this.controls.sel_Prdct = pay;
     },
-    RefreshCart(){
-      this.cart.shift()
-      this.cart.unshift({id:-1,quantity:0})
+    RefreshCart() {
+      this.cart.shift();
+      this.cart.unshift({ id: -1, quantity: 0 });
     },
     AddProdInCart(pay) {
       // check if prod exists in cart
-      let index=this.cart.findIndex(i => i.id === this.controls.sel_Prdct.id);
+      let index = this.cart.findIndex(i => i.id === this.controls.sel_Prdct.id);
 
-       this.controls.sel_Prdct.quantity=pay
-      if (index>-1){
+      this.controls.sel_Prdct.quantity = pay;
+      if (index > -1) {
         //update quantinty
-        this.cart[index].quantity=pay
-      }else{
-        // add in cart      
+        this.cart[index].quantity = pay;
+      } else {
+        // add in cart
         this.cart.push(this.controls.sel_Prdct);
       }
       // debugger
-      this.cart.shift()
-      this.cart.unshift({id:-1,quantity:0})
+      this.cart.shift();
+      this.cart.unshift({ id: -1, quantity: 0 });
 
       // reset selected
       // this.cartSum=this.cartNumb
       this.controls.sel_Prdct = null;
     },
-    DeleteProdCart(prod){
-      let index=this.cart.findIndex(i => i.id === prod.id);
-      this.cart.splice(index, 1) 
+    DeleteProdCart(prod) {
+      let index = this.cart.findIndex(i => i.id === prod.id);
+      this.cart.splice(index, 1);
     },
 
     UpdateLvl(pay) {
+      // debugger;
       this.controls.showLevel = pay.lvl;
       // this.controls.selected1_Cat=payload.cat
       // this.controls.selected2_AisleCat=pay.AisleCat
@@ -181,7 +181,7 @@ export default {
   //   cart: {
   //     deep:true,
   //     handler: function (val) {
-  //       var sum=0      
+  //       var sum=0
   //       this.cart.forEach(itm=>{
   //         sum=sum+itm.quantity
   //       })
@@ -190,16 +190,15 @@ export default {
   //     }
 
   //   }},
-  
-   computed:{
-    cartNumb(){
-      
-      var sum=0      
-      this.cart.forEach(itm=>{
-        sum=sum+itm.quantity
-      })
-      
-      return sum
+
+  computed: {
+    cartNumb() {
+      var sum = 0;
+      this.cart.forEach(itm => {
+        sum = sum + itm.quantity;
+      });
+
+      return sum;
       // if (this.cart.length==0){
       //   return 0
       // }

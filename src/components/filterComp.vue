@@ -22,7 +22,7 @@
         <div class="filterLbl" v-html="inputOBJ.Filters.FilterRatingLabel"></div>
         <form id="PriceFilterForm" action="#">
           <div
-            v-for="(rating,index) in inputOBJ.Filters.RatingMaxVal-1"
+            v-for="(rating,index) in inputOBJ.Filters.RatingMaxVal"
             :key="rating"
             class="paddingBox"
           >
@@ -31,12 +31,12 @@
                 type="checkbox"
                 class="filled-in"
                 :id="'price_'+index"
-                :value="inputOBJ.Filters.RatingMaxVal-rating"
+                :value="inputOBJ.Filters.RatingMaxVal-rating+1"
                 v-model="scFilters.rating"
               >
               <span :for="'rating_'+index">
-                <stars :rating="inputOBJ.Filters.RatingMaxVal-rating"></stars>
-                {{inputOBJ.Filters.RatingLabel}}
+                <stars :rating="inputOBJ.Filters.RatingMaxVal-rating+1"></stars>
+                <span v-if="rating!=1">{{inputOBJ.Filters.RatingLabel}}</span>
               </span>
             </label>
           </div>
@@ -94,19 +94,28 @@ export default {
   props: {
     inputOBJ: Object,
     isMobile: Boolean,
-    scFilters:Object
+    scFilters: Object
   },
   data() {
-    return {      
+    return {
       show_filters: !this.isMobile
     };
-  },  
-  mounted() {}
+  },
+  mounted() {},
+  watch: {},
+  computed: {
+    example: function(arr) {
+      console.log("aaa");
+    }
+  }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+span {
+  color: #4c4c4c;
+}
 .noPadding {
   padding: 0px;
 }

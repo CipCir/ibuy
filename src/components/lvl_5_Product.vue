@@ -5,14 +5,14 @@
         <span class="btn orange" @click="$emit('updtLvl',{lvl:'Products'})">back to results</span>
       </span>
       <span class="right">
-        <span class="btn-flat orange" @click="$emit('updtLvl',{lvl:'Cart'})">go to checkout</span>
+        <span class="btn orange" @click="$emit('updtLvl',{lvl:'Cart'})">go to checkout</span>
       </span>
     </div>
     <div id="prodctCont" class="row">
       <div class="col xl1 extraCol show-on-extra-large"></div>
       <div id="PrdctArea" class="col m12 xl10">
         <div id="PrdSplitCont" class="row">
-          <div id="ProdImgCont" class="col s12 m7">
+          <div id="ProdImgCont" class="col s12 m8 l9">
             <!-- prod name and review -->
             <div class="row">
               <div>
@@ -82,7 +82,7 @@
             </div>
           </div>
           <!-- cart container -->
-          <div id="cartCont" class="col s12 m5">
+          <div id="cartCont" class="col s12 m4 l3">
             <div class="row center-align">
               <span class="lowTxt" v-html="texts.price"></span> :
               <span class="prodPrice">{{inputOBJ.generalInfo.currency}} {{Prdct.price}}</span>
@@ -199,6 +199,10 @@ export default {
   display: flex;
   /* align-items: center; */
 }
+#ProdImgCont,
+#ProdImgContMob {
+  font-size: 21px;
+}
 .noMargin {
   margin-left: 0px !important;
   margin-right: 0px !important;
@@ -222,7 +226,7 @@ export default {
   /* display: none; */
 }
 .selected {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   box-shadow: 0 0 3px 2px rgba(228, 121, 17, 0.5);
   /* background-color: #a2a6ac; */
 }
@@ -231,6 +235,12 @@ export default {
 }
 #PrdSplitCont {
   padding: 3px;
+  /* border: 1px solid blue; */
+}
+@media only screen and (min-width: 601px) {
+  #PrdSplitCont {
+    display: flex;
+  }
 }
 #TumbAndProd {
   display: flex;
@@ -287,6 +297,7 @@ export default {
 #cartCont {
   padding-left: 5px;
   box-shadow: -4px 0px 3px -2px #ccc;
+  /* border: 1px solid red; */
 }
 select {
   display: inline-block;
@@ -300,7 +311,8 @@ select {
   display: inline-block;
   padding: 3px;
   height: 29px;
-  width: 200px;
+  width: 90%;
+  max-width: 200px;
 
   cursor: pointer;
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset;

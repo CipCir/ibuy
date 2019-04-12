@@ -6,28 +6,26 @@
         :inputOBJ="inputOBJ"
         :isMobile="true"
         :scFilters="cFilters"
-        
-        v-on:brandF="UpdateFilter('brand',$event)"
-        v-on:priceF="UpdateFilter('price',$event)"
-        v-on:ratingF="UpdateFilter('rating',$event)"
-
         class="row hide-on-med-and-up"
       ></filterComp>
+      <!-- v-on:brandF="UpdateFilter('brand',$event)"
+        v-on:priceF="UpdateFilter('price',$event)"
+      v-on:ratingF="UpdateFilter('rating',$event)"-->
       <!-- desktop filter -->
       <filterComp
         :inputOBJ="inputOBJ"
         :isMobile="false"
         :scFilters="cFilters"
-        v-on:brandF="UpdateFilter('brand',$event)"
-        v-on:priceF="UpdateFilter('price',$event)"
-        v-on:ratingF="UpdateFilter('rating',$event)"
-
         class="row hide-on-small-only"
       ></filterComp>
 
       <div class="row">
         <div id="ProdsCont" class="col s12 m9 l10">
-          <div class="row s12 banner_img_cont clickable" v-if="show_banner" @click="SelectSponsProd()">
+          <div
+            class="row s12 banner_img_cont clickable"
+            v-if="show_banner"
+            @click="SelectSponsProd()"
+          >
             <img
               class="banner_img show-on-small"
               :src="inputOBJ.banner.img1"
@@ -103,7 +101,7 @@
 import stars from "./stars.vue";
 import filterComp from "./filterComp.vue";
 import { close, closeSync } from "fs";
-import { debug } from "util";
+import { debug, debuglog } from "util";
 
 export default {
   name: "lvl_Prods",
@@ -114,13 +112,13 @@ export default {
   props: {
     texts: Object,
     Prods: Array,
-    SponsoredProdId:Number,
+    SponsoredProdId: Number,
     inputOBJ: Object,
-    cFilters:Object,
+    cFilters: Object
   },
   data() {
     return {
-      show_banner: this.inputOBJ.generalInfo.show_banner,
+      show_banner: this.inputOBJ.generalInfo.show_banner
     };
   },
 
@@ -170,14 +168,15 @@ export default {
     }
   },
   methods: {
-    UpdateFilter(filter,value){
-      this.$emit("updFilter",{fil:filter,val:value})
-      
-    },
-    SelectSponsProd(){
-      let vueObj=this
-      let SponsProd=this.Prods.find(x=> x.id==vueObj.SponsoredProdId)
-      this.Selected(SponsProd)  
+    // UpdateFilter(filter, value) {
+    //   console.log(value);
+    //   debugger;
+    //   this.$emit("updFilter", { fil: filter, val: value });
+    // },
+    SelectSponsProd() {
+      let vueObj = this;
+      let SponsProd = this.Prods.find(x => x.id == vueObj.SponsoredProdId);
+      this.Selected(SponsProd);
     },
     Selected(prod) {
       this.$emit("selProd", prod);

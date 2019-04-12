@@ -1,7 +1,11 @@
 <template>
   <div id="headerComp">
     <div class="row_header_first row" v-bind:style="{'background-color':header_bk_color}">
-      <div class="col s10 m3 l3 valign-wrapper" v-bind:style="{'background-color':header_bk_color}">
+      <div
+        class="col s10 m3 l3 valign-wrapper clickable"
+        v-bind:style="{'background-color':header_bk_color}"
+        @click="$emit('updtLvl',{lvl:'Products'})"
+      >
         <img :src="logo_img" alt="logo image here">
       </div>
       <div
@@ -32,7 +36,7 @@
           class="col s2 searchbar valign-wrapper"
           v-bind:style="{'background-color':search_color3}"
         >
-          <img :src="'./img/search.png'">
+          <i class="material-icons small">search</i>
         </div>
       </div>
       <div
@@ -77,7 +81,6 @@ export default {
     skinProps: Object,
     texts: Object,
     nr_cart: Number
-    
   },
   data() {
     return {
@@ -144,6 +147,7 @@ export default {
   border: none;
   text-overflow: ellipsis;
   user-select: none;
+  margin: 0px;
 }
 #search_txt:focus {
   box-shadow: none;
