@@ -20,27 +20,28 @@
       <!-- rating filter -->
       <div id="RatingFilterCont">
         <div class="filterLbl" v-html="inputOBJ.Filters.FilterRatingLabel"></div>
-        <form id="PriceFilterForm" action="#">
+        
           <div
-            v-for="(rating,index) in inputOBJ.Filters.RatingMaxVal"
+            v-for="(rating) in inputOBJ.Filters.RatingMaxVal"
             :key="rating"
-            class="paddingBox"
-          >
-            <label>
-              <input
+            class="paddingBox clickable"
+            @click="$emit('SelectedStar',inputOBJ.Filters.RatingMaxVal-rating+1)"
+          >          
+            <!-- <label> -->
+              <!-- <input
                 type="checkbox"
                 class="filled-in"
-                :id="'price_'+index"
+                :id="'price_'+rating"
                 :value="inputOBJ.Filters.RatingMaxVal-rating+1"
                 v-model="scFilters.rating"
-              >
-              <span :for="'rating_'+index">
+              > -->              
+              <span :for="'rating_'+rating" :class="{'selected':SelectedStarF(rating)}">
                 <stars :rating="inputOBJ.Filters.RatingMaxVal-rating+1"></stars>
-                <span v-if="rating!=1">{{inputOBJ.Filters.RatingLabel}}</span>
+                <!-- <span v-if="rating!=1">{{inputOBJ.Filters.RatingLabel}}</span> -->
               </span>
-            </label>
+            <!-- </label> -->
           </div>
-        </form>
+        
       </div>
       <!-- brand filter -->
       <div id="BrandFilterCont">
@@ -103,6 +104,16 @@ export default {
   },
   mounted() {},
   watch: {},
+  methods:{
+    SelectedStarF(rating){
+      
+      if (this.scFilters.rating !=null){        
+        return this.inputOBJ.Filters.RatingMaxVal-rating+1>=this.scFilters.rating
+      }
+      
+      return false
+    }
+  },
   computed: {
     example: function(arr) {
       console.log("aaa");
@@ -139,5 +150,12 @@ span {
   background: whitesmoke;
   font-weight: bold;
   padding: 8px 20px;
+}
+.selected .stars_container{
+  /* background: lightblue */
+  border-left:solid 5px #26a69a
+}
+.stars_container{
+  border-left:solid 5px transparent
 }
 </style>

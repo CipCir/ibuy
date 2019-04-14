@@ -106,7 +106,7 @@ export default {
         selected3_ShelfCat: null,
         sel_Prdct: null,
         filters: {
-          rating: [],
+          rating: null,
           brand: [],
           price: []
         }
@@ -126,7 +126,11 @@ export default {
     //   this.controls.selected1_Cat = pay;
     // },
     UpdateFilters(pay) {
-      this.controls.filters[pay.fil] = pay.val;
+      if (this.controls.filters[pay.fil] == pay.val) {
+        this.controls.filters[pay.fil] = null;
+      } else {
+        this.controls.filters[pay.fil] = pay.val;
+      }
     },
     CheckOut() {
       this.cart = [{ id: -1, quantity: 0 }];

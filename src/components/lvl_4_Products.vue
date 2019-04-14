@@ -7,6 +7,7 @@
         :isMobile="true"
         :scFilters="cFilters"
         class="row hide-on-med-and-up"
+        v-on:SelectedStar="UpdateFilter('rating',$event)"
       ></filterComp>
       <!-- v-on:brandF="UpdateFilter('brand',$event)"
         v-on:priceF="UpdateFilter('price',$event)"
@@ -16,6 +17,7 @@
         :inputOBJ="inputOBJ"
         :isMobile="false"
         :scFilters="cFilters"
+        v-on:SelectedStar="UpdateFilter('rating',$event)"
         class="row hide-on-small-only"
       ></filterComp>
 
@@ -157,9 +159,15 @@ export default {
         returned = tempArr;
       }
 
-      if (this.cFilters.rating.length > 0) {
+      // if (this.cFilters.rating.length > 0) {
+      //   // debugger;
+      //   var tempMin = Math.min(...vueObj.cFilters.rating);
+      //   // console.log(vueObj.ratingFilter, tempMin);
+      //   returned = returned.filter(prod => prod.rating >= tempMin);
+      // }
+      if (this.cFilters.rating!=null) {
         // debugger;
-        var tempMin = Math.min(...vueObj.cFilters.rating);
+        var tempMin = this.cFilters.rating
         // console.log(vueObj.ratingFilter, tempMin);
         returned = returned.filter(prod => prod.rating >= tempMin);
       }
@@ -168,11 +176,9 @@ export default {
     }
   },
   methods: {
-    // UpdateFilter(filter, value) {
-    //   console.log(value);
-    //   debugger;
-    //   this.$emit("updFilter", { fil: filter, val: value });
-    // },
+    UpdateFilter(filter, value) {      
+      this.$emit("updFilter", { fil: filter, val: value });
+    },
     SelectSponsProd() {
       let vueObj = this;
       let SponsProd = this.Prods.find(x => x.id == vueObj.SponsoredProdId);
