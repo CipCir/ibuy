@@ -177,13 +177,14 @@ export default {
   mounted() {
     // $(".modal").modal();
     var onModalClose = function() {
-        alert("Modal closed!");
+      // alert("Modal closed!");
+      $("video")[0].pause();
     };
 
-  var modal = document.querySelector('.modal');
-    M.Modal.init(modal,{
-        onCloseEnd: onModalClose // Callback für Modal schließen.
-    })
+    var modal = document.querySelector(".modal");
+    M.Modal.init(modal, {
+      onCloseEnd: onModalClose // Callback für Modal schließen.
+    });
   },
   methods: {
     addToCart() {
