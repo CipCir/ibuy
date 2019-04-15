@@ -178,7 +178,9 @@ export default {
     // $(".modal").modal();
     var onModalClose = function() {
       // alert("Modal closed!");
-      $("video")[0].pause();
+      if ($("video")[0]) {
+        $("video")[0].pause();
+      }
     };
 
     var modal = document.querySelector(".modal");
@@ -251,7 +253,7 @@ export default {
   height: 80vh;
 } */
 .header_container {
-  text-align: end;
+  text-align: right;
   padding-right: 13px;
   padding-top: 10px;
   font-size: 20px;
@@ -361,6 +363,9 @@ export default {
   text-align: center;
   text-decoration: none !important;
   vertical-align: middle;
+}
+.tumbImg > img {
+  width: 100%;
 }
 .tumbImg:hover {
   border-color: #a2a6ac #979aa1 #82858a;
