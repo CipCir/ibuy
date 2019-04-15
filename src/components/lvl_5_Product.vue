@@ -175,7 +175,15 @@ export default {
     window.scrollTo(0, 0);
   },
   mounted() {
-    $(".modal").modal();
+    // $(".modal").modal();
+    var onModalClose = function() {
+        alert("Modal closed!");
+    };
+
+  var modal = document.querySelector('.modal');
+    M.Modal.init(modal,{
+        onCloseEnd: onModalClose // Callback für Modal schließen.
+    })
   },
   methods: {
     addToCart() {
