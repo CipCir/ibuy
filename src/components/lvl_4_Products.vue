@@ -62,7 +62,7 @@
               <div
                 class="prodImg col"
                 :class="inputOBJ.generalInfo.productView=='Grid'?'s4 m12':'s4 m3'"
-                :style="{'background-image': 'url(' + './img/'+prod.imgArr[0]+ ')'}"
+                :style="{'background-image': 'url(' + './img/'+prod.imgArr[0].imgSrc+ ')'}"
               >
                 <!-- <img :src="'./img/'+prod.img"> -->
               </div>
@@ -165,9 +165,9 @@ export default {
       //   // console.log(vueObj.ratingFilter, tempMin);
       //   returned = returned.filter(prod => prod.rating >= tempMin);
       // }
-      if (this.cFilters.rating!=null) {
+      if (this.cFilters.rating != null) {
         // debugger;
-        var tempMin = this.cFilters.rating
+        var tempMin = this.cFilters.rating;
         // console.log(vueObj.ratingFilter, tempMin);
         returned = returned.filter(prod => prod.rating >= tempMin);
       }
@@ -176,7 +176,7 @@ export default {
     }
   },
   methods: {
-    UpdateFilter(filter, value) {      
+    UpdateFilter(filter, value) {
       this.$emit("updFilter", { fil: filter, val: value });
     },
     SelectSponsProd() {

@@ -36,9 +36,9 @@
                 <div class="col s2 navContainer" @click="slideImg(-1)">
                   <i class="medium material-icons">chevron_left</i>
                 </div>
-                <div id="mainImgContMob" class="col s8 center-align">
+                <div id="mainImgContMob" class="col s8 center-align" @click="imageClicked()">
                   <div>
-                    <img class="ProdImgMob" :key="PrdImg" :src="'./img/'+PrdImg">
+                    <img class="ProdImgMob" :src="'./img/'+PrdImg.imgSrc">
                   </div>
                 </div>
                 <div class="col s2 navContainer" @click="slideImg(1)">
@@ -54,7 +54,7 @@
                   :class="{'selected':PrdImg==thumb}"
                   @click="PrdImg=thumb"
                 >
-                  <img :src="'./img/'+thumb">
+                  <img :src="'./img/'+thumb.imgSrc">
                 </div>
               </div>
             </div>
@@ -70,13 +70,13 @@
                   :class="{'selected':PrdImg==thumb}"
                   @click="PrdImg=thumb"
                 >
-                  <img :src="'./img/'+thumb">
+                  <img :src="'./img/'+thumb.imgSrc">
                 </div>
               </div>
               <!-- main img -->
-              <div id="mainImgCont" class="center-align">
+              <div id="mainImgCont" class="center-align" @click="imageClicked()">
                 <div class="prodImg">
-                  <img :src="'./img/'+PrdImg">
+                  <img id="img_displayed" :src="'./img/'+PrdImg.imgSrc">
                 </div>
               </div>
             </div>
@@ -132,6 +132,23 @@
       </div>
       <div class="col xl1 extraCol show-on-extra-large"></div>
     </div>
+    <!-- modal -->
+    <div id="modal1" class="modal">
+      <div class="header_container">
+        <span class="modal-close close_modal_btn">X</span>
+        <!-- <div class="modal-close close_modal_btn">X</div> -->
+      </div>
+      <div class="modal-content">
+        <div id="modalImageContainer" v-if="PrdImg.type=='img'">
+          <img id="modalImage" :src="'./img/'+PrdImg.imgSrc" alt="product image enlarged here">
+        </div>
+        <div id="modalVideoContainer" v-if="PrdImg.type=='video'">
+          <video id="modalVideo" controls>
+            <source :src="'./img/'+PrdImg.videoSrc" type="video/mp4">Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -157,6 +174,9 @@ export default {
   created() {
     window.scrollTo(0, 0);
   },
+  mounted() {
+    $(".modal").modal();
+  },
   methods: {
     addToCart() {
       // if (prod.prods.length==0){
@@ -173,6 +193,9 @@ export default {
       ) {
         this.PrdImg = this.Prdct.imgArr[currIndex + value];
       }
+    },
+    imageClicked() {
+      M.Modal.getInstance($("#modal1")).open();
     }
   }
 };
@@ -180,6 +203,60 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.modal-content {
+  height: 90%;
+  /* background-color: bisque; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal {
+  /* border: 1px solid blue; */
+  top: 5vh !important;
+  max-height: 90vh;
+  width: 90vw;
+  bottom: 5vh;
+  overflow: hidden;
+}
+/* #modalVideoContainer,
+#modalImageContainer {
+  border: 1px solid red;
+} */
+#modalVideo,
+#modalImage {
+  max-width: 100%;
+  max-height: 80vh;
+  display: block;
+  margin: 0 auto;
+  /* border: 1px solid blue; */
+}
+@media (max-height: 600px) and (orientation: landscape) {
+  #modalVideo,
+  #modalImage {
+    max-height: 60vh;
+    /* border: 1px solid red; */
+  }
+}
+/* #modalImage {
+  max-height: 80vh;
+  height: 80vh;
+} */
+.header_container {
+  text-align: end;
+  padding-right: 13px;
+  padding-top: 10px;
+  font-size: 20px;
+}
+.close_modal_btn {
+  background-color: #26a69a;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+#img_displayed {
+  max-width: 100%;
+  max-height: 50vh;
+}
 .btm_img {
   display: none;
 }

@@ -1,28 +1,24 @@
 <template>
   <div id="lvl_cart" class="lvl_container">
-     <div id="navRow" class="row">
+    <div id="navRow" class="row">
       <span class="left">
         <span class="btn orange" @click="$emit('updtLvl',{lvl:'Products'})">back to results</span>
-      </span>      
+      </span>
     </div>
     <div class="row" style="padding-left:15px">
-      <h5>
-        {{texts.cart.cartTitle}}
-      </h5>
-      <div v-if="Cart.length==1">        
-        {{texts.cart.empty}}
-      </div>
+      <h5>{{texts.cart.cartTitle}}</h5>
+      <div v-if="Cart.length==1">{{texts.cart.empty}}</div>
     </div>
     <div id="cartRow" class="row" v-if="Cart.length>1">
       <div
         class="col s12 l10 prodCol"
         v-for="prod in Cart.filter(itm=>{return itm.id>-1})"
-        :key="prod.id"        
+        :key="prod.id"
       >
         <hr>
         <div
           class="prodImg col s4 m3"
-          :style="{'background-image': 'url(' + './img/'+prod.imgArr[0]+ ')'}"
+          :style="{'background-image': 'url(' + './img/'+prod.imgArr[0].imgSrc+ ')'}"
         >
           <!-- <img :src="'./img/'+prod.img"> -->
         </div>
@@ -53,10 +49,10 @@
           <div v-html="prod.addInf2"></div>
           <!-- quantity -->
           <div>
-             {{texts.Quantity}}
-              <select v-model="prod.quantity" @change="$emit('RCart')">
-                <option v-for="n in 10" :key="n" :value="n">{{n}}</option>
-              </select>
+            {{texts.Quantity}}
+            <select v-model="prod.quantity" @change="$emit('RCart')">
+              <option v-for="n in 10" :key="n" :value="n">{{n}}</option>
+            </select>
           </div>
           <!-- remove -->
           <div>
@@ -65,10 +61,13 @@
         </div>
       </div>
     </div>
-    <div id="CheckoutRow" class="row" v-if="Cart.length>1"> 
+    <div id="CheckoutRow" class="row" v-if="Cart.length>1">
       <span id="CheckoutCol" class="col s12 m5 l3">
-        <span id="CheckoutBtn"  @click="$emit('updtLvl',{lvl:'Products'}),$emit('checkOut')">{{texts.cart.Checkout}}</span>
-      </span>    
+        <span
+          id="CheckoutBtn"
+          @click="$emit('updtLvl',{lvl:'Products'}),$emit('checkOut')"
+        >{{texts.cart.Checkout}}</span>
+      </span>
     </div>
   </div>
 </template>
@@ -86,8 +85,8 @@ export default {
     Cart: Array,
     inputOBJ: Object
   },
-   created() {
-    window.scrollTo(0,0)
+  created() {
+    window.scrollTo(0, 0);
   },
   methods: {
     Selected(prod) {
@@ -97,8 +96,8 @@ export default {
       this.$emit("selProd", prod);
       this.$emit("updtLvl", { lvl: "Prdct" });
     },
-    DeleteProd(prod){
-      this.$emit("remProd",prod)
+    DeleteProd(prod) {
+      this.$emit("remProd", prod);
     }
   }
 };
@@ -106,7 +105,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 select {
   display: inline-block;
   background-color: white;
@@ -176,53 +174,53 @@ select {
   background: lightcyan;
   min-height: 100px;
 }
-#cartRow{
+#cartRow {
   display: flex;
   justify-content: center;
-  flex-flow: column; 
+  flex-flow: column;
   align-items: center;
 }
-.prodCol{
+.prodCol {
   margin-left: unset !important;
 }
-.DelLbl{
-  margin-top:10px;
-      color: #0066C0;
-    cursor: pointer;
-    font-size: 12px;
-        /* box-shadow: 0 0 5px 0.1px rgba(0, 0, 0, 0.1); */
-        border: solid 1px #babbbd;
-    border-radius: 5px;
-    width: 63px;
-    height: 27px;
-    display: block;
-    padding: 5px;
-    text-align: center;
-    background-color: #e7e9ec;
+.DelLbl {
+  margin-top: 10px;
+  color: #0066c0;
+  cursor: pointer;
+  font-size: 12px;
+  /* box-shadow: 0 0 5px 0.1px rgba(0, 0, 0, 0.1); */
+  border: solid 1px #babbbd;
+  border-radius: 5px;
+  width: 63px;
+  height: 27px;
+  display: block;
+  padding: 5px;
+  text-align: center;
+  background-color: #e7e9ec;
 }
-#CheckoutRow{
-      display: flex;
-    justify-content: center;
+#CheckoutRow {
+  display: flex;
+  justify-content: center;
 }
-#CheckoutCol{
-      margin: unset;
+#CheckoutCol {
+  margin: unset;
 }
-#CheckoutBtn{
-    width: 100%;
-    padding: 5px;
-    background: #f0c14b;
-    /* border-color: #a88734 #9c7e31 #846a29; */
-    border-color: #ca7c1b #be751a #a56616;
-    /* background: linear-gradient(to bottom, #f7dfa5, #f0c14b); */
-    color: #111;
-    border-radius: 3px;
-    border-style: solid;
-    border-width: 1px;
-    cursor: pointer;
-    display: inline-block;
-    text-align: center;
-    text-decoration: none!important;
-    vertical-align: middle;
+#CheckoutBtn {
+  width: 100%;
+  padding: 5px;
+  background: #f0c14b;
+  /* border-color: #a88734 #9c7e31 #846a29; */
+  border-color: #ca7c1b #be751a #a56616;
+  /* background: linear-gradient(to bottom, #f7dfa5, #f0c14b); */
+  color: #111;
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 1px;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none !important;
+  vertical-align: middle;
 }
 #CheckoutBtn:hover {
   border-color: #a88734 #9c7e31 #846a29;
