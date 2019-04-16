@@ -97,7 +97,7 @@
               <div class="addCart" @click="addToCart()">Add to Cart</div>
             </div>
             <div class="row center-align">
-              <img :src="'./img/ProdSponorCart.jpg'" alt>
+              <img :src="'./img/'+Prdct.sponsorImg" alt>
             </div>
 
             <!-- <div v-html="Prdct.addInf2"></div> -->

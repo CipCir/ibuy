@@ -19,6 +19,7 @@ var prodDB = {
         "ProdDetailsCart.jpg",
         "ProdDetailsCart.jpg"
       ],
+      sponsorImg: "ProdSponorCart.jpg",
       by: null,
       rating: 5,
       reviews: "<span style='color:#0066c0;'>4</span>",
@@ -43,6 +44,7 @@ var prodDB = {
         "ProdDetailsCart.jpg",
         "ProdDetailsCart.jpg"
       ],
+      sponsorImg: "ProdSponorCart.jpg",
       by: null,
       rating: 3.5,
       reviews: "<span style='color:#0066c0;'>6</span>",
@@ -66,6 +68,7 @@ var prodDB = {
         "ProdDetailsCart.jpg",
         "ProdDetailsCart.jpg"
       ],
+      sponsorImg: "ProdSponorCart.jpg",
       by: null,
       rating: 5,
       reviews: "<span style='color:#0066c0;'>3</span>",
@@ -90,6 +93,7 @@ var prodDB = {
         "ProdDetailsCart.jpg",
         "ProdDetailsCart.jpg"
       ],
+      sponsorImg: "ProdSponorCart.jpg",
       by: null,
       rating: 5,
       reviews: "<span style='color:#0066c0;'>1</span>",
@@ -115,6 +119,7 @@ var prodDB = {
         "ProdDetailsCart.jpg",
         "ProdDetailsCart.jpg"
       ],
+      sponsorImg: "ProdSponorCart.jpg",
       by: null,
       rating: 4,
       reviews: "<span style='color:#0066c0;'>144</span>",
@@ -141,6 +146,7 @@ var prodDB = {
         "ProdDetailsCart.jpg",
         "ProdDetailsCart.jpg"
       ],
+      sponsorImg: "ProdSponorCart.jpg",
       by: null,
       rating: 3,
       reviews: "<span style='color:#0066c0;'>1</span>",
@@ -167,6 +173,7 @@ var prodDB = {
         "ProdDetailsCart.jpg",
         "ProdDetailsCart.jpg"
       ],
+      sponsorImg: "ProdSponorCart.jpg",
       by: "<span style='color:gray;'>by Rexona</span>",
       rating: null,
       reviews: null,
@@ -192,6 +199,7 @@ var prodDB = {
         "ProdDetailsCart.jpg",
         "ProdDetailsCart.jpg"
       ],
+      sponsorImg: "ProdSponorCart.jpg",
       by: null,
       rating: 4,
       reviews: "<span style='color:#0066c0;'>1</span>",
@@ -217,6 +225,7 @@ var prodDB = {
         "ProdDetailsCart.jpg",
         "ProdDetailsCart.jpg"
       ],
+      sponsorImg: "ProdSponorCart.jpg",
       by: "<span style='color:gray;'>by Tom's of Maine</span>",
       rating: 4,
       reviews: "<span style='color:#0066c0;'>300</span>",

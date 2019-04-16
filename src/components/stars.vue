@@ -1,62 +1,60 @@
 <template>
-<div class="stars_container">
-  <div v-for="n in fullstars" class='star fullstar' v-bind:key="n.id"></div>
-  <div v-for="n in halfstars" class='star halfstar' v-bind:key="n.id"></div>
-  <div v-for="n in remaining" class='star emptystar' v-bind:key="n.id"></div>
+  <div class="stars_container">
+    <div v-for="n in fullstars" class="star fullstar" v-bind:key="n.id"></div>
+    <div v-for="n in halfstars" class="star halfstar" v-bind:key="n.id"></div>
+    <div v-for="n in remaining" class="star emptystar" v-bind:key="n.id"></div>
   </div>
 </template>
 
 <script>
 export default {
   name: "stars",
-  props: {    
-    rating:Number,
+  props: {
+    rating: Number
   },
   data() {
-  return {
-    fullstars: 0,
-    halfstars:0,
-    remaining:0,
-    maxStars:5
-  
-    }
+    return {
+      fullstars: 0,
+      halfstars: 0,
+      remaining: 0,
+      maxStars: 5
+    };
   },
-  mounted(){
-    
-    let rateArr=this.rating.toString().split(".")
-    let hasHalf=0
+  mounted() {
+    let rateArr = this.rating.toString().split(".");
+    let hasHalf = 0;
 
-    if (rateArr.length=2){
-      hasHalf=rateArr[1]>=5
+    if ((rateArr.length = 2)) {
+      hasHalf = rateArr[1] >= 5;
     }
 
-    if (hasHalf){this.halfstars=1}
-    this.fullstars=parseInt(rateArr[0])
-    if (this.fullstars<=this.maxStars){
-      this.remaining=this.maxStars-this.fullstars-this.halfstars
-    }else{
-      this.remaining=0
-      this.fullstars=0
-      this.halfstars=0
+    if (hasHalf) {
+      this.halfstars = 1;
     }
-    
+    this.fullstars = parseInt(rateArr[0]);
+    if (this.fullstars <= this.maxStars) {
+      this.remaining = this.maxStars - this.fullstars - this.halfstars;
+    } else {
+      this.remaining = 0;
+      this.fullstars = 0;
+      this.halfstars = 0;
+    }
   }
-  
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .fullstar {
-  background-image: url("https://media.ipsosinteractive.com/sandbox/Ramona/AmazonDEV/general/full_star.png");
+  background-image: url("https://media.ipsosinteractive.com/sandbox/Ramona/AmazonDEV/general/amazon_full_star.png");
 }
 
 .halfstar {
-  background-image: url("https://media.ipsosinteractive.com/sandbox/Ramona/AmazonDEV/general/half_star.png");
+  background-image: url("https://media.ipsosinteractive.com/sandbox/Ramona/AmazonDEV/general/amazon_half_star.png");
 }
 
 .emptystar {
-  background-image: url("https://media.ipsosinteractive.com/sandbox/Ramona/AmazonDEV/general/empty_star.png");
+  background-image: url("https://media.ipsosinteractive.com/sandbox/Ramona/AmazonDEV/general/amazon_empty_star.png");
 }
 
 .star {
