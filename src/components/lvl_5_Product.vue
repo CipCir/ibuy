@@ -97,7 +97,7 @@
               <div class="addCart" @click="addToCart()">Add to Cart</div>
             </div>
             <div class="row center-align">
-              <img :src="'./img/ProdSponorCart.jpg'" alt>
+              <img :src="'./img/'+Prdct.sponsorImg" alt>
             </div>
 
             <!-- <div v-html="Prdct.addInf2"></div> -->
@@ -193,7 +193,7 @@ export default {
     // $(".modal").modal();
     var onModalClose = function() {
       // alert("Modal closed!");
-      if ($("video").length){
+      if ($("video").length){      
         $("video")[0].pause();
       }
     };
@@ -275,7 +275,7 @@ export default {
   height: 80vh;
 } */
 .header_container {
-  text-align: end;
+  text-align: right;
   padding-right: 13px;
   padding-top: 10px;
   font-size: 20px;
@@ -385,6 +385,9 @@ export default {
   text-align: center;
   text-decoration: none !important;
   vertical-align: middle;
+}
+.tumbImg > img {
+  width: 100%;
 }
 .tumbImg:hover {
   border-color: #a2a6ac #979aa1 #82858a;
