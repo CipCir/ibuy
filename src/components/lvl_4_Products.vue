@@ -1,5 +1,12 @@
 <template>
   <div id="lvl_Main" class="lvl_container">
+    <!-- row for sort -->
+      <div class="row">
+     <select id="SortDrop" v-model="SortBy">
+        <!-- inline object literal -->
+        <option v-for="srt in SortArr" :key="srt.lbl" :value="srt">{{srt.lbl}}</option>
+      </select>
+      </div>
     <div class="row">
       <!-- mobile filter -->
       <filterComp
@@ -20,6 +27,7 @@
         v-on:SelectedStar="UpdateFilter('rating',$event)"
         class="row hide-on-small-only"
       ></filterComp>
+      
 
       <div class="row">
         <div id="ProdsCont" class="col s12 m9 l10">
@@ -120,17 +128,59 @@ export default {
   },
   data() {
     return {
-      show_banner: this.inputOBJ.generalInfo.show_banner
+      show_banner: this.inputOBJ.generalInfo.show_banner,
+      SortArr:[
+        {lbl:"Best Sellers",param:"selNum",ordr:1,type:"str"},
+        {lbl:"Price: Low to High",param:"price",type:"num",ordr:1},
+        {lbl:"Price: High to Low",param:"price",type:"num",ordr:-1},
+        {lbl:"A-Z",param:"lbl",type:"str",ordr:1},
+        {lbl:"Z-A",param:"lbl",type:"str",ordr:-1},
+      ],
+      SortBy:null//this.SortArr[0]
     };
   },
 
   created() {
     window.scrollTo(0, 0);
+    this.SortBy=this.SortArr[0]
+
   },
+  // mounted(){
+  //   $('.dropdown-trigger').dropdown();
+  // },
   computed: {
+    
+    productsArr(){
+      let Fparam=this.SortBy.param
+      let fOrd=this.SortBy.ordr
+
+      function compareLBL(a, b){
+        // debugger
+        if (a[Fparam] > b[Fparam]) return fOrd;
+        if (a[Fparam] < b[Fparam]) return -1*fOrd;
+        return 0;
+      }
+      function compareNMB(a, b){
+        
+        if (parseFloat(a[Fparam]) > parseFloat(b[Fparam])) return fOrd;
+        if (parseFloat(a[Fparam]) < parseFloat(b[Fparam])) return -1*fOrd;
+        return 0;
+      }    
+      
+      if(this.SortBy.lbl!="Bestf Sellers"){ 
+        if (this.SortBy.type=="str") {
+          return this.Prods.sort(compareLBL)
+        }else{
+          return this.Prods.sort(compareNMB)
+        }
+       
+      }else{
+        return this.Prods
+      }
+    },
     prodFilterList() {
       var vueObj = this;
-      var returned = this.Prods;
+      var returned = this.productsArr;
 
       if (this.cFilters.brand.length > 0) {
         returned = returned.filter(
@@ -296,5 +346,11 @@ export default {
 #SponsCont {
   background: lightcyan;
   min-height: 100px;
+}
+#SortDrop{
+  display: block;
+  float:right;
+  width: 200px;
+  background: lightgray;
 }
 </style>

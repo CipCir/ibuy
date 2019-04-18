@@ -21,7 +21,7 @@
               </div>
               <div>
                 <stars v-if="Prdct.rating != null" :rating="Prdct.rating"></stars>&nbsp;
-                <span>
+                <span class="lowTxt">
                   <span v-html="Prdct.reviews"></span>&nbsp;
                   <span v-html="texts.CustmrsRev"></span>
                 </span>
@@ -74,7 +74,7 @@
                 </div>
               </div>
               <!-- main img -->
-              <div id="mainImgCont" class="center-align" @click="imageClicked()">
+              <div id="mainImgCont" class="center-align clickable" @click="imageClicked()">
                 <div class="prodImg">
                   <img id="img_displayed" :src="'./img/'+PrdImg.imgSrc">
                 </div>
@@ -139,13 +139,27 @@
         <!-- <div class="modal-close close_modal_btn">X</div> -->
       </div>
       <div class="modal-content">
-        <div id="modalImageContainer" v-if="PrdImg.type=='img'">
-          <img id="modalImage" :src="'./img/'+PrdImg.imgSrc" alt="product image enlarged here">
+        <div id="ProdMediaCont" class="row">
+          <div id="modalImageContainer" v-if="PrdImg.type=='img'">
+            <img id="modalImage" :src="'./img/'+PrdImg.imgSrc" alt="product image enlarged here">
+          </div>
+          <div id="modalVideoContainer" v-if="PrdImg.type=='video'">
+            <video id="modalVideo" controls>
+              <source :src="PrdImg.videoSrc" type="video/mp4">Your browser does not support the video tag.
+            </video>
+          </div>
         </div>
-        <div id="modalVideoContainer" v-if="PrdImg.type=='video'">
-          <video id="modalVideo" controls>
-            <source :src="'./img/'+PrdImg.videoSrc" type="video/mp4">Your browser does not support the video tag.
-          </video>
+         <!-- thumbs -->
+        <div id="tumbContMob" class="row s12 center-align noMargin">
+          <div
+            v-for="(thumb,ind) in Prdct.imgArr"
+            :key="ind"
+            class="tumbImg"
+            :class="{'selected':PrdImg==thumb}"
+            @click="PrdImg=thumb"
+          >
+            <img :src="'./img/'+thumb.imgSrc">
+          </div>
         </div>
       </div>
     </div>
@@ -168,7 +182,8 @@ export default {
   data() {
     return {
       quantity: 1,
-      PrdImg: this.Prdct.imgArr[0]
+      PrdImg: this.Prdct.imgArr[0],
+    
     };
   },
   created() {
@@ -178,7 +193,9 @@ export default {
     // $(".modal").modal();
     var onModalClose = function() {
       // alert("Modal closed!");
-      $("video")[0].pause();
+      if ($("video").length){
+        $("video")[0].pause();
+      }
     };
 
     var modal = document.querySelector(".modal");
@@ -212,12 +229,18 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+#ProdMediaCont{
+  height: 100%;
+  display: flex;
+  align-items: center
+}
 .modal-content {
   height: 90%;
   /* background-color: bisque; */
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+  flex-direction: column;
 }
 .modal {
   /* border: 1px solid blue; */
@@ -234,12 +257,13 @@ export default {
 #modalVideo,
 #modalImage {
   max-width: 100%;
-  max-height: 80vh;
+  max-height: 70vh;
   display: block;
   margin: 0 auto;
   /* border: 1px solid blue; */
 }
-@media (max-height: 600px) and (orientation: landscape) {
+/* phone view */
+@media (max-height: 600px)  {
   #modalVideo,
   #modalImage {
     max-height: 60vh;
@@ -415,6 +439,9 @@ select {
 .addCart:hover {
   border-color: #a88734 #9c7e31 #846a29;
   background: linear-gradient(to bottom, #f5d78e, #eeb933);
+}
+.reviews{
+  font-size: 10px
 }
 </style>
 

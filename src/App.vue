@@ -208,6 +208,7 @@ export default {
       // }
       // return this.cart.map(item => item.quantity).reduce((total, amount) => total + amount);
     }
+
   }
   // created(){
   //   console.log(inputObj)
