@@ -23,7 +23,7 @@
                 <stars
                   v-if="Prdct.rating != null"
                   :rating="Prdct.rating"
-                  :moduleProps="moduleProps"
+                  :skinProps="skinProps"
                 ></stars>&nbsp;
                 <span class="lowTxt">
                   <span v-html="Prdct.reviews"></span>&nbsp;
@@ -42,7 +42,7 @@
                 </div>
                 <div id="mainImgContMob" class="col s8 center-align" @click="imageClicked()">
                   <div>
-                    <img class="ProdImgMob" :src="'./img/'+PrdImg.imgSrc">
+                    <img class="ProdImgMob" :src="prodMediaPath+PrdImg.imgSrc">
                   </div>
                 </div>
                 <div class="col s2 navContainer" @click="slideImg(1)">
@@ -58,7 +58,7 @@
                   :class="{'selected':PrdImg==thumb}"
                   @click="PrdImg=thumb"
                 >
-                  <img :src="'./img/'+thumb.imgSrc">
+                  <img :src="prodMediaPath+thumb.imgSrc">
                 </div>
               </div>
             </div>
@@ -74,13 +74,13 @@
                   :class="{'selected':PrdImg==thumb}"
                   @click="PrdImg=thumb"
                 >
-                  <img :src="'./img/'+thumb.imgSrc">
+                  <img :src="prodMediaPath+thumb.imgSrc">
                 </div>
               </div>
               <!-- main img -->
               <div id="mainImgCont" class="center-align clickable" @click="imageClicked()">
                 <div class="prodImg">
-                  <img id="img_displayed" :src="'./img/'+PrdImg.imgSrc">
+                  <img id="img_displayed" :src="prodMediaPath+PrdImg.imgSrc">
                 </div>
               </div>
             </div>
@@ -108,7 +108,7 @@
               <div class="addCart" @click="addToCart()">Add to Cart</div>
             </div>
             <div class="row center-align">
-              <img :src="'./img/'+Prdct.sponsorImg" alt>
+              <img :src="prodMediaPath+Prdct.sponsorImg" alt>
             </div>
 
             <!-- <div v-html="Prdct.addInf2"></div> -->
@@ -121,22 +121,22 @@
         <div id="BtmProdCont" class="row">
           <img
             class="btm_img show-on-small"
-            :src="'./img/'+Prdct.detailsImgArr[0]"
+            :src="prodMediaPath+Prdct.detailsImgArr[0]"
             alt="additional image 1 here"
           >
           <img
             class="btm_img show-on-medium"
-            :src="'./img/'+Prdct.detailsImgArr[1]"
+            :src="prodMediaPath+Prdct.detailsImgArr[1]"
             alt="additional image 2 here"
           >
           <img
             class="btm_img show-on-large"
-            :src="'./img/'+Prdct.detailsImgArr[2]"
+            :src="prodMediaPath+Prdct.detailsImgArr[2]"
             alt="additional image 3 here"
           >
           <img
             class="btm_img show-on-extra-large"
-            :src="'./img/'+Prdct.detailsImgArr[3]"
+            :src="prodMediaPath+Prdct.detailsImgArr[3]"
             alt="additional image 4 here"
           >
         </div>
@@ -152,7 +152,7 @@
       <div class="modal-content">
         <div id="ProdMediaCont" class="row">
           <div id="modalImageContainer" v-if="PrdImg.type=='img'">
-            <img id="modalImage" :src="'./img/'+PrdImg.imgSrc" alt="product image enlarged here">
+            <img id="modalImage" :src="prodMediaPath+PrdImg.imgSrc" alt="product image enlarged here">
           </div>
           <div id="modalVideoContainer" v-if="PrdImg.type=='video'">
             <video id="modalVideo" controls>
@@ -169,7 +169,7 @@
             :class="{'selected':PrdImg==thumb}"
             @click="PrdImg=thumb"
           >
-            <img :src="'./img/'+thumb.imgSrc">
+            <img :src="prodMediaPath+thumb.imgSrc">
           </div>
         </div>
       </div>
@@ -187,9 +187,10 @@ export default {
   },
   props: {
     general_texts: Object,
+    prodMediaPath:String,
     Prdct: Object,
     texts: Object,
-    moduleProps: Object
+    skinProps: Object
   },
   data() {
     return {

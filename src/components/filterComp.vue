@@ -22,10 +22,10 @@
         <div class="filterLbl" v-html="filters.FilterRatingLabel"></div>
 
         <div
-          v-for="(rating) in moduleProps.ratingMaxVal"
+          v-for="(rating) in skinProps.LayoutProps.ratingMaxVal"
           :key="rating"
           class="paddingBox clickable"
-          @click="$emit('SelectedStar',moduleProps.ratingMaxVal-rating+1)"
+          @click="$emit('SelectedStar',skinProps.LayoutProps.ratingMaxVal-rating+1)"
         >
           <!-- <label> -->
           <!-- <input
@@ -36,7 +36,7 @@
                 v-model="scFilters.rating"
           >-->
           <span :for="'rating_'+rating" :class="{'selected':SelectedStarF(rating)}">
-            <stars :rating="moduleProps.ratingMaxVal-rating+1" :moduleProps="moduleProps"></stars>
+            <stars :rating="skinProps.LayoutProps.ratingMaxVal-rating+1" :skinProps="skinProps"></stars>
             <!-- <span v-if="rating!=1">{{filters.RatingLabel}}</span> -->
           </span>
           <!-- </label> -->
@@ -96,7 +96,7 @@ export default {
     isMobile: Boolean,
     scFilters: Object,
     filters: Object,
-    moduleProps: Object
+    skinProps:Object
   },
   data() {
     return {
@@ -109,7 +109,7 @@ export default {
     SelectedStarF(rating) {
       if (this.scFilters.rating != null) {
         return (
-          this.moduleProps.ratingMaxVal - rating + 1 >= this.scFilters.rating
+          this.skinProps.LayoutProps.ratingMaxVal - rating + 1 >= this.scFilters.rating
         );
       }
 

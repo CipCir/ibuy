@@ -1,13 +1,14 @@
-var moduleProps = {
-  show_search: true,
-  show_bk_to_top: true,
-  show_footer_text: true,
-  show_footer_image: true,
-  show_banner: true,
-  ratingMaxVal: 5,
-  productView: "Grid" //"Grid" "List"
-};
+
 var skinProps = {
+  LayoutProps : {
+    show_search: true,
+    show_bk_to_top: true,
+    show_footer_text: true,
+    show_footer_image: true,
+    show_banner: true,
+    ratingMaxVal: 5,
+    productView: "Grid" //"Grid" "List"
+  },
   header: {
     header_bk_color: "#233040",
     search_color1: "#f3f3f3",

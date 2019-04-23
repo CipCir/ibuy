@@ -18,7 +18,7 @@
         <hr>
         <div
           class="prodImg col s4 m3"
-          :style="{'background-image': 'url(' + './img/'+prod.imgArr[0].imgSrc+ ')'}"
+          :style="{'background-image': 'url(' + prodMediaPath+prod.imgArr[0].imgSrc+ ')'}"
         >
           <!-- <img :src="'./img/'+prod.img"> -->
         </div>
@@ -26,7 +26,7 @@
           <div class="ProdLbl" v-html="prod.lbl"></div>
           <div v-html="prod.by"></div>
           <div>
-            <stars v-if="prod.rating != null" :rating="prod.rating" :moduleProps="moduleProps"></stars>&nbsp;
+            <stars v-if="prod.rating != null" :rating="prod.rating" :skinProps="skinProps"></stars>&nbsp;
             <span v-html="prod.reviews"></span>
           </div>
 
@@ -82,9 +82,10 @@ export default {
   },
   props: {
     general_texts: Object,
+    prodMediaPath:String,
     Cart: Array,
     texts: Object,
-    moduleProps: Object
+    skinProps: Object
   },
   created() {
     window.scrollTo(0, 0);
@@ -94,7 +95,7 @@ export default {
       // if (prod.prods.length==0){
       // return false;
       // }
-      this.$emit("selProd", prod);
+      // this.$emit("selProd", prod);
       this.$emit("updtLvl", { lvl: "Prdct" });
     },
     DeleteProd(prod) {

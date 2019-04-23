@@ -32,17 +32,16 @@ export default {
   name: "footerComp",
   props: {
     skinProps: Object,
-    footer_texts: Object,
-    moduleProps: Object
+    footer_texts: Object,    
   },
   data() {
     return {
       footer_color: this.skinProps.footer.footer_bk_color,
       bk_top_color: this.skinProps.footer.bk_to_top_color,
       backtotop_text: this.footer_texts.back_to_top,
-      show_bk_to_top: this.moduleProps.show_bk_to_top,
-      show_footer_text: this.moduleProps.show_footer_text,
-      show_footer_image: this.moduleProps.show_footer_image
+      show_bk_to_top: this.skinProps.LayoutProps.show_bk_to_top,
+      show_footer_text: this.skinProps.LayoutProps.show_footer_text,
+      show_footer_image: this.skinProps.LayoutProps.show_footer_image
     };
   },
   mounted() {},

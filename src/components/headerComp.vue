@@ -77,13 +77,12 @@ export default {
   name: "headerComp",
   props: {
     skinProps: Object,
-    nr_cart: Number,
-    moduleProps: Object,
+    nr_cart: Number,    
     header_texts: Object
   },
   data() {
     return {
-      show_search: this.moduleProps.show_search,
+      show_search: this.skinProps.LayoutProps.show_search,
       header_bk_color: this.skinProps.header.header_bk_color,
       logo_img: this.header_texts.logo_img,
       search_color1: this.skinProps.header.search_color1,

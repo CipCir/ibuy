@@ -7,7 +7,7 @@
       @click="Selected(cat)"
       >
         <div class="catLbl">{{cat.lbl}}</div>
-        <div class="catImg"><img :src="'./img/'+cat.img"/></div>
+        <div class="catImg"><img :src="prods.prodMediaPath+cat.img"/></div>
       </div>
     </div>
   </div>

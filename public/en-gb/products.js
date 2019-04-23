@@ -1,4 +1,5 @@
 var prodDB = {
+  prodMediaPath:"./img/",
   SponsoredProdId: 8,
   Products: [
     {

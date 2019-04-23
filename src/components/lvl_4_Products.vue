@@ -14,9 +14,9 @@
         :filters="texts.filters"
         :isMobile="true"
         :scFilters="cFilters"
+        :skinProps="skinProps"
         class="row hide-on-med-and-up"
         v-on:SelectedStar="UpdateFilter('rating',$event)"
-        :moduleProps="moduleProps"
       ></filterComp>
       <!-- v-on:brandF="UpdateFilter('brand',$event)"
         v-on:priceF="UpdateFilter('price',$event)"
@@ -27,9 +27,9 @@
         :filters="texts.filters"
         :isMobile="false"
         :scFilters="cFilters"
+        :skinProps="skinProps"
         v-on:SelectedStar="UpdateFilter('rating',$event)"
         class="row hide-on-small-only"
-        :moduleProps="moduleProps"
       ></filterComp>
 
       <div class="row">
@@ -63,28 +63,28 @@
           <div class="col l12 xl11">
             <div
               class="col CanSelect s12"
-              :class="[moduleProps.productView=='Grid'?'m4 l3':'m12', ((index % 4)==0&&(index>0))?'clear_left_4':'', ((index % 3)==0&&(index>0))?'clear_left_3':'']"
+              :class="[skinProps.LayoutProps.productView=='Grid'?'m4 l3':'m12', ((index % 4)==0&&(index>0))?'clear_left_4':'', ((index % 3)==0&&(index>0))?'clear_left_3':'']"
               v-for="(prod,index) in prodFilterList"
               :key="prod.id"
               @click="Selected(prod)"
             >
               <hr>
-              <!-- <hr v-if="moduleProps.productView=='Grid' && index>3"> -->
+              <!-- <hr v-if="skinProps.LayoutProps.productView=='Grid' && index>3"> -->
               <div
                 class="prodImg col"
-                :class="moduleProps.productView=='Grid'?'s4 m12':'s4 m3'"
-                :style="{'background-image': 'url(' + './img/'+prod.imgArr[0].imgSrc+ ')'}"
+                :class="skinProps.LayoutProps.productView=='Grid'?'s4 m12':'s4 m3'"
+                :style="{'background-image': 'url(' + prodMediaPath+prod.imgArr[0].imgSrc+ ')'}"
               >
                 <!-- <img :src="'./img/'+prod.img"> -->
               </div>
-              <div class="col" :class="moduleProps.productView=='Grid'?'s8 m12':'s8 m9'">
+              <div class="col" :class="skinProps.LayoutProps.productView=='Grid'?'s8 m12':'s8 m9'">
                 <div class="ProdLbl" v-html="prod.lbl"></div>
                 <div v-html="prod.by"></div>
                 <div>
                   <stars
                     v-if="prod.rating != null"
                     :rating="prod.rating"
-                    :moduleProps="moduleProps"
+                    :skinProps="skinProps"
                   ></stars>&nbsp;
                   <span v-html="prod.reviews"></span>
                 </div>
@@ -129,14 +129,15 @@ export default {
   props: {
     general_texts: Object,
     Prods: Array,
+    prodMediaPath:String,
     SponsoredProdId: Number,
     texts: Object,
     cFilters: Object,
-    moduleProps: Object
+    skinProps: Object
   },
   data() {
     return {
-      show_banner: this.moduleProps.show_banner,
+      show_banner: this.skinProps.LayoutProps.show_banner,
       SortArr: this.texts.filters.SortArr,
       SortBy: null //this.SortArr[0]
     };
@@ -240,7 +241,6 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .banner_img_cont {
   width: 100%;
@@ -321,9 +321,7 @@ export default {
   padding: 0 20px;
   height: 150px;
 }
-/* .prodLbl {
-  text-transform: uppercase;
-} */
+
 .prodImg {
   /* width: 100% */
   min-height: 200px;

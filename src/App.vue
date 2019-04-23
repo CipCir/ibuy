@@ -1,10 +1,10 @@
 <template>
   <div id="app" v-bind:style="{'background-color':skinProps.body_bk_color}">
-    <headerComp
-      :moduleProps="moduleProps"
+    <headerComp      
       :skinProps="skinProps"
-      :header_texts="texts.header"
       :nr_cart="cartNumb"
+      :header_texts="texts.header"
+
       v-on:updtLvl="UpdateLvl($event)"
     />
     <!-- <lvlMain
@@ -34,38 +34,44 @@
       v-if="controls.showLevel=='Products'"
       :general_texts="texts.general_texts"
       :Prods="prodDB.Products"
-      :SelShelfId="controls.selected3_ShelfCat"
+      :prodMediaPath="prodDB.prodMediaPath"
+      :SponsoredProdId="prodDB.SponsoredProdId"   
       :texts="texts"
       :cFilters="controls.filters"
-      :SponsoredProdId="prodDB.SponsoredProdId"
+      :skinProps="skinProps"
+
       v-on:selProd="SetPrdct($event)"
       v-on:updtLvl="UpdateLvl($event)"
       v-on:updFilter="UpdateFilters($event)"
-      :moduleProps="moduleProps"
     />
     <lvlPrdct
       v-if="controls.showLevel=='Prdct'"
       :general_texts="texts.general_texts"
+      :prodMediaPath="prodDB.prodMediaPath"      
       :Prdct="controls.sel_Prdct"
       :texts="texts"
+      :skinProps="skinProps"
+
       v-on:addInCart="AddProdInCart($event)"
       v-on:updtLvl="UpdateLvl($event)"
-      :moduleProps="moduleProps"
     />
     <lvlCart
       v-if="controls.showLevel=='Cart'"
       :general_texts="texts.general_texts"
+      :prodMediaPath="prodDB.prodMediaPath"
       :Cart="cart"
       :texts="texts"
-      v-on:addInCart="AddProdInCart($event)"
+      :skinProps="skinProps"
+
       v-on:updtLvl="UpdateLvl($event)"
       v-on:remProd="DeleteProdCart($event)"
-      v-on:checkOut="CheckOut()"
       v-on:RCart="RefreshCart()"
-      :moduleProps="moduleProps"
+      v-on:checkOut="CheckOut()"
     />
 
-    <footerComp :moduleProps="moduleProps" :skinProps="skinProps" :footer_texts="texts.footer"/>
+    <footerComp 
+      :skinProps="skinProps" 
+      :footer_texts="texts.footer"/>
   </div>
 </template>
 
@@ -94,8 +100,7 @@ export default {
   },
   data() {
     return {
-      texts,
-      moduleProps,
+      texts,      
       skinProps,
       prodDB,
       output: {},
@@ -115,16 +120,7 @@ export default {
       cartSum: 0
     };
   },
-  methods: {
-    // SetShelfCat(pay) {
-    //   this.controls.selected3_ShelfCat = pay;
-    // },
-    // SetAisleCat(pay) {
-    //   this.controls.selected2_AisleCat = pay;
-    // },
-    // SetCategory(pay) {
-    //   this.controls.selected1_Cat = pay;
-    // },
+  methods: {    
     UpdateFilters(pay) {
       if (this.controls.filters[pay.fil] == pay.val) {
         this.controls.filters[pay.fil] = null;
@@ -136,7 +132,7 @@ export default {
       this.cart = [{ id: -1, quantity: 0 }];
       this.cartSum = 0;
       this.controls.filters = {
-        rating: [],
+        rating: null,
         brand: [],
         price: []
       };
@@ -181,19 +177,6 @@ export default {
       // this.controls.selected2_AisleCat=pay.AisleCat
     }
   },
-  //  watch: {
-  //   cart: {
-  //     deep:true,
-  //     handler: function (val) {
-  //       var sum=0
-  //       this.cart.forEach(itm=>{
-  //         sum=sum+itm.quantity
-  //       })
-  //       debugger
-  //       this.cartSum=sum
-  //     }
-
-  //   }},
 
   computed: {
     cartNumb() {
@@ -202,16 +185,9 @@ export default {
         sum = sum + itm.quantity;
       });
 
-      return sum;
-      // if (this.cart.length==0){
-      //   return 0
-      // }
-      // return this.cart.map(item => item.quantity).reduce((total, amount) => total + amount);
+      return sum;      
     }
   }
-  // created(){
-  //   console.log(texts)
-  // }
 };
 </script>
 <style>
