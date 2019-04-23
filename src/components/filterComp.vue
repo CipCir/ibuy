@@ -3,13 +3,13 @@
     <div v-if="isMobile">
       <div
         class="MobFilter1 clickable"
-        v-html="inputOBJ.Filters.FilterLbl1"
+        v-html="filters.FilterLbl1"
         v-if="!show_filters"
         @click="show_filters=!show_filters"
       ></div>
       <div
         class="MobFilter2 clickable"
-        v-html="inputOBJ.Filters.FilterLbl2"
+        v-html="filters.FilterLbl2"
         v-if="show_filters"
         @click="show_filters=!show_filters"
       ></div>
@@ -19,35 +19,34 @@
       <!-- start filter -->
       <!-- rating filter -->
       <div id="RatingFilterCont">
-        <div class="filterLbl" v-html="inputOBJ.Filters.FilterRatingLabel"></div>
-        
-          <div
-            v-for="(rating) in inputOBJ.Filters.RatingMaxVal"
-            :key="rating"
-            class="paddingBox clickable"
-            @click="$emit('SelectedStar',inputOBJ.Filters.RatingMaxVal-rating+1)"
-          >          
-            <!-- <label> -->
-              <!-- <input
+        <div class="filterLbl" v-html="filters.FilterRatingLabel"></div>
+
+        <div
+          v-for="(rating) in moduleProps.ratingMaxVal"
+          :key="rating"
+          class="paddingBox clickable"
+          @click="$emit('SelectedStar',moduleProps.ratingMaxVal-rating+1)"
+        >
+          <!-- <label> -->
+          <!-- <input
                 type="checkbox"
                 class="filled-in"
                 :id="'price_'+rating"
-                :value="inputOBJ.Filters.RatingMaxVal-rating+1"
+                :value="filters.RatingMaxVal-rating+1"
                 v-model="scFilters.rating"
-              > -->              
-              <span :for="'rating_'+rating" :class="{'selected':SelectedStarF(rating)}">
-                <stars :rating="inputOBJ.Filters.RatingMaxVal-rating+1"></stars>
-                <!-- <span v-if="rating!=1">{{inputOBJ.Filters.RatingLabel}}</span> -->
-              </span>
-            <!-- </label> -->
-          </div>
-        
+          >-->
+          <span :for="'rating_'+rating" :class="{'selected':SelectedStarF(rating)}">
+            <stars :rating="moduleProps.ratingMaxVal-rating+1" :moduleProps="moduleProps"></stars>
+            <!-- <span v-if="rating!=1">{{filters.RatingLabel}}</span> -->
+          </span>
+          <!-- </label> -->
+        </div>
       </div>
       <!-- brand filter -->
       <div id="BrandFilterCont">
-        <div class="filterLbl" v-html="inputOBJ.Filters.FilterBrandLabel"></div>
+        <div class="filterLbl" v-html="filters.FilterBrandLabel"></div>
         <form id="BrandFilterForm" action="#">
-          <div v-for="(brand,index) in inputOBJ.Filters.brand" :key="brand" class="paddingBox">
+          <div v-for="(brand,index) in filters.brand" :key="brand" class="paddingBox">
             <label>
               <input
                 type="checkbox"
@@ -63,9 +62,9 @@
       </div>
       <!-- price filter -->
       <div id="PriceFilterCont">
-        <div class="filterLbl" v-html="inputOBJ.Filters.FilterPriceLabel"></div>
+        <div class="filterLbl" v-html="filters.FilterPriceLabel"></div>
         <form id="PriceFilterForm" action="#">
-          <div v-for="(price,index) in inputOBJ.Filters.price" :key="price.val" class="paddingBox">
+          <div v-for="(price,index) in filters.price" :key="price.val" class="paddingBox">
             <label>
               <input
                 type="checkbox"
@@ -93,9 +92,11 @@ export default {
     stars
   },
   props: {
-    inputOBJ: Object,
+    texts: Object,
     isMobile: Boolean,
-    scFilters: Object
+    scFilters: Object,
+    filters: Object,
+    moduleProps: Object
   },
   data() {
     return {
@@ -104,14 +105,15 @@ export default {
   },
   mounted() {},
   watch: {},
-  methods:{
-    SelectedStarF(rating){
-      
-      if (this.scFilters.rating !=null){        
-        return this.inputOBJ.Filters.RatingMaxVal-rating+1>=this.scFilters.rating
+  methods: {
+    SelectedStarF(rating) {
+      if (this.scFilters.rating != null) {
+        return (
+          this.moduleProps.ratingMaxVal - rating + 1 >= this.scFilters.rating
+        );
       }
-      
-      return false
+
+      return false;
     }
   },
   computed: {
@@ -151,11 +153,11 @@ span {
   font-weight: bold;
   padding: 8px 20px;
 }
-.selected .stars_container{
+.selected .stars_container {
   /* background: lightblue */
-  border-left:solid 5px #26a69a
+  border-left: solid 5px #26a69a;
 }
-.stars_container{
-  border-left:solid 5px transparent
+.stars_container {
+  border-left: solid 5px transparent;
 }
 </style>

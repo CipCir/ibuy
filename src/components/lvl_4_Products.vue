@@ -1,33 +1,36 @@
 <template>
   <div id="lvl_Main" class="lvl_container">
     <!-- row for sort -->
-      <div class="row">
-     <select id="SortDrop" v-model="SortBy">
+    <div class="row">
+      <select id="SortDrop" v-model="SortBy">
         <!-- inline object literal -->
         <option v-for="srt in SortArr" :key="srt.lbl" :value="srt">{{srt.lbl}}</option>
       </select>
-      </div>
+    </div>
     <div class="row">
       <!-- mobile filter -->
       <filterComp
-        :inputOBJ="inputOBJ"
+        :texts="texts"
+        :filters="texts.filters"
         :isMobile="true"
         :scFilters="cFilters"
         class="row hide-on-med-and-up"
         v-on:SelectedStar="UpdateFilter('rating',$event)"
+        :moduleProps="moduleProps"
       ></filterComp>
       <!-- v-on:brandF="UpdateFilter('brand',$event)"
         v-on:priceF="UpdateFilter('price',$event)"
       v-on:ratingF="UpdateFilter('rating',$event)"-->
       <!-- desktop filter -->
       <filterComp
-        :inputOBJ="inputOBJ"
+        :texts="texts"
+        :filters="texts.filters"
         :isMobile="false"
         :scFilters="cFilters"
         v-on:SelectedStar="UpdateFilter('rating',$event)"
         class="row hide-on-small-only"
+        :moduleProps="moduleProps"
       ></filterComp>
-      
 
       <div class="row">
         <div id="ProdsCont" class="col s12 m9 l10">
@@ -38,62 +41,66 @@
           >
             <img
               class="banner_img show-on-small"
-              :src="inputOBJ.banner.img1"
+              :src="texts.banner.img1"
               alt="banner image 1 here"
             >
             <img
               class="banner_img show-on-medium"
-              :src="inputOBJ.banner.img2"
+              :src="texts.banner.img2"
               alt="banner image 2 here"
             >
             <img
               class="banner_img show-on-large"
-              :src="inputOBJ.banner.img3"
+              :src="texts.banner.img3"
               alt="banner image 3 here"
             >
             <img
               class="banner_img show-on-extra-large"
-              :src="inputOBJ.banner.img4"
+              :src="texts.banner.img4"
               alt="banner image 4 here"
             >
           </div>
           <div class="col l12 xl11">
             <div
               class="col CanSelect s12"
-              :class="[inputOBJ.generalInfo.productView=='Grid'?'m4 l3':'m12', ((index % 4)==0&&(index>0))?'clear_left_4':'', ((index % 3)==0&&(index>0))?'clear_left_3':'']"
+              :class="[moduleProps.productView=='Grid'?'m4 l3':'m12', ((index % 4)==0&&(index>0))?'clear_left_4':'', ((index % 3)==0&&(index>0))?'clear_left_3':'']"
               v-for="(prod,index) in prodFilterList"
               :key="prod.id"
               @click="Selected(prod)"
             >
               <hr>
-              <!-- <hr v-if="inputOBJ.generalInfo.productView=='Grid' && index>3"> -->
+              <!-- <hr v-if="moduleProps.productView=='Grid' && index>3"> -->
               <div
                 class="prodImg col"
-                :class="inputOBJ.generalInfo.productView=='Grid'?'s4 m12':'s4 m3'"
+                :class="moduleProps.productView=='Grid'?'s4 m12':'s4 m3'"
                 :style="{'background-image': 'url(' + './img/'+prod.imgArr[0].imgSrc+ ')'}"
               >
                 <!-- <img :src="'./img/'+prod.img"> -->
               </div>
-              <div class="col" :class="inputOBJ.generalInfo.productView=='Grid'?'s8 m12':'s8 m9'">
+              <div class="col" :class="moduleProps.productView=='Grid'?'s8 m12':'s8 m9'">
                 <div class="ProdLbl" v-html="prod.lbl"></div>
                 <div v-html="prod.by"></div>
                 <div>
-                  <stars v-if="prod.rating != null" :rating="prod.rating"></stars>&nbsp;
+                  <stars
+                    v-if="prod.rating != null"
+                    :rating="prod.rating"
+                    :moduleProps="moduleProps"
+                  ></stars>&nbsp;
                   <span v-html="prod.reviews"></span>
                 </div>
 
                 <div v-html="prod.addInf1"></div>
                 <div class="prodPrice">
-                  <span v-if="inputOBJ.generalInfo.currecySide=='left'">
-                    <sup v-html="inputOBJ.generalInfo.currency"></sup>
+                  <span v-if="general_texts.currecySide=='left'">
+                    <sup v-html="general_texts.currency"></sup>
                   </span>
                   <span v-if="prod.price.toString().indexOf('.')>-1">
                     <span v-html="prod.price.toString().split('.')[0]"></span>
                     <sup class="suprascript" v-html="prod.price.toString().split('.')[1]"></sup>
                   </span>
                   <span v-else v-html="prod.price"></span>
-                  <span v-if="inputOBJ.generalInfo.currecySide=='right'">
-                    <sup v-html="inputOBJ.generalInfo.currency"></sup>
+                  <span v-if="general_texts.currecySide=='right'">
+                    <sup v-html="general_texts.currency"></sup>
                   </span>
                 </div>
 
@@ -120,62 +127,53 @@ export default {
     filterComp
   },
   props: {
-    texts: Object,
+    general_texts: Object,
     Prods: Array,
     SponsoredProdId: Number,
-    inputOBJ: Object,
-    cFilters: Object
+    texts: Object,
+    cFilters: Object,
+    moduleProps: Object
   },
   data() {
     return {
-      show_banner: this.inputOBJ.generalInfo.show_banner,
-      SortArr:[
-        {lbl:"Best Sellers",param:"selNum",ordr:1,type:"str"},
-        {lbl:"Price: Low to High",param:"price",type:"num",ordr:1},
-        {lbl:"Price: High to Low",param:"price",type:"num",ordr:-1},
-        {lbl:"A-Z",param:"lbl",type:"str",ordr:1},
-        {lbl:"Z-A",param:"lbl",type:"str",ordr:-1},
-      ],
-      SortBy:null//this.SortArr[0]
+      show_banner: this.moduleProps.show_banner,
+      SortArr: this.texts.filters.SortArr,
+      SortBy: null //this.SortArr[0]
     };
   },
 
   created() {
     window.scrollTo(0, 0);
-    this.SortBy=this.SortArr[0]
-
+    this.SortBy = this.SortArr[0];
   },
   // mounted(){
   //   $('.dropdown-trigger').dropdown();
   // },
   computed: {
-    
-    productsArr(){
-      let Fparam=this.SortBy.param
-      let fOrd=this.SortBy.ordr
+    productsArr() {
+      let Fparam = this.SortBy.param;
+      let fOrd = this.SortBy.ordr;
 
-      function compareLBL(a, b){
+      function compareLBL(a, b) {
         // debugger
         if (a[Fparam] > b[Fparam]) return fOrd;
-        if (a[Fparam] < b[Fparam]) return -1*fOrd;
+        if (a[Fparam] < b[Fparam]) return -1 * fOrd;
         return 0;
       }
-      function compareNMB(a, b){
-        
+      function compareNMB(a, b) {
         if (parseFloat(a[Fparam]) > parseFloat(b[Fparam])) return fOrd;
-        if (parseFloat(a[Fparam]) < parseFloat(b[Fparam])) return -1*fOrd;
+        if (parseFloat(a[Fparam]) < parseFloat(b[Fparam])) return -1 * fOrd;
         return 0;
-      }    
-      
-      if(this.SortBy.lbl!="Bestf Sellers"){ 
-        if (this.SortBy.type=="str") {
-          return this.Prods.sort(compareLBL)
-        }else{
-          return this.Prods.sort(compareNMB)
+      }
+
+      if (this.SortBy.lbl != "Bestf Sellers") {
+        if (this.SortBy.type == "str") {
+          return this.Prods.sort(compareLBL);
+        } else {
+          return this.Prods.sort(compareNMB);
         }
-       
-      }else{
-        return this.Prods
+      } else {
+        return this.Prods;
       }
     },
     prodFilterList() {
@@ -347,9 +345,9 @@ export default {
   background: lightcyan;
   min-height: 100px;
 }
-#SortDrop{
+#SortDrop {
   display: block;
-  float:right;
+  float: right;
   width: 200px;
   background: lightgray;
 }

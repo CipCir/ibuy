@@ -6,8 +6,8 @@
       </span>
     </div>
     <div class="row" style="padding-left:15px">
-      <h5>{{texts.cart.cartTitle}}</h5>
-      <div v-if="Cart.length==1">{{texts.cart.empty}}</div>
+      <h5>{{general_texts.cart.cartTitle}}</h5>
+      <div v-if="Cart.length==1">{{general_texts.cart.empty}}</div>
     </div>
     <div id="cartRow" class="row" v-if="Cart.length>1">
       <div
@@ -26,37 +26,37 @@
           <div class="ProdLbl" v-html="prod.lbl"></div>
           <div v-html="prod.by"></div>
           <div>
-            <stars v-if="prod.rating != null" :rating="prod.rating"></stars>&nbsp;
+            <stars v-if="prod.rating != null" :rating="prod.rating" :moduleProps="moduleProps"></stars>&nbsp;
             <span v-html="prod.reviews"></span>
           </div>
 
           <div v-html="prod.addInf1"></div>
           <!-- price -->
           <div class="prodPrice">
-            <span v-if="inputOBJ.generalInfo.currecySide=='left'">
-              <sup v-html="inputOBJ.generalInfo.currency"></sup>
+            <span v-if="general_texts.currecySide=='left'">
+              <sup v-html="general_texts.currency"></sup>
             </span>
             <span v-if="prod.price.toString().indexOf('.')>-1">
               <span v-html="prod.price.toString().split('.')[0]"></span>
               <sup class="suprascript" v-html="prod.price.toString().split('.')[1]"></sup>
             </span>
             <span v-else v-html="prod.price"></span>
-            <span v-if="inputOBJ.generalInfo.currecySide=='right'">
-              <sup v-html="inputOBJ.generalInfo.currency"></sup>
+            <span v-if="general_texts.currecySide=='right'">
+              <sup v-html="general_texts.currency"></sup>
             </span>
           </div>
           <!-- additional info -->
           <div v-html="prod.addInf2"></div>
           <!-- quantity -->
           <div>
-            {{texts.Quantity}}
+            {{general_texts.qty}}
             <select v-model="prod.quantity" @change="$emit('RCart')">
               <option v-for="n in 10" :key="n" :value="n">{{n}}</option>
             </select>
           </div>
           <!-- remove -->
           <div>
-            <span class="DelLbl" @click="DeleteProd(prod)">{{texts.Dlt}}</span>
+            <span class="DelLbl" @click="DeleteProd(prod)">{{general_texts.del}}</span>
           </div>
         </div>
       </div>
@@ -66,7 +66,7 @@
         <span
           id="CheckoutBtn"
           @click="$emit('updtLvl',{lvl:'Products'}),$emit('checkOut')"
-        >{{texts.cart.Checkout}}</span>
+        >{{general_texts.cart.checkout}}</span>
       </span>
     </div>
   </div>
@@ -81,9 +81,10 @@ export default {
     stars
   },
   props: {
-    texts: Object,
+    general_texts: Object,
     Cart: Array,
-    inputOBJ: Object
+    texts: Object,
+    moduleProps: Object
   },
   created() {
     window.scrollTo(0, 0);

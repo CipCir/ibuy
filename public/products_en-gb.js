@@ -11,7 +11,11 @@ var prodDB = {
         { type: "img", imgSrc: "R0.jpg" },
         { type: "img", imgSrc: "R1.jpg" },
         { type: "img", imgSrc: "R2.jpg" },
-        { type: "video", imgSrc: "vid_blank.jpg", videoSrc: "https://d1y6jrbzotnyjg.cloudfront.net/V3MSA/5b3f25ddb27b42a1a1ca9566e3b3e7f7/V1/4150ef4341f149d8a58cbb1da9ccb9c0/ShortForm-Generic-480p-16-9-1409173089793-rpcbe5.mp4?Expires=1555943691&Signature=UlLe5XisYlnDWZqvcxWzgwFunojH6hCGuOxzGtN8cp089WNUrp1Dt0iGIvQB-cECdRcANrram7zbajxbOFgYWCxYenFkr59aAJbL2f2hd4a93WsgN1PJFQm8FyHkc2WoDTlDo69lL99TjxQymiQD7NtyTuzGr4pYDVm2SBHdm1Q_&Key-Pair-Id=APKAJ62XWKZ35EOVO4XA" }
+        {
+          type: "video",
+          imgSrc: "vid_blank.jpg",
+          videoSrc: "http://techslides.com/demos/sample-videos/small.mp4"
+        }
       ],
       detailsImgArr: [
         "ProdDetailsCart_Mob.jpg",

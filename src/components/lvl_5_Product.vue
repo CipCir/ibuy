@@ -20,10 +20,14 @@
                 <span v-html="Prdct.by"></span>
               </div>
               <div>
-                <stars v-if="Prdct.rating != null" :rating="Prdct.rating"></stars>&nbsp;
+                <stars
+                  v-if="Prdct.rating != null"
+                  :rating="Prdct.rating"
+                  :moduleProps="moduleProps"
+                ></stars>&nbsp;
                 <span class="lowTxt">
                   <span v-html="Prdct.reviews"></span>&nbsp;
-                  <span v-html="texts.CustmrsRev"></span>
+                  <span v-html="general_texts.customRev"></span>
                 </span>
               </div>
             </div>
@@ -84,11 +88,18 @@
           <!-- cart container -->
           <div id="cartCont" class="col s12 m4 l3">
             <div class="row center-align">
-              <span class="lowTxt" v-html="texts.price"></span> :
-              <span class="prodPrice">{{inputOBJ.generalInfo.currency}} {{Prdct.price}}</span>
+              <span class="lowTxt" v-html="general_texts.price"></span> :
+              <span class="prodPrice">
+                <span v-if="general_texts.currecySide=='left'" v-html="general_texts.currency"></span>
+                {{Prdct.price}}
+                <span
+                  v-if="general_texts.currecySide=='right'"
+                  v-html="general_texts.currency"
+                ></span>
+              </span>
             </div>
             <div class="row center-align">
-              Quantity
+              {{general_texts.qty}}
               <select v-model="quantity">
                 <option v-for="n in 10" :key="n" :value="n">{{n}}</option>
               </select>
@@ -149,7 +160,7 @@
             </video>
           </div>
         </div>
-         <!-- thumbs -->
+        <!-- thumbs -->
         <div id="tumbContMob" class="row s12 center-align noMargin">
           <div
             v-for="(thumb,ind) in Prdct.imgArr"
@@ -175,15 +186,15 @@ export default {
     stars
   },
   props: {
-    texts: Object,
+    general_texts: Object,
     Prdct: Object,
-    inputOBJ: Object
+    texts: Object,
+    moduleProps: Object
   },
   data() {
     return {
       quantity: 1,
-      PrdImg: this.Prdct.imgArr[0],
-    
+      PrdImg: this.Prdct.imgArr[0]
     };
   },
   created() {
@@ -193,7 +204,7 @@ export default {
     // $(".modal").modal();
     var onModalClose = function() {
       // alert("Modal closed!");
-      if ($("video").length){      
+      if ($("video").length) {
         $("video")[0].pause();
       }
     };
@@ -229,10 +240,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-#ProdMediaCont{
+#ProdMediaCont {
   height: 100%;
   display: flex;
-  align-items: center
+  align-items: center;
 }
 .modal-content {
   height: 90%;
@@ -263,7 +274,7 @@ export default {
   /* border: 1px solid blue; */
 }
 /* phone view */
-@media (max-height: 600px)  {
+@media (max-height: 600px) {
   #modalVideo,
   #modalImage {
     max-height: 60vh;
@@ -443,8 +454,8 @@ select {
   border-color: #a88734 #9c7e31 #846a29;
   background: linear-gradient(to bottom, #f5d78e, #eeb933);
 }
-.reviews{
-  font-size: 10px
+.reviews {
+  font-size: 10px;
 }
 </style>
 

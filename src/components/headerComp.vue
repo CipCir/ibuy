@@ -23,15 +23,14 @@
       >
         <div
           class="col s2 searchbar valign-wrapper"
-          v-html="texts.search_all_text"
+          v-html="header_texts.search_all_text"
           v-bind:style="{'background-color':search_color1}"
         ></div>
         <div
           class="col s12 searchbar valign-wrapper"
           v-bind:style="{'background-color':search_color2}"
-        >
-          <input type="text" id="search_txt" disabled :placeholder="texts.placeholder_search">
-        </div>
+          v-html="header_texts.placeholder_search"
+        ></div>
         <div
           class="col s2 searchbar valign-wrapper"
           v-bind:style="{'background-color':search_color3}"
@@ -42,24 +41,24 @@
       <div
         class="col hide-on-med-and-down l3 right right-align"
         v-bind:style="{'background-color':header_bk_color}"
-        v-html="texts.opt0"
+        v-html="header_texts.opt0"
       ></div>
     </div>
     <div class="row_header_second row" v-bind:style="{'background-color':header_bk_color}">
       <div
         class="col hide-on-small-only m3 l3 white_space_pre"
         v-bind:style="{'background-color':header_bk_color}"
-        v-html="texts.opt1"
+        v-html="header_texts.opt1"
       ></div>
       <div
         class="col hide-on-small-only m7 l6 white_space_pre forced_line"
         v-bind:style="{'background-color':header_bk_color}"
-        v-html="texts.opt2"
+        v-html="header_texts.opt2"
       ></div>
       <div
         class="col hide-on-med-and-down l2 white_space_pre"
         v-bind:style="{'background-color':header_bk_color}"
-        v-html="texts.opt3"
+        v-html="header_texts.opt3"
       ></div>
       <div
         class="col hide-on-small-only m1 l1 valign-wrapper cart_container right clickable"
@@ -77,46 +76,23 @@
 export default {
   name: "headerComp",
   props: {
-    skin: String,
     skinProps: Object,
-    texts: Object,
-    nr_cart: Number
+    nr_cart: Number,
+    moduleProps: Object,
+    header_texts: Object
   },
   data() {
     return {
-      logo_img: "",
-      header_bk_color: "",
-      show_search: false,
-      search_color1: "",
-      search_color2: "",
-      search_color3: "",
-      cart_color: ""
+      show_search: this.moduleProps.show_search,
+      header_bk_color: this.skinProps.header.header_bk_color,
+      logo_img: this.header_texts.logo_img,
+      search_color1: this.skinProps.header.search_color1,
+      search_color2: this.skinProps.header.search_color2,
+      search_color3: this.skinProps.header.search_color3,
+      cart_color: this.skinProps.header.cart_color
     };
   },
-  mounted() {
-    switch (this.skin) {
-      case "Amazon":
-        // console.log("Amazon");
-        this.logo_img = "./img/amazon_logo_150x50.png";
-        this.header_bk_color = "#233040";
-        this.show_search = true;
-        this.cart_color = "white";
-        this.search_color1 = "#f3f3f3";
-        this.search_color2 = "white";
-        this.search_color3 = "#febd69";
-        break;
-      default:
-        // console.log("Custom");
-        this.logo_img = this.skinProps.logo_img;
-        this.header_bk_color = this.skinProps.header_bk_color;
-        this.show_search = this.skinProps.show_search;
-        this.cart_color = this.skinProps.cart_color;
-        this.search_color1 = this.skinProps.search_header_bk_color1;
-        this.search_color2 = this.skinProps.search_header_bk_color2;
-        this.search_color3 = this.skinProps.search_header_bk_color3;
-        break;
-    }
-  },
+  mounted() {},
   methods: {
     UpdateLvl() {
       this.$emit("updtLvl", { lvl: "Cart" });
@@ -149,9 +125,7 @@ export default {
   user-select: none;
   margin: 0px;
 }
-#search_txt:focus {
-  box-shadow: none;
-}
+
 .searchbar {
   height: 40px;
   margin-top: 5px;
@@ -165,6 +139,9 @@ export default {
 
 .searchbar:nth-child(2) {
   border: 1px solid darkgray;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .searchbar:last-child {
   width: 50px;

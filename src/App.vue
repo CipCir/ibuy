@@ -1,22 +1,22 @@
 <template>
-  <div id="app" v-bind:style="{'background-color':inputObj.generalInfo.body_bk_color}">
+  <div id="app" v-bind:style="{'background-color':skinProps.body_bk_color}">
     <headerComp
-      :texts="inputObj.texts.Header"
-      :skin="inputObj.generalInfo.skin"
-      :skinProps="inputObj.generalInfo.skinProps"
+      :moduleProps="moduleProps"
+      :skinProps="skinProps"
+      :header_texts="texts.header"
       :nr_cart="cartNumb"
       v-on:updtLvl="UpdateLvl($event)"
     />
     <!-- <lvlMain
       v-if="controls.showLevel=='Main'"
-      :texts="inputObj.texts.lvl_Main"
+      :texts="texts.texts.lvl_Main"
       :prods="prodDB"
       v-on:setCateg="SetCategory($event)"
       v-on:updtLvl="UpdateLvl($event)"
     />
     <lvlAisle
       v-if="controls.showLevel=='Aisle'"
-      :texts="inputObj.texts.lvl_Aisle"
+      :texts="texts.texts.lvl_Aisle"
       :Aisles="prodDB.AisleCat"
       :SelCatId="controls.selected1_Cat.id"
       v-on:setAisleCat="SetAisleCat($event)"
@@ -24,7 +24,7 @@
     />
     <lvlShelf
       v-if="controls.showLevel=='Shelf'"
-      :texts="inputObj.texts.lvl_Shelf"
+      :texts="texts.texts.lvl_Shelf"
       :Shelfs="prodDB.ShelfCat"
       :SelAisleId="controls.selected2_AisleCat.id"
       v-on:selShelf="SetShelfCat($event)"
@@ -32,47 +32,45 @@
     />-->
     <lvlProds
       v-if="controls.showLevel=='Products'"
-      :texts="inputObj.texts.lvl_Prod"
+      :general_texts="texts.general_texts"
       :Prods="prodDB.Products"
       :SelShelfId="controls.selected3_ShelfCat"
-      :inputOBJ="inputObj"
+      :texts="texts"
       :cFilters="controls.filters"
       :SponsoredProdId="prodDB.SponsoredProdId"
       v-on:selProd="SetPrdct($event)"
       v-on:updtLvl="UpdateLvl($event)"
       v-on:updFilter="UpdateFilters($event)"
+      :moduleProps="moduleProps"
     />
     <lvlPrdct
       v-if="controls.showLevel=='Prdct'"
-      :texts="inputObj.texts"
+      :general_texts="texts.general_texts"
       :Prdct="controls.sel_Prdct"
-      :inputOBJ="inputObj"
+      :texts="texts"
       v-on:addInCart="AddProdInCart($event)"
       v-on:updtLvl="UpdateLvl($event)"
+      :moduleProps="moduleProps"
     />
     <lvlCart
       v-if="controls.showLevel=='Cart'"
-      :texts="inputObj.texts"
+      :general_texts="texts.general_texts"
       :Cart="cart"
-      :inputOBJ="inputObj"
+      :texts="texts"
       v-on:addInCart="AddProdInCart($event)"
       v-on:updtLvl="UpdateLvl($event)"
       v-on:remProd="DeleteProdCart($event)"
       v-on:checkOut="CheckOut()"
       v-on:RCart="RefreshCart()"
+      :moduleProps="moduleProps"
     />
 
-    <footerComp
-      :skin="inputObj.generalInfo.skin"
-      :skinProps="inputObj.generalInfo.skinProps"
-      :texts="inputObj.texts.Footer"
-    />
+    <footerComp :moduleProps="moduleProps" :skinProps="skinProps" :footer_texts="texts.footer"/>
   </div>
 </template>
 
 <script>
 import headerComp from "./components/headerComp.vue";
-
 // import lvlMain from "./components/lvl_1_Main.vue";
 // import lvlAisle from "./components/lvl_2_Aisle.vue";
 // import lvlShelf from "./components/lvl_3_Shelf.vue";
@@ -96,7 +94,9 @@ export default {
   },
   data() {
     return {
-      inputObj,
+      texts,
+      moduleProps,
+      skinProps,
       prodDB,
       output: {},
       controls: {
@@ -208,10 +208,9 @@ export default {
       // }
       // return this.cart.map(item => item.quantity).reduce((total, amount) => total + amount);
     }
-
   }
   // created(){
-  //   console.log(inputObj)
+  //   console.log(texts)
   // }
 };
 </script>

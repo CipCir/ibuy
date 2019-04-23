@@ -10,14 +10,15 @@
 export default {
   name: "stars",
   props: {
-    rating: Number
+    rating: Number,
+    moduleProps: Object
   },
   data() {
     return {
       fullstars: 0,
       halfstars: 0,
       remaining: 0,
-      maxStars: 5
+      maxStars: moduleProps.ratingMaxVal
     };
   },
   mounted() {
