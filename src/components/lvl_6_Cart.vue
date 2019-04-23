@@ -65,6 +65,7 @@
       <span id="CheckoutCol" class="col s12 m5 l3">
         <span
           id="CheckoutBtn"
+          :style="skinProps.LayoutProps.checkout_btn"
           @click="$emit('updtLvl',{lvl:'Products'}),$emit('checkOut')"
         >{{general_texts.cart.checkout}}</span>
       </span>
@@ -82,7 +83,7 @@ export default {
   },
   props: {
     general_texts: Object,
-    prodMediaPath:String,
+    prodMediaPath: String,
     Cart: Array,
     texts: Object,
     skinProps: Object
@@ -210,9 +211,9 @@ select {
 #CheckoutBtn {
   width: 100%;
   padding: 5px;
-  background: #f0c14b;
+  /* background: #f0c14b; */
   /* border-color: #a88734 #9c7e31 #846a29; */
-  border-color: #ca7c1b #be751a #a56616;
+  /* border-color: #ca7c1b #be751a #a56616; */
   /* background: linear-gradient(to bottom, #f7dfa5, #f0c14b); */
   color: #111;
   border-radius: 3px;
@@ -224,8 +225,8 @@ select {
   text-decoration: none !important;
   vertical-align: middle;
 }
-#CheckoutBtn:hover {
+/* #CheckoutBtn:hover {
   border-color: #a88734 #9c7e31 #846a29;
   background: linear-gradient(to bottom, #f5d78e, #eeb933);
-}
+} */
 </style>

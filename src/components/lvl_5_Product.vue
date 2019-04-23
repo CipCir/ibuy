@@ -2,10 +2,18 @@
   <div id="lvl_Main" class="lvl_container">
     <div id="navRow" class="row">
       <span class="left">
-        <span class="btn orange" @click="$emit('updtLvl',{lvl:'Products'})">back to results</span>
+        <span
+          class="btn"
+          :class="skinProps.LayoutProps.nav_buttons_class"
+          @click="$emit('updtLvl',{lvl:'Products'})"
+        >back to results</span>
       </span>
       <span class="right">
-        <span class="btn orange" @click="$emit('updtLvl',{lvl:'Cart'})">go to checkout</span>
+        <span
+          class="btn"
+          :class="skinProps.LayoutProps.nav_buttons_class"
+          @click="$emit('updtLvl',{lvl:'Cart'})"
+        >go to checkout</span>
       </span>
     </div>
     <div id="prodctCont" class="row">
@@ -20,11 +28,7 @@
                 <span v-html="Prdct.by"></span>
               </div>
               <div>
-                <stars
-                  v-if="Prdct.rating != null"
-                  :rating="Prdct.rating"
-                  :skinProps="skinProps"
-                ></stars>&nbsp;
+                <stars v-if="Prdct.rating != null" :rating="Prdct.rating" :skinProps="skinProps"></stars>&nbsp;
                 <span class="lowTxt">
                   <span v-html="Prdct.reviews"></span>&nbsp;
                   <span v-html="general_texts.customRev"></span>
@@ -105,7 +109,11 @@
               </select>
             </div>
             <div class="row center-align">
-              <div class="addCart" @click="addToCart()">Add to Cart</div>
+              <div
+                class="addCart"
+                @click="addToCart()"
+                :style="skinProps.LayoutProps.cart_btn"
+              >Add to Cart</div>
             </div>
             <div class="row center-align">
               <img :src="prodMediaPath+Prdct.sponsorImg" alt>
@@ -152,7 +160,11 @@
       <div class="modal-content">
         <div id="ProdMediaCont" class="row">
           <div id="modalImageContainer" v-if="PrdImg.type=='img'">
-            <img id="modalImage" :src="prodMediaPath+PrdImg.imgSrc" alt="product image enlarged here">
+            <img
+              id="modalImage"
+              :src="prodMediaPath+PrdImg.imgSrc"
+              alt="product image enlarged here"
+            >
           </div>
           <div id="modalVideoContainer" v-if="PrdImg.type=='video'">
             <video id="modalVideo" controls>
@@ -187,7 +199,7 @@ export default {
   },
   props: {
     general_texts: Object,
-    prodMediaPath:String,
+    prodMediaPath: String,
     Prdct: Object,
     texts: Object,
     skinProps: Object
@@ -446,15 +458,15 @@ select {
   border-radius: 3px;
   border-style: solid;
   border-width: 1px;
-  border-color: #ca7c1b #be751a #a56616;
-  background: linear-gradient(to bottom, #f7dfa5, #f0c14b);
+  /* border-color: #ca7c1b #be751a #a56616;
+  background: linear-gradient(to bottom, #f7dfa5, #f0c14b); */
   text-align: center;
   text-decoration: none !important;
 }
-.addCart:hover {
+/* .addCart:hover {
   border-color: #a88734 #9c7e31 #846a29;
   background: linear-gradient(to bottom, #f5d78e, #eeb933);
-}
+} */
 .reviews {
   font-size: 10px;
 }

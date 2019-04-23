@@ -1,13 +1,16 @@
-
 var skinProps = {
-  LayoutProps : {
+  LayoutProps: {
     show_search: true,
     show_bk_to_top: true,
     show_footer_text: true,
     show_footer_image: true,
     show_banner: true,
     ratingMaxVal: 5,
-    productView: "Grid" //"Grid" "List"
+    productView: "Grid", //"Grid" "List",
+    nav_buttons_class: "orange white-text",
+    cart_btn:
+      "border-color: #ca7c1b #be751a #a56616;background:linear-gradient(to bottom, #f7dfa5, #f0c14b);",
+    checkout_btn: "border-color: #ca7c1b #be751a #a56616;background:#f0c14b;"
   },
   header: {
     header_bk_color: "#233040",
