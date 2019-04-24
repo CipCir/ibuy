@@ -329,6 +329,8 @@ export default {
 
 	margin-left: 10px;
 	margin-right: 10px;
+	height: 30px;
+	padding: 0px;
 }
 #sortContainer {
 	margin-top: 10px;

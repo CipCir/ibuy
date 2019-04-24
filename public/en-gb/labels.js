@@ -54,7 +54,8 @@ var texts = {
 		},
 		btn: {
 			bckResults: 'back to results',
-			gtCheckout: 'go to checkout'
+			gtCheckout: 'go to checkout',
+			addCart: 'Add to Cart'
 		}
 	},
 	filters: {
