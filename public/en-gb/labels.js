@@ -61,7 +61,7 @@ var texts = {
       { lbl: "10.50 - 15", val: "10.50#15" }
     ],
     SortArr: [
-      { lbl: "Best Sellers", param: "selNum", ordr: 1, type: "str" },
+      { lbl: "Best Sellers", param: "id", ordr: 1, type: "num" },
       { lbl: "Price: Low to High", param: "price", type: "num", ordr: 1 },
       { lbl: "Price: High to Low", param: "price", type: "num", ordr: -1 },
       { lbl: "A-Z", param: "lbl", type: "str", ordr: 1 },

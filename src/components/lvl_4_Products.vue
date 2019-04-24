@@ -167,15 +167,15 @@ export default {
         return 0;
       }
 
-      if (this.SortBy.lbl != "Bestf Sellers") {
+      // if (this.SortBy.lbl != "Bestf Sellers") {
         if (this.SortBy.type == "str") {
           return this.Prods.sort(compareLBL);
         } else {
           return this.Prods.sort(compareNMB);
         }
-      } else {
-        return this.Prods;
-      }
+      // } else {
+      //   return this.Prods;
+      // }
     },
     prodFilterList() {
       var vueObj = this;
