@@ -136,15 +136,15 @@
                 @click="addToCart()"
                 :style="skinProps.LayoutProps.cart_btn"
               >
-                Add to Cart
+                {{general_texts.btn.addCart}}
               </div>
             </div>
             <div class="row center-align">
               <img :src="prodMediaPath+Prdct.sponsorImg" alt />
-            </div>           
+            </div>
           </div>
         </div>
-        <!-- under the products -->        
+        <!-- under the products -->
         <div id="BtmProdCont" class="row">
           <img
             class="btm_img show-on-small"
@@ -173,7 +173,7 @@
     <!-- modal -->
     <div id="modal1" class="modal">
       <div class="header_container">
-        <span class="modal-close close_modal_btn">X</span>        
+        <span class="modal-close close_modal_btn">X</span>
       </div>
       <div class="modal-content">
         <div id="ProdMediaCont" class="row">
@@ -234,7 +234,7 @@ export default {
     window.scrollTo(0, 0);
   },
   mounted() {
-    
+
     var onModalClose = function() {
       // alert("Modal closed!");
       if ($("video").length) {
@@ -248,7 +248,7 @@ export default {
     });
   },
   methods: {
-    addToCart() {      
+    addToCart() {
       this.$emit("addInCart", this.quantity);
       this.$emit("updtLvl", { lvl: "Products" });
     },
@@ -297,13 +297,13 @@ export default {
   max-width: 100%;
   max-height: 70vh;
   display: block;
-  margin: 0 auto;  
+  margin: 0 auto;
 }
 /* phone view */
 @media (max-height: 600px) {
   #modalVideo,
   #modalImage {
-    max-height: 60vh;    
+    max-height: 60vh;
   }
 }
 
@@ -329,7 +329,7 @@ export default {
 #mainImgContMob {
   padding: 0px;
 }
-.navContainer {  
+.navContainer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -337,7 +337,7 @@ export default {
   user-select: none;
 }
 #ProdImgContMob {
-  display: flex;  
+  display: flex;
 }
 #ProdImgCont,
 #ProdImgContMob {
@@ -365,14 +365,14 @@ export default {
   max-width: 100%;
   /* display: none; */
 }
-.selected {  
-  box-shadow: 0 0 3px 2px rgba(228, 121, 17, 0.5);  
+.selected {
+  box-shadow: 0 0 3px 2px rgba(228, 121, 17, 0.5);
 }
 .extraCol {
   display: none;
 }
 #PrdSplitCont {
-  padding: 3px;  
+  padding: 3px;
 }
 @media only screen and (min-width: 601px) {
   #PrdSplitCont {
@@ -384,7 +384,7 @@ export default {
   align-items: flex-start;
 }
 #tumbCont {
-  display: flex;  
+  display: flex;
   flex-wrap: wrap;
   width: 110px;
 }
@@ -392,7 +392,7 @@ export default {
   width: 100%;
 }
 .tumbImg {
-  display: flex;  
+  display: flex;
   margin: 4px;
   height: 50px;
   justify-content: center;
@@ -433,7 +433,7 @@ export default {
 
 #cartCont {
   padding-left: 5px;
-  box-shadow: -4px 0px 3px -2px #ccc;  
+  box-shadow: -4px 0px 3px -2px #ccc;
 }
 select {
   display: inline-block;
@@ -456,7 +456,7 @@ select {
   text-align: center;
   border-radius: 3px;
   border-style: solid;
-  border-width: 1px;  
+  border-width: 1px;
   text-align: center;
   text-decoration: none !important;
 }
