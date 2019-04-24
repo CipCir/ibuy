@@ -6,14 +6,16 @@
           class="btn"
           :class="skinProps.LayoutProps.nav_buttons_class"
           @click="$emit('updtLvl',{lvl:'Products'})"
-        >back to results</span>
+          >{{general_texts.btn.bckResults}}</span
+        >
       </span>
       <span class="right">
         <span
           class="btn"
           :class="skinProps.LayoutProps.nav_buttons_class"
           @click="$emit('updtLvl',{lvl:'Cart'})"
-        >go to checkout</span>
+          >{{general_texts.btn.gtCheckout}}</span
+        >
       </span>
     </div>
     <div id="prodctCont" class="row">
@@ -28,7 +30,13 @@
                 <span v-html="Prdct.by"></span>
               </div>
               <div>
-                <stars v-if="Prdct.rating != null" :rating="Prdct.rating" :skinProps="skinProps"></stars>&nbsp;
+                <stars
+                  v-if="Prdct.rating != null"
+                  :rating="Prdct.rating"
+                  :skinProps="skinProps"
+                >
+                </stars
+                >&nbsp;
                 <span class="lowTxt">
                   <span v-html="Prdct.reviews"></span>&nbsp;
                   <span v-html="general_texts.customRev"></span>
@@ -44,9 +52,16 @@
                 <div class="col s2 navContainer" @click="slideImg(-1)">
                   <i class="medium material-icons">chevron_left</i>
                 </div>
-                <div id="mainImgContMob" class="col s8 center-align" @click="imageClicked()">
+                <div
+                  id="mainImgContMob"
+                  class="col s8 center-align"
+                  @click="imageClicked()"
+                >
                   <div>
-                    <img class="ProdImgMob" :src="prodMediaPath+PrdImg.imgSrc">
+                    <img
+                      class="ProdImgMob"
+                      :src="prodMediaPath+PrdImg.imgSrc"
+                    />
                   </div>
                 </div>
                 <div class="col s2 navContainer" @click="slideImg(1)">
@@ -62,7 +77,7 @@
                   :class="{'selected':PrdImg==thumb}"
                   @click="PrdImg=thumb"
                 >
-                  <img :src="prodMediaPath+thumb.imgSrc">
+                  <img :src="prodMediaPath+thumb.imgSrc" />
                 </div>
               </div>
             </div>
@@ -78,13 +93,17 @@
                   :class="{'selected':PrdImg==thumb}"
                   @click="PrdImg=thumb"
                 >
-                  <img :src="prodMediaPath+thumb.imgSrc">
+                  <img :src="prodMediaPath+thumb.imgSrc" />
                 </div>
               </div>
               <!-- main img -->
-              <div id="mainImgCont" class="center-align clickable" @click="imageClicked()">
+              <div
+                id="mainImgCont"
+                class="center-align clickable"
+                @click="imageClicked()"
+              >
                 <div class="prodImg">
-                  <img id="img_displayed" :src="prodMediaPath+PrdImg.imgSrc">
+                  <img id="img_displayed" :src="prodMediaPath+PrdImg.imgSrc" />
                 </div>
               </div>
             </div>
@@ -94,8 +113,11 @@
             <div class="row center-align">
               <span class="lowTxt" v-html="general_texts.price"></span> :
               <span class="prodPrice">
-                <span v-if="general_texts.currecySide=='left'" v-html="general_texts.currency"></span>
-                {{Prdct.price}}
+                <span
+                  v-if="general_texts.currecySide=='left'"
+                  v-html="general_texts.currency"
+                ></span>
+                {{ Prdct.price }}
                 <span
                   v-if="general_texts.currecySide=='right'"
                   v-html="general_texts.currency"
@@ -103,9 +125,9 @@
               </span>
             </div>
             <div class="row center-align">
-              {{general_texts.qty}}
+              {{ general_texts.qty }}
               <select v-model="quantity">
-                <option v-for="n in 10" :key="n" :value="n">{{n}}</option>
+                <option v-for="n in 10" :key="n" :value="n">{{ n }}</option>
               </select>
             </div>
             <div class="row center-align">
@@ -113,40 +135,37 @@
                 class="addCart"
                 @click="addToCart()"
                 :style="skinProps.LayoutProps.cart_btn"
-              >Add to Cart</div>
+              >
+                Add to Cart
+              </div>
             </div>
             <div class="row center-align">
-              <img :src="prodMediaPath+Prdct.sponsorImg" alt>
-            </div>
-
-            <!-- <div v-html="Prdct.addInf2"></div> -->
+              <img :src="prodMediaPath+Prdct.sponsorImg" alt />
+            </div>           
           </div>
         </div>
-        <!-- under the products -->
-        <!-- <div id="BtmProdCont" class="row">
-          <img :src="'./img/ProdDetailsCart.jpg'" alt>
-        </div>-->
+        <!-- under the products -->        
         <div id="BtmProdCont" class="row">
           <img
             class="btm_img show-on-small"
             :src="prodMediaPath+Prdct.detailsImgArr[0]"
             alt="additional image 1 here"
-          >
+          />
           <img
             class="btm_img show-on-medium"
             :src="prodMediaPath+Prdct.detailsImgArr[1]"
             alt="additional image 2 here"
-          >
+          />
           <img
             class="btm_img show-on-large"
             :src="prodMediaPath+Prdct.detailsImgArr[2]"
             alt="additional image 3 here"
-          >
+          />
           <img
             class="btm_img show-on-extra-large"
             :src="prodMediaPath+Prdct.detailsImgArr[3]"
             alt="additional image 4 here"
-          >
+          />
         </div>
       </div>
       <div class="col xl1 extraCol show-on-extra-large"></div>
@@ -154,8 +173,7 @@
     <!-- modal -->
     <div id="modal1" class="modal">
       <div class="header_container">
-        <span class="modal-close close_modal_btn">X</span>
-        <!-- <div class="modal-close close_modal_btn">X</div> -->
+        <span class="modal-close close_modal_btn">X</span>        
       </div>
       <div class="modal-content">
         <div id="ProdMediaCont" class="row">
@@ -164,11 +182,12 @@
               id="modalImage"
               :src="prodMediaPath+PrdImg.imgSrc"
               alt="product image enlarged here"
-            >
+            />
           </div>
           <div id="modalVideoContainer" v-if="PrdImg.type=='video'">
             <video id="modalVideo" controls>
-              <source :src="PrdImg.videoSrc" type="video/mp4">Your browser does not support the video tag.
+              <source :src="PrdImg.videoSrc" type="video/mp4" />
+              Your browser does not support the video tag.
             </video>
           </div>
         </div>
@@ -181,13 +200,14 @@
             :class="{'selected':PrdImg==thumb}"
             @click="PrdImg=thumb"
           >
-            <img :src="prodMediaPath+thumb.imgSrc">
+            <img :src="prodMediaPath+thumb.imgSrc" />
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 
 <script>
 import stars from "./stars.vue";
@@ -214,7 +234,7 @@ export default {
     window.scrollTo(0, 0);
   },
   mounted() {
-    // $(".modal").modal();
+    
     var onModalClose = function() {
       // alert("Modal closed!");
       if ($("video").length) {
@@ -228,10 +248,7 @@ export default {
     });
   },
   methods: {
-    addToCart() {
-      // if (prod.prods.length==0){
-      // return false;
-      // }
+    addToCart() {      
       this.$emit("addInCart", this.quantity);
       this.$emit("updtLvl", { lvl: "Products" });
     },
@@ -274,30 +291,22 @@ export default {
   bottom: 5vh;
   overflow: hidden;
 }
-/* #modalVideoContainer,
-#modalImageContainer {
-  border: 1px solid red;
-} */
+
 #modalVideo,
 #modalImage {
   max-width: 100%;
   max-height: 70vh;
   display: block;
-  margin: 0 auto;
-  /* border: 1px solid blue; */
+  margin: 0 auto;  
 }
 /* phone view */
 @media (max-height: 600px) {
   #modalVideo,
   #modalImage {
-    max-height: 60vh;
-    /* border: 1px solid red; */
+    max-height: 60vh;    
   }
 }
-/* #modalImage {
-  max-height: 80vh;
-  height: 80vh;
-} */
+
 .header_container {
   text-align: right;
   padding-right: 13px;
@@ -320,9 +329,7 @@ export default {
 #mainImgContMob {
   padding: 0px;
 }
-.navContainer {
-  /* margin: 0px 10px; */
-  /* background-color: #a88734; */
+.navContainer {  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -330,8 +337,7 @@ export default {
   user-select: none;
 }
 #ProdImgContMob {
-  display: flex;
-  /* align-items: center; */
+  display: flex;  
 }
 #ProdImgCont,
 #ProdImgContMob {
@@ -359,17 +365,14 @@ export default {
   max-width: 100%;
   /* display: none; */
 }
-.selected {
-  /* border: 1px solid red; */
-  box-shadow: 0 0 3px 2px rgba(228, 121, 17, 0.5);
-  /* background-color: #a2a6ac; */
+.selected {  
+  box-shadow: 0 0 3px 2px rgba(228, 121, 17, 0.5);  
 }
 .extraCol {
   display: none;
 }
 #PrdSplitCont {
-  padding: 3px;
-  /* border: 1px solid blue; */
+  padding: 3px;  
 }
 @media only screen and (min-width: 601px) {
   #PrdSplitCont {
@@ -381,8 +384,7 @@ export default {
   align-items: flex-start;
 }
 #tumbCont {
-  display: flex;
-  /* justify-content: flex-start;*/
+  display: flex;  
   flex-wrap: wrap;
   width: 110px;
 }
@@ -390,9 +392,7 @@ export default {
   width: 100%;
 }
 .tumbImg {
-  display: flex;
-  /* background: red; */
-  /* flex: 1 1 35%; */
+  display: flex;  
   margin: 4px;
   height: 50px;
   justify-content: center;
@@ -433,8 +433,7 @@ export default {
 
 #cartCont {
   padding-left: 5px;
-  box-shadow: -4px 0px 3px -2px #ccc;
-  /* border: 1px solid red; */
+  box-shadow: -4px 0px 3px -2px #ccc;  
 }
 select {
   display: inline-block;
@@ -457,9 +456,7 @@ select {
   text-align: center;
   border-radius: 3px;
   border-style: solid;
-  border-width: 1px;
-  /* border-color: #ca7c1b #be751a #a56616;
-  background: linear-gradient(to bottom, #f7dfa5, #f0c14b); */
+  border-width: 1px;  
   text-align: center;
   text-decoration: none !important;
 }

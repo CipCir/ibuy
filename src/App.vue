@@ -106,9 +106,9 @@ export default {
       output: {},
       controls: {
         showLevel: "Products", // "Main","Aisle","Shelf","Products","Prdct","Cart"
-        selected1_Cat: null,
-        selected2_AisleCat: null,
-        selected3_ShelfCat: null,
+        // selected1_Cat: null,
+        // selected2_AisleCat: null,
+        // selected3_ShelfCat: null,
         sel_Prdct: null,
         filters: {
           rating: null,
@@ -129,6 +129,7 @@ export default {
       }
     },
     CheckOut() {
+      //reset defaults
       this.cart = [{ id: -1, quantity: 0 }];
       this.cartSum = 0;
       this.controls.filters = {

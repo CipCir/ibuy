@@ -1,30 +1,23 @@
 <template>
-  <div id="footerComp" v-bind:style="{'background-color':footer_color}">
-    <div
-      id="bk_top"
-      v-if="show_bk_to_top"
-      class="row center clickable"
-      @click="back_to_top()"
-      v-html="backtotop_text"
-      v-bind:style="{'background-color':bk_top_color}"
-    ></div>
-    <div class="row" v-if="show_footer_text">
-      <div class="col center-align s6 m6 l4 xl3" v-html="footer_texts.col1"></div>
-      <div class="col center-align s6 m6 l4 xl3" v-html="footer_texts.col2"></div>
-      <div class="col center-align hide-on-med-and-down l4 xl3" v-html="footer_texts.col3"></div>
-      <div class="col center-align hide-on-large-and-down xl3" v-html="footer_texts.col4"></div>
+    <div id="footerComp" v-bind:style="{'background-color':skinProps.footer.footer_bk_color}">
+        <div id="bk_top" 
+          class="row center clickable" 
+          v-if="skinProps.LayoutProps.show_bk_to_top" 
+          @click="back_to_top()"
+          v-html="footer_texts.back_to_top" v-bind:style="{'background-color':skinProps.footer.bk_to_top_color}"></div>
+        <div class="row" v-if="skinProps.LayoutProps.show_footer_text">
+            <div class="col center-align s6 m6 l4 xl3" v-html="footer_texts.col1"></div>
+            <div class="col center-align s6 m6 l4 xl3" v-html="footer_texts.col2"></div>
+            <div class="col center-align hide-on-med-and-down l4 xl3" v-html="footer_texts.col3"></div>
+            <div class="col center-align hide-on-large-and-down xl3" v-html="footer_texts.col4"></div>
+        </div>
+        <div class="row footer_img_cont" v-if="skinProps.LayoutProps.show_footer_image">
+            <img class="footer_img show-on-small" :src="footer_texts.img1" alt="footer image 1 here">
+            <img class="footer_img show-on-medium" :src="footer_texts.img2" alt="footer image 2 here">
+            <img class="footer_img show-on-large" :src="footer_texts.img3" alt="footer image 3 here">
+            <img class="footer_img show-on-extra-large" :src="footer_texts.img4" alt="footer image 4 here">
+        </div>
     </div>
-    <div class="row footer_img_cont" v-if="show_footer_image">
-      <img class="footer_img show-on-small" :src="footer_texts.img1" alt="footer image 1 here">
-      <img class="footer_img show-on-medium" :src="footer_texts.img2" alt="footer image 2 here">
-      <img class="footer_img show-on-large" :src="footer_texts.img3" alt="footer image 3 here">
-      <img
-        class="footer_img show-on-extra-large"
-        :src="footer_texts.img4"
-        alt="footer image 4 here"
-      >
-    </div>
-  </div>
 </template>
 
 <script>
@@ -34,17 +27,6 @@ export default {
     skinProps: Object,
     footer_texts: Object,    
   },
-  data() {
-    return {
-      footer_color: this.skinProps.footer.footer_bk_color,
-      bk_top_color: this.skinProps.footer.bk_to_top_color,
-      backtotop_text: this.footer_texts.back_to_top,
-      show_bk_to_top: this.skinProps.LayoutProps.show_bk_to_top,
-      show_footer_text: this.skinProps.LayoutProps.show_footer_text,
-      show_footer_image: this.skinProps.LayoutProps.show_footer_image
-    };
-  },
-  mounted() {},
   methods: {
     back_to_top: function() {
       $("body,html").animate(
@@ -57,8 +39,6 @@ export default {
   }
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .footer_img_cont {
   width: 100%;
