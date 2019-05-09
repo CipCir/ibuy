@@ -1,11 +1,11 @@
 <template>
-  <div id="app" v-bind:style="{'background-color':skinProps.body_bk_color}">
-    <headerComp      
+  <div id="app" v-bind:style="{ 'background-color': skinProps.body_bk_color }">
+    <headerComp
       :skinProps="skinProps"
       :nr_cart="cartNumb"
-      :header_texts="texts.header"
-
+      :texts="texts"
       v-on:updtLvl="UpdateLvl($event)"
+      :voucherVal="setVoucher"
     />
     <!-- <lvlMain
       v-if="controls.showLevel=='Main'"
@@ -31,47 +31,54 @@
       v-on:updtLvl="UpdateLvl($event)"
     />-->
     <lvlProds
-      v-if="controls.showLevel=='Products'"
+      v-if="controls.showLevel == 'Products'"
       :general_texts="texts.general_texts"
       :Prods="prodDB.Products"
       :prodMediaPath="prodDB.prodMediaPath"
-      :SponsoredProdId="prodDB.SponsoredProdId"   
+      :SponsoredProdId="prodDB.SponsoredProdId"
       :texts="texts"
       :cFilters="controls.filters"
       :skinProps="skinProps"
-
       v-on:selProd="SetPrdct($event)"
       v-on:updtLvl="UpdateLvl($event)"
       v-on:updFilter="UpdateFilters($event)"
     />
     <lvlPrdct
-      v-if="controls.showLevel=='Prdct'"
+      v-if="controls.showLevel == 'Prdct'"
       :general_texts="texts.general_texts"
-      :prodMediaPath="prodDB.prodMediaPath"      
+      :prodMediaPath="prodDB.prodMediaPath"
       :Prdct="controls.sel_Prdct"
       :texts="texts"
       :skinProps="skinProps"
-
       v-on:addInCart="AddProdInCart($event)"
       v-on:updtLvl="UpdateLvl($event)"
     />
     <lvlCart
-      v-if="controls.showLevel=='Cart'"
+      v-if="controls.showLevel == 'Cart'"
       :general_texts="texts.general_texts"
       :prodMediaPath="prodDB.prodMediaPath"
       :Cart="cart"
       :texts="texts"
       :skinProps="skinProps"
-
       v-on:updtLvl="UpdateLvl($event)"
       v-on:remProd="DeleteProdCart($event)"
       v-on:RCart="RefreshCart()"
       v-on:checkOut="CheckOut()"
+      v-on:updVoucher="UpdateVoucher($event)"
+    />
+    <inputs
+      v-if="controls.showLevel == 'inputs'"
+      :skinProps="skinProps"
+      v-on:updtLvl="UpdateLvl($event)"
     />
 
-    <footerComp 
-      :skinProps="skinProps" 
-      :footer_texts="texts.footer"/>
+    <footerComp :skinProps="skinProps" :footer_texts="texts.footer" />
+
+    <a
+      class="waves-effect waves-light btn"
+      @click="controls.showLevel = 'inputs'"
+      ><i class="material-icons left">code</i>Show inputs</a
+    >
   </div>
 </template>
 
@@ -83,6 +90,7 @@ import headerComp from "./components/headerComp.vue";
 import lvlProds from "./components/lvl_4_Products.vue";
 import lvlPrdct from "./components/lvl_5_Product.vue";
 import lvlCart from "./components/lvl_6_Cart.vue";
+import inputs from "./components/xInputs.vue";
 
 import footerComp from "./components/footerComp.vue";
 
@@ -96,11 +104,12 @@ export default {
     // lvlShelf,
     lvlProds,
     lvlPrdct,
-    lvlCart
+    lvlCart,
+    inputs
   },
   data() {
     return {
-      texts,      
+      texts,
       skinProps,
       prodDB,
       output: {},
@@ -117,10 +126,19 @@ export default {
         }
       },
       cart: [{ id: -1, quantity: 0 }],
-      cartSum: 0
+      cartSum: 0,
+      voucher: null
     };
   },
-  methods: {    
+  mounted() {
+    if (this.skinProps.LayoutProps.hasVoucher) {
+      this.voucher = parseFloat(this.skinProps.LayoutProps.voucher).toFixed(2);
+    }
+  },
+  methods: {
+    UpdateVoucher(pay) {
+      this.voucher = pay;
+    },
     UpdateFilters(pay) {
       if (this.controls.filters[pay.fil] == pay.val) {
         this.controls.filters[pay.fil] = null;
@@ -160,6 +178,12 @@ export default {
       }
       // debugger
       this.cart.shift();
+      let cartSum = 0;
+      this.cart.forEach(prod => {
+        cartSum += prod.quantity * parseFloat(prod.price);
+      });
+      this.voucher = (this.skinProps.LayoutProps.voucher - cartSum).toFixed(2);
+
       this.cart.unshift({ id: -1, quantity: 0 });
 
       // reset selected
@@ -180,13 +204,21 @@ export default {
   },
 
   computed: {
+    // skinProps() {
+    //   return skinProps;
+    // },
+    setVoucher() {
+      if (this.skinProps.LayoutProps.hasVoucher) {
+        return parseFloat(this.skinProps.LayoutProps.voucher).toFixed(2);
+      }
+    },
     cartNumb() {
       var sum = 0;
       this.cart.forEach(itm => {
         sum = sum + itm.quantity;
       });
 
-      return sum;      
+      return sum;
     }
   }
 };

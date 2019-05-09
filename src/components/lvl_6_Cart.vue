@@ -2,25 +2,32 @@
   <div id="lvl_cart" class="lvl_container">
     <div id="navRow" class="row">
       <span class="left">
-        <span class="btn orange" @click="$emit('updtLvl',{lvl:'Products'})">{{
-          general_texts.btn.bckResults
-        }}</span>
+        <span
+          class="btn orange"
+          @click="$emit('updtLvl', { lvl: 'Products' })"
+          >{{ general_texts.btn.bckResults }}</span
+        >
       </span>
     </div>
     <div class="row" style="padding-left:15px">
       <h5>{{ general_texts.cart.cartTitle }}</h5>
-      <div v-if="Cart.length==1">{{ general_texts.cart.empty }}</div>
+      <div v-if="Cart.length == 1">{{ general_texts.cart.empty }}</div>
     </div>
-    <div id="cartRow" class="row" v-if="Cart.length>1">
+    <div id="cartRow" class="row" v-if="Cart.length > 1">
       <div
         class="col s12 l10 prodCol"
-        v-for="prod in Cart.filter(itm=>{return itm.id>-1})"
+        v-for="prod in Cart.filter(itm => {
+          return itm.id > -1;
+        })"
         :key="prod.id"
       >
         <hr />
         <div
           class="prodImg col s4 m3"
-          :style="{'background-image': 'url(' + prodMediaPath+prod.imgArr[0].imgSrc+ ')'}"
+          :style="{
+            'background-image':
+              'url(' + prodMediaPath + prod.imgArr[0].imgSrc + ')'
+          }"
         ></div>
         <div class="col s8 m9">
           <div class="ProdLbl" v-html="prod.lbl"></div>
@@ -38,10 +45,10 @@
           <div v-html="prod.addInf1"></div>
           <!-- price -->
           <div class="prodPrice">
-            <span v-if="general_texts.currecySide=='left'">
+            <span v-if="general_texts.currecySide == 'left'">
               <sup v-html="general_texts.currency"></sup>
             </span>
-            <span v-if="prod.price.toString().indexOf('.')>-1">
+            <span v-if="prod.price.toString().indexOf('.') > -1">
               <span v-html="prod.price.toString().split('.')[0]"></span>
               <sup
                 class="suprascript"
@@ -49,7 +56,7 @@
               ></sup>
             </span>
             <span v-else v-html="prod.price"></span>
-            <span v-if="general_texts.currecySide=='right'">
+            <span v-if="general_texts.currecySide == 'right'">
               <sup v-html="general_texts.currency"></sup>
             </span>
           </div>
@@ -58,7 +65,7 @@
           <!-- quantity -->
           <div>
             {{ general_texts.qty }}
-            <select v-model="prod.quantity" @change="$emit('RCart')">
+            <select v-model="prod.quantity" @change="UpdateQ()">
               <option v-for="n in 10" :key="n" :value="n">{{ n }}</option>
             </select>
           </div>
@@ -71,12 +78,26 @@
         </div>
       </div>
     </div>
-    <div id="CheckoutRow" class="row" v-if="Cart.length>1">
+    <div id="totalContainer" class="row center-align">
+      <div>
+        {{ general_texts.subTot }} ({{ cartCount }} {{ general_texts.itm }} ):
+        {{ general_texts.currency }}
+        {{ cartTotal }}
+      </div>
+      <div
+        v-if="skinProps.LayoutProps.hasVoucher"
+        :class="parseInt(remainingV) > 0 ? 'blue-text' : 'red-text'"
+      >
+        {{ general_texts.remainingV }} {{ general_texts.currency }}
+        {{ remainingV }}
+      </div>
+    </div>
+    <div id="CheckoutRow" class="row" v-if="Cart.length > 1">
       <span id="CheckoutCol" class="col s12 m5 l3">
         <span
           id="CheckoutBtn"
           :style="skinProps.LayoutProps.checkout_btn"
-          @click="$emit('updtLvl',{lvl:'Products'}),$emit('checkOut')"
+          @click="$emit('updtLvl', { lvl: 'Products' }), $emit('checkOut')"
           >{{ general_texts.cart.checkout }}</span
         >
       </span>
@@ -100,11 +121,41 @@ export default {
     texts: Object,
     skinProps: Object
   },
+  data() {
+    return {
+      cartCount: 0,
+      cartTotal: 0,
+      remainingV: 0
+    };
+  },
   created() {
     window.scrollTo(0, 0);
+    this.subTotal();
   },
   methods: {
-    Selected(prod) {      
+    UpdateQ() {
+      this.subTotal();
+      // update voucher val
+
+      this.$emit("updVoucher", this.remainingV);
+      this.$emit("RCart");
+    },
+    subTotal() {
+      this.cartCount = 0;
+      this.cartTotal = 0;
+
+      let vueObj = this;
+      this.Cart.forEach(prod => {
+        if (prod.id != -1) {
+          vueObj.cartCount += prod.quantity;
+          vueObj.cartTotal += prod.quantity * parseFloat(prod.price);
+        }
+      });
+      this.remainingV = (
+        this.skinProps.LayoutProps.voucher - this.cartTotal
+      ).toFixed(2);
+    },
+    Selected(prod) {
       this.$emit("updtLvl", { lvl: "Prdct" });
     },
     DeleteProd(prod) {
@@ -116,6 +167,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+#totalContainer {
+  font-weight: bold;
+}
 select {
   display: inline-block;
   background-color: white;
@@ -216,7 +270,7 @@ select {
 }
 #CheckoutBtn {
   width: 100%;
-  padding: 5px;  
+  padding: 5px;
   color: #111;
   border-radius: 3px;
   border-style: solid;
