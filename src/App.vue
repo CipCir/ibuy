@@ -209,7 +209,16 @@ export default {
     // },
     setVoucher() {
       if (this.skinProps.LayoutProps.hasVoucher) {
-        return parseFloat(this.skinProps.LayoutProps.voucher).toFixed(2);
+        let voucher = 0;
+        let cartTotal = 0;
+        this.cart.forEach(prod => {
+          if (prod.id != -1) {
+            cartTotal += prod.quantity * parseFloat(prod.price);
+          }
+        });
+        voucher = (this.skinProps.LayoutProps.voucher - cartTotal).toFixed(2);
+
+        return voucher;
       }
     },
     cartNumb() {
