@@ -47,15 +47,15 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .fullstar {
-  background-image: url("https://media.ipsosinteractive.com/sandbox/Ramona/AmazonDEV/general/amazon_full_star.png");
+  background-image: url("https://cdn.ipsosinteractive.com/deploy/products/iBuy_v2/img/stars/amazon_full_star.png");
 }
 
 .halfstar {
-  background-image: url("https://media.ipsosinteractive.com/sandbox/Ramona/AmazonDEV/general/amazon_half_star.png");
+  background-image: url("https://cdn.ipsosinteractive.com/deploy/products/iBuy_v2/img/stars/amazon_half_star.png");
 }
 
 .emptystar {
-  background-image: url("https://media.ipsosinteractive.com/sandbox/Ramona/AmazonDEV/general/amazon_empty_star.png");
+  background-image: url("https://cdn.ipsosinteractive.com/deploy/products/iBuy_v2/img/stars/amazon_empty_star.png");
 }
 
 .star {
