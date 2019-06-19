@@ -1,6 +1,10 @@
 var skinProps = {
+  TestMode: true,
   LayoutProps: {
     hasVoucher: true,
+    hasSort: true,
+    hasFilters: true,
+    RandomizeProds_ForNoSort: true,
     voucher: 50,
     show_search: true,
     show_bk_to_top: true,

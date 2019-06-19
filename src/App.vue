@@ -30,18 +30,41 @@
       v-on:selShelf="SetShelfCat($event)"
       v-on:updtLvl="UpdateLvl($event)"
     />-->
+    <!-- row for sort -->
+    <div
+      class="row right valign-wrapper"
+      id="sortContainer"
+      v-if="skinProps.LayoutProps.hasSort && controls.showLevel == 'Products'"
+    >
+      <b>{{ texts.filters.SortByLabel }}</b>
+      <select
+        id="SortDrop"
+        v-model="SortBy"
+        :style="skinProps.LayoutProps.sortby_btn"
+      >
+        <option
+          v-for="srt in texts.filters.SortArr"
+          :key="srt.lbl"
+          :value="srt"
+          >{{ srt.lbl }}</option
+        >
+      </select>
+    </div>
     <lvlProds
       v-if="controls.showLevel == 'Products'"
       :general_texts="texts.general_texts"
-      :Prods="prodDB.Products"
+      :Prods="ProductsArr"
+      :PRandIndx="ProdRandIndx"
       :prodMediaPath="prodDB.prodMediaPath"
       :SponsoredProdId="prodDB.SponsoredProdId"
       :texts="texts"
       :cFilters="controls.filters"
       :skinProps="skinProps"
+      :SortBy="SortBy"
       v-on:selProd="SetPrdct($event)"
       v-on:updtLvl="UpdateLvl($event)"
       v-on:updFilter="UpdateFilters($event)"
+      v-on:SaveProdOrdr="SaveIndexProd($event)"
     />
     <lvlPrdct
       v-if="controls.showLevel == 'Prdct'"
@@ -65,20 +88,27 @@
       v-on:RCart="RefreshCart()"
       v-on:checkOut="CheckOut()"
       v-on:updVoucher="UpdateVoucher($event)"
+      v-on:updCartTime="UpdateCartTime($event)"
     />
     <inputs
       v-if="controls.showLevel == 'inputs'"
       :skinProps="skinProps"
       v-on:updtLvl="UpdateLvl($event)"
     />
+    <outputs
+      v-if="controls.showLevel == 'output'"
+      :output="output"
+      v-on:updtLvl="UpdateLvl($event)"
+    />
 
     <footerComp :skinProps="skinProps" :footer_texts="texts.footer" />
-
-    <a
-      class="waves-effect waves-light btn"
-      @click="controls.showLevel = 'inputs'"
-      ><i class="material-icons left">code</i>Show inputs</a
-    >
+    <div class="row" v-if="skinProps.TestMode">
+      <a
+        class="waves-effect waves-light btn"
+        @click="controls.showLevel = 'inputs'"
+        ><i class="material-icons left">code</i>Show inputs</a
+      >
+    </div>
   </div>
 </template>
 
@@ -91,6 +121,7 @@ import lvlProds from "./components/lvl_4_Products.vue";
 import lvlPrdct from "./components/lvl_5_Product.vue";
 import lvlCart from "./components/lvl_6_Cart.vue";
 import inputs from "./components/xInputs.vue";
+import outputs from "./components/xOutput.vue";
 
 import footerComp from "./components/footerComp.vue";
 
@@ -105,14 +136,33 @@ export default {
     lvlProds,
     lvlPrdct,
     lvlCart,
-    inputs
+    inputs,
+    outputs
   },
   data() {
     return {
       texts,
       skinProps,
       prodDB,
-      output: {},
+      ProductsArr,
+      ProdRandIndx: [],
+      output: {
+        time_total: null,
+        time_cart: null,
+        cart_val: null,
+        cart_prod: [],
+        prod_seen: [],
+        prod_clicked: [],
+        prod_addedInCart: [],
+        prod_removedCart: [],
+        filterUsed: null,
+        sortUsed: null
+      },
+      SortBy: {},
+      aux: {
+        beginTime: null,
+        endTime: null
+      },
       controls: {
         showLevel: "Products", // "Main","Aisle","Shelf","Products","Prdct","Cart"
         // selected1_Cat: null,
@@ -134,8 +184,27 @@ export default {
     if (this.skinProps.LayoutProps.hasVoucher) {
       this.voucher = parseFloat(this.skinProps.LayoutProps.voucher).toFixed(2);
     }
+    this.ProdRandIndx = this.ProductsArr.map(a => a.id);
+    function shuffle(array) {
+      array.sort(() => Math.random() - 0.5);
+    }
+    shuffle(this.ProdRandIndx);
   },
+  created() {
+    this.SortBy = this.texts.filters.SortArr[0];
+    this.aux.beginTime = new Date();
+  },
+
   methods: {
+    StoreInArr(arr, elVal) {
+      arr.push(elVal);
+    },
+    SaveIndexProd(pay) {
+      this.output.prodIndx = pay;
+    },
+    UpdateCartTime(pay) {
+      this.output.time_cart += new Date() - pay;
+    },
     UpdateVoucher(pay) {
       this.voucher = pay;
     },
@@ -147,6 +216,39 @@ export default {
       }
     },
     CheckOut() {
+      //set filters and sort
+      this.output.filterUsed = this.controls.filters;
+      this.output.sortUsed = this.SortBy.lbl;
+      //set cart prod
+      this.output.cart_prod = [];
+      this.cart
+        .filter(itm => itm.id != -1)
+        .forEach(elm => {
+          this.output.cart_prod.push({ id: elm.id, q: elm.quantity });
+        });
+
+      //set product index
+      if (
+        this.skinProps.LayoutProps.hasSort == false &&
+        this.skinProps.LayoutProps.RandomizeProds_ForNoSort
+      ) {
+        this.output.prodIndx = this.ProdRandIndx;
+      }
+
+      //set timers
+      this.output.time_total = new Date() - this.aux.beginTime;
+
+      // set value
+      this.output.cart_val = null;
+      this.cart.forEach(prod => {
+        if (prod.id != -1) {
+          this.output.cart_val += prod.quantity * parseFloat(prod.price);
+        }
+      });
+
+      //display outputs
+      this.controls.showLevel = "output";
+      /*
       //reset defaults
       this.cart = [{ id: -1, quantity: 0 }];
       this.cartSum = 0;
@@ -155,10 +257,13 @@ export default {
         brand: [],
         price: []
       };
+      */
     },
     SetPrdct(pay) {
       // pay prouct object
       this.controls.sel_Prdct = pay;
+      //save prod in output
+      this.StoreInArr(this.output.prod_clicked, pay.id);
     },
     RefreshCart() {
       this.cart.shift();
@@ -186,13 +291,14 @@ export default {
 
       this.cart.unshift({ id: -1, quantity: 0 });
 
-      // reset selected
-      // this.cartSum=this.cartNumb
+      //update output
+      this.StoreInArr(this.output.prod_addedInCart, this.controls.sel_Prdct.id);
       this.controls.sel_Prdct = null;
     },
     DeleteProdCart(prod) {
       let index = this.cart.findIndex(i => i.id === prod.id);
       this.cart.splice(index, 1);
+      this.StoreInArr(this.output.prod_removedCart, prod.id);
     },
 
     UpdateLvl(pay) {
@@ -266,5 +372,16 @@ body {
 }
 .mark {
   background: lightgrey;
+}
+#SortDrop {
+  display: block;
+  float: right;
+  width: 200px;
+  background: white;
+
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 30px;
+  padding: 0px;
 }
 </style>

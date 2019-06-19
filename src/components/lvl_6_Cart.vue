@@ -2,11 +2,9 @@
   <div id="lvl_cart" class="lvl_container">
     <div id="navRow" class="row">
       <span class="left">
-        <span
-          class="btn orange"
-          @click="$emit('updtLvl', { lvl: 'Products' })"
-          >{{ general_texts.btn.bckResults }}</span
-        >
+        <span class="btn orange" @click="Back()">{{
+          general_texts.btn.bckResults
+        }}</span>
       </span>
     </div>
     <div class="row" style="padding-left:15px">
@@ -97,7 +95,7 @@
         <span
           id="CheckoutBtn"
           :style="skinProps.LayoutProps.checkout_btn"
-          @click="$emit('updtLvl', { lvl: 'Products' }), $emit('checkOut')"
+          @click="CheckOut()"
           >{{ general_texts.cart.checkout }}</span
         >
       </span>
@@ -125,14 +123,25 @@ export default {
     return {
       cartCount: 0,
       cartTotal: 0,
-      remainingV: 0
+      remainingV: 0,
+      loadedDate: null
     };
   },
   created() {
     window.scrollTo(0, 0);
     this.subTotal();
+    this.loadedDate = new Date();
   },
   methods: {
+    Back() {
+      this.$emit("updCartTime", this.loadedDate);
+      this.$emit("updtLvl", { lvl: "Products" });
+    },
+    CheckOut() {
+      this.$emit("updtLvl", { lvl: "Products" });
+      this.$emit("updCartTime", this.loadedDate);
+      this.$emit("checkOut");
+    },
     UpdateQ() {
       this.subTotal();
       // update voucher val
@@ -160,6 +169,7 @@ export default {
     },
     DeleteProd(prod) {
       this.$emit("remProd", prod);
+      this.$emit("updCartTime", this.loadedDate);
     }
   }
 };
