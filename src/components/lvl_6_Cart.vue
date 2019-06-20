@@ -9,7 +9,9 @@
     </div>
     <div class="row" style="padding-left:15px">
       <h5>{{ general_texts.cart.cartTitle }}</h5>
-      <div v-if="Cart.length == 1">{{ general_texts.cart.empty }}</div>
+      <div v-if="Cart.length == 1">
+        {{ general_texts.cart.empty }}
+      </div>
     </div>
     <div id="cartRow" class="row" v-if="Cart.length > 1">
       <div
@@ -80,7 +82,7 @@
       <div>
         {{ general_texts.subTot }} ({{ cartCount }} {{ general_texts.itm }} ):
         {{ general_texts.currency }}
-        {{ cartTotal }}
+        {{ cartTotal.toFixed(2) }}
       </div>
       <div
         v-if="skinProps.LayoutProps.hasVoucher"
@@ -90,7 +92,11 @@
         {{ remainingV }}
       </div>
     </div>
-    <div id="CheckoutRow" class="row" v-if="Cart.length > 1">
+    <div
+      id="CheckoutRow"
+      class="row"
+      v-if="Cart.length > 1 || skinProps.LayoutProps.AllowEmptyCart"
+    >
       <span id="CheckoutCol" class="col s12 m5 l3">
         <span
           id="CheckoutBtn"

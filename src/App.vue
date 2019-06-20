@@ -239,12 +239,13 @@ export default {
       this.output.time_total = new Date() - this.aux.beginTime;
 
       // set value
-      this.output.cart_val = null;
+      this.output.cart_val = 0;
       this.cart.forEach(prod => {
         if (prod.id != -1) {
           this.output.cart_val += prod.quantity * parseFloat(prod.price);
         }
       });
+      this.output.cart_val = this.output.cart_val.toFixed(2);
 
       //display outputs
       this.controls.showLevel = "output";
