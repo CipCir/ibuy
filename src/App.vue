@@ -55,8 +55,8 @@
       :general_texts="texts.general_texts"
       :Prods="ProductsArr"
       :PRandIndx="ProdRandIndx"
-      :prodMediaPath="prodDB.prodMediaPath"
-      :SponsoredProdId="prodDB.SponsoredProdId"
+      :prodDB="prodDB"
+      :SponsoredProdId="prodDB.SponsoredProd.id"
       :texts="texts"
       :cFilters="controls.filters"
       :skinProps="skinProps"
@@ -69,12 +69,15 @@
     <lvlPrdct
       v-if="controls.showLevel == 'Prdct'"
       :general_texts="texts.general_texts"
-      :prodMediaPath="prodDB.prodMediaPath"
+      :prodDB="prodDB"
       :Prdct="controls.sel_Prdct"
       :texts="texts"
       :skinProps="skinProps"
+      :ImgIndx="ImgIndx"
       v-on:addInCart="AddProdInCart($event)"
       v-on:updtLvl="UpdateLvl($event)"
+      v-on:StoreBnr="StoreBnrClick($event)"
+      v-on:updImgIndx="UpdateImgIndx($event)"
     />
     <lvlCart
       v-if="controls.showLevel == 'Cart'"
@@ -155,6 +158,7 @@ export default {
         prod_clicked: [],
         prod_addedInCart: [],
         prod_removedCart: [],
+        prod_BnrClick: [],
         filterUsed: null,
         sortUsed: null
       },
@@ -163,6 +167,7 @@ export default {
         beginTime: null,
         endTime: null
       },
+      ImgIndx: 0,
       controls: {
         showLevel: "Products", // "Main","Aisle","Shelf","Products","Prdct","Cart"
         // selected1_Cat: null,
@@ -196,6 +201,22 @@ export default {
   },
 
   methods: {
+    UpdateImgIndx(pay) {
+      this.ImgIndx = pay;
+    },
+    StoreBnrClick(pay) {
+      let recrd = {
+        id: this.controls.sel_Prdct.id,
+        bnr: pay
+      };
+
+      this.StoreInArr(this.output.prod_BnrClick, recrd);
+      this.controls.sel_Prdct = this.ProductsArr.find(
+        x => x.id == prodDB.SponsoredProd.id
+      );
+      this.ImgIndx = 0;
+      window.scrollTo(0, 0);
+    },
     StoreInArr(arr, elVal) {
       arr.push(elVal);
     },

@@ -2,7 +2,7 @@ var skinProps = {
   TestMode: true,
   LayoutProps: {
     hasVoucher: true,
-    hasSort: false,
+    hasSort: true,
     hasFilters: true,
     RandomizeProds_ForNoSort: true,
     AllowEmptyCart: true,

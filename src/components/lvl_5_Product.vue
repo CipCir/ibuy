@@ -5,16 +5,16 @@
         <span
           class="btn"
           :class="skinProps.LayoutProps.nav_buttons_class"
-          @click="$emit('updtLvl',{lvl:'Products'})"
-          >{{general_texts.btn.bckResults}}</span
+          @click="$emit('updtLvl', { lvl: 'Products' })"
+          >{{ general_texts.btn.bckResults }}</span
         >
       </span>
       <span class="right">
         <span
           class="btn"
           :class="skinProps.LayoutProps.nav_buttons_class"
-          @click="$emit('updtLvl',{lvl:'Cart'})"
-          >{{general_texts.btn.gtCheckout}}</span
+          @click="$emit('updtLvl', { lvl: 'Cart' })"
+          >{{ general_texts.btn.gtCheckout }}</span
         >
       </span>
     </div>
@@ -44,7 +44,6 @@
               </div>
             </div>
             <!-- prod images -->
-            <!--  -->
             <!-- mobile -->
             <div class="row hide-on-med-and-up">
               <div id="ProdImgContMob" class="row s12 center-align noMargin">
@@ -60,7 +59,7 @@
                   <div>
                     <img
                       class="ProdImgMob"
-                      :src="prodMediaPath+PrdImg.imgSrc"
+                      :src="prodDB.prodMediaPath + PrdImg.imgSrc"
                     />
                   </div>
                 </div>
@@ -71,13 +70,13 @@
               <!-- thumbs -->
               <div id="tumbContMob" class="row s12 center-align noMargin">
                 <div
-                  v-for="(thumb,ind) in Prdct.imgArr"
+                  v-for="(thumb, ind) in Prdct.imgArr"
                   :key="ind"
                   class="tumbImg"
-                  :class="{'selected':PrdImg==thumb}"
-                  @click="PrdImg=thumb"
+                  :class="{ selected: PrdImg == thumb }"
+                  @click="updMainImg(ind)"
                 >
-                  <img :src="prodMediaPath+thumb.imgSrc" />
+                  <img :src="prodDB.prodMediaPath + thumb.imgSrc" />
                 </div>
               </div>
             </div>
@@ -87,13 +86,13 @@
               <!-- thumbs -->
               <div id="tumbCont" class="center-align">
                 <div
-                  v-for="(thumb,ind) in Prdct.imgArr"
+                  v-for="(thumb, ind) in Prdct.imgArr"
                   :key="ind"
                   class="tumbImg"
-                  :class="{'selected':PrdImg==thumb}"
-                  @click="PrdImg=thumb"
+                  :class="{ selected: PrdImg == thumb }"
+                  @click="updMainImg(ind)"
                 >
-                  <img :src="prodMediaPath+thumb.imgSrc" />
+                  <img :src="prodDB.prodMediaPath + thumb.imgSrc" />
                 </div>
               </div>
               <!-- main img -->
@@ -103,7 +102,10 @@
                 @click="imageClicked()"
               >
                 <div class="prodImg">
-                  <img id="img_displayed" :src="prodMediaPath+PrdImg.imgSrc" />
+                  <img
+                    id="img_displayed"
+                    :src="prodDB.prodMediaPath + PrdImg.imgSrc"
+                  />
                 </div>
               </div>
             </div>
@@ -114,12 +116,12 @@
               <span class="lowTxt" v-html="general_texts.price"></span> :
               <span class="prodPrice">
                 <span
-                  v-if="general_texts.currecySide=='left'"
+                  v-if="general_texts.currecySide == 'left'"
                   v-html="general_texts.currency"
                 ></span>
                 {{ Prdct.price }}
                 <span
-                  v-if="general_texts.currecySide=='right'"
+                  v-if="general_texts.currecySide == 'right'"
                   v-html="general_texts.currency"
                 ></span>
               </span>
@@ -136,35 +138,63 @@
                 @click="addToCart()"
                 :style="skinProps.LayoutProps.cart_btn"
               >
-                {{general_texts.btn.addCart}}
+                {{ general_texts.btn.addCart }}
               </div>
             </div>
-            <div class="row center-align">
-              <img :src="prodMediaPath+Prdct.sponsorImg" alt />
+            <!-- cart banner -->
+            <div
+              class="row center-align clickable"
+              v-if="Prdct.hasBnrCartImg"
+              @click="$emit('StoreBnr', 'Cart')"
+            >
+              <img
+                :src="prodDB.prodMediaPath + prodDB.SponsoredProd.bannerCartImg"
+              />
             </div>
           </div>
         </div>
         <!-- under the products -->
-        <div id="BtmProdCont" class="row">
+        <div class="BtmProdCont row">
           <img
             class="btm_img show-on-small"
-            :src="prodMediaPath+Prdct.detailsImgArr[0]"
+            :src="prodDB.prodMediaPath + Prdct.detailsImgArr[0]"
             alt="additional image 1 here"
           />
           <img
             class="btm_img show-on-medium"
-            :src="prodMediaPath+Prdct.detailsImgArr[1]"
+            :src="prodDB.prodMediaPath + Prdct.detailsImgArr[1]"
             alt="additional image 2 here"
           />
           <img
             class="btm_img show-on-large"
-            :src="prodMediaPath+Prdct.detailsImgArr[2]"
+            :src="prodDB.prodMediaPath + Prdct.detailsImgArr[2]"
             alt="additional image 3 here"
           />
           <img
             class="btm_img show-on-extra-large"
-            :src="prodMediaPath+Prdct.detailsImgArr[3]"
+            :src="prodDB.prodMediaPath + Prdct.detailsImgArr[3]"
             alt="additional image 4 here"
+          />
+        </div>
+        <!-- bannder details sponsored -->
+        <div
+          class="row BtmProdCont clickable"
+          v-if="Prdct.hasBnrDetailsImg"
+          @click="$emit('StoreBnr', 'Details')"
+        >
+          <img
+            class="btm_img show-on-small show-on-medium"
+            :src="
+              prodDB.prodMediaPath + prodDB.SponsoredProd.bannerDetailsImg[0]
+            "
+            alt="additional image 1 here"
+          />
+          <img
+            class="btm_img show-on-large show-on-extra-large"
+            :src="
+              prodDB.prodMediaPath + prodDB.SponsoredProd.bannerDetailsImg[1]
+            "
+            alt="additional image 2 here"
           />
         </div>
       </div>
@@ -177,14 +207,14 @@
       </div>
       <div class="modal-content">
         <div id="ProdMediaCont" class="row">
-          <div id="modalImageContainer" v-if="PrdImg.type=='img'">
+          <div id="modalImageContainer" v-if="PrdImg.type == 'img'">
             <img
               id="modalImage"
-              :src="prodMediaPath+PrdImg.imgSrc"
+              :src="prodDB.prodMediaPath + PrdImg.imgSrc"
               alt="product image enlarged here"
             />
           </div>
-          <div id="modalVideoContainer" v-if="PrdImg.type=='video'">
+          <div id="modalVideoContainer" v-if="PrdImg.type == 'video'">
             <video id="modalVideo" controls>
               <source :src="PrdImg.videoSrc" type="video/mp4" />
               Your browser does not support the video tag.
@@ -194,13 +224,13 @@
         <!-- thumbs -->
         <div id="tumbContMob" class="row s12 center-align noMargin">
           <div
-            v-for="(thumb,ind) in Prdct.imgArr"
+            v-for="(thumb, ind) in Prdct.imgArr"
             :key="ind"
             class="tumbImg"
-            :class="{'selected':PrdImg==thumb}"
-            @click="PrdImg=thumb"
+            :class="{ selected: PrdImg == thumb }"
+            @click="updMainImg(ind)"
           >
-            <img :src="prodMediaPath+thumb.imgSrc" />
+            <img :src="prodDB.prodMediaPath + thumb.imgSrc" />
           </div>
         </div>
       </div>
@@ -219,22 +249,26 @@ export default {
   },
   props: {
     general_texts: Object,
-    prodMediaPath: String,
+    prodDB: Object,
     Prdct: Object,
     texts: Object,
-    skinProps: Object
+    skinProps: Object,
+    ImgIndx: Number
   },
   data() {
     return {
-      quantity: 1,
-      PrdImg: this.Prdct.imgArr[0]
+      quantity: 1
     };
+  },
+  computed: {
+    PrdImg() {
+      return this.Prdct.imgArr[this.ImgIndx];
+    }
   },
   created() {
     window.scrollTo(0, 0);
   },
   mounted() {
-
     var onModalClose = function() {
       // alert("Modal closed!");
       if ($("video").length) {
@@ -252,13 +286,17 @@ export default {
       this.$emit("addInCart", this.quantity);
       this.$emit("updtLvl", { lvl: "Products" });
     },
+    updMainImg(val) {
+      this.$emit("updImgIndx", val);
+    },
     slideImg(value) {
-      let currIndex = this.Prdct.imgArr.indexOf(this.PrdImg);
+      let currIndex = this.ImgIndx; //this.Prdct.imgArr.indexOf(this.PrdImg);
       if (
         currIndex + value < this.Prdct.imgArr.length &&
         currIndex + value >= 0
       ) {
-        this.PrdImg = this.Prdct.imgArr[currIndex + value];
+        // this.PrdImg = this.Prdct.imgArr[currIndex + value];
+        this.updMainImg(currIndex + value);
       }
     },
     imageClicked() {
@@ -356,10 +394,10 @@ export default {
   justify-content: center;
   margin-bottom: 0px;
 }
-#BtmProdCont {
+.BtmProdCont {
   display: grid;
 }
-#BtmProdCont > img {
+.BtmProdCont > img {
   margin: 0 auto;
   position: relative;
   max-width: 100%;

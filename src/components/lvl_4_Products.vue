@@ -79,7 +79,7 @@
                 "
                 :style="{
                   'background-image':
-                    'url(' + prodMediaPath + prod.imgArr[0].imgSrc + ')'
+                    'url(' + prodDB.prodMediaPath + prod.imgArr[0].imgSrc + ')'
                 }"
               >
                 <!-- <img :src="'./img/'+prod.img"> -->
@@ -146,7 +146,7 @@ export default {
     general_texts: Object,
     Prods: Array,
     PRandIndx: Array,
-    prodMediaPath: String,
+    prodDB: Object,
     SponsoredProdId: Number,
     texts: Object,
     cFilters: Object,
@@ -256,7 +256,9 @@ export default {
     },
     SelectSponsProd() {
       let vueObj = this;
-      let SponsProd = this.Prods.find(x => x.id == vueObj.SponsoredProdId);
+      let SponsProd = this.Prods.find(
+        x => x.id == this.prodDB.SponsoredProd.id
+      );
       this.Selected(SponsProd);
     },
     Selected(prod) {
