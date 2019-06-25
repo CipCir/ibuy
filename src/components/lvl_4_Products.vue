@@ -11,6 +11,7 @@
           :skinProps="skinProps"
           class="row hide-on-med-and-up"
           v-on:SelectedStar="UpdateFilter('rating', $event)"
+          v-on:filterUpd="DelayedStoreViewProd()"
         ></filterComp>
         <!-- desktop filter -->
         <filterComp
@@ -20,16 +21,18 @@
           :scFilters="cFilters"
           :skinProps="skinProps"
           v-on:SelectedStar="UpdateFilter('rating', $event)"
+          v-on:filterUpd="DelayedStoreViewProd()"
           class="row hide-on-small-only"
         ></filterComp>
       </div>
 
       <div class="row">
         <div
-          id="ProdsCont"
+          id="ProdsAreaCont"
           class="col s12 "
           :class="{ 'm9 l10': skinProps.LayoutProps.hasFilters }"
         >
+          <!-- top banner -->
           <div
             class="row s12 banner_img_cont clickable"
             v-if="show_banner"
@@ -56,7 +59,9 @@
               alt="banner image 4 here"
             />
           </div>
+          <!-- prod grid container -->
           <div class="col l12 xl11">
+            <!-- indiv prod container -->
             <div
               class="col CanSelect s12"
               :class="[
@@ -66,64 +71,77 @@
               ]"
               v-for="(prod, index) in prodFilterList"
               :key="prod.id"
+              :id="'prd_' + prod.id"
               @click="Selected(prod)"
             >
-              <hr />
-              <!-- <hr v-if="skinProps.LayoutProps.productView=='Grid' && index>3"> -->
-              <div
-                class="prodImg col"
-                :class="
-                  skinProps.LayoutProps.productView == 'Grid'
-                    ? 's4 m12'
-                    : 's4 m3'
-                "
-                :style="{
-                  'background-image':
-                    'url(' + prodDB.prodMediaPath + prod.imgArr[0].imgSrc + ')'
-                }"
-              >
-                <!-- <img :src="'./img/'+prod.img"> -->
-              </div>
-              <div
-                class="col"
-                :class="
-                  skinProps.LayoutProps.productView == 'Grid'
-                    ? 's8 m12'
-                    : 's8 m9'
-                "
-              >
-                <div class="ProdLbl" v-html="prod.lbl"></div>
-                <div v-html="prod.by"></div>
-                <div>
-                  <stars
-                    v-if="prod.rating != null"
-                    :rating="prod.rating"
-                    :skinProps="skinProps"
-                  ></stars
-                  >&nbsp;
-                  <span v-html="prod.reviews"></span>
+              <hr :id="'viz_' + prod.id" class="isVizibil" />
+              <div>
+                <div
+                  class="prodImg col"
+                  :class="
+                    skinProps.LayoutProps.productView == 'Grid'
+                      ? 's4 m12'
+                      : 's4 m3'
+                  "
+                  :style="{
+                    'background-image':
+                      'url(' +
+                      prodDB.prodMediaPath +
+                      prod.imgArr[0].imgSrc +
+                      ')'
+                  }"
+                ></div>
+                <div
+                  class="col"
+                  :class="
+                    skinProps.LayoutProps.productView == 'Grid'
+                      ? 's8 m12'
+                      : 's8 m9'
+                  "
+                >
+                  <!-- <div
+                  class="ProdLbl isVizibil"
+                  :id="'viz_' + prod.id"
+                  v-html="prod.lbl"
+                ></div> -->
+                  <div class="ProdLbl" v-html="prod.lbl"></div>
+                  <!-- 
+                  <div class="isVizibil" :id="'viz_' + prod.id"></div> 
+                  -->
                 </div>
-
-                <div v-html="prod.addInf1"></div>
-                <div class="prodPrice">
-                  <span v-if="general_texts.currecySide == 'left'">
-                    <sup v-html="general_texts.currency"></sup>
-                  </span>
-                  <span v-if="prod.price.toString().indexOf('.') > -1">
-                    <span v-html="prod.price.toString().split('.')[0]"></span>
-                    <sup
-                      class="suprascript"
-                      v-html="prod.price.toString().split('.')[1]"
-                    ></sup>
-                  </span>
-                  <span v-else v-html="prod.price"></span>
-                  <span v-if="general_texts.currecySide == 'right'">
-                    <sup v-html="general_texts.currency"></sup>
-                  </span>
-                </div>
-
-                <div v-html="prod.addInf2"></div>
               </div>
+              <!-- prod by -->
+              <div v-html="prod.by"></div>
+
+              <!-- rating -->
+              <div>
+                <stars
+                  v-if="prod.rating != null"
+                  :rating="prod.rating"
+                  :skinProps="skinProps"
+                ></stars>
+                <span v-html="prod.reviews"></span>
+              </div>
+
+              <div v-html="prod.addInf1"></div>
+              <div class="prodPrice">
+                <span v-if="general_texts.currecySide == 'left'">
+                  <sup v-html="general_texts.currency"></sup>
+                </span>
+                <span v-if="prod.price.toString().indexOf('.') > -1">
+                  <span v-html="prod.price.toString().split('.')[0]"></span>
+                  <sup
+                    class="suprascript"
+                    v-html="prod.price.toString().split('.')[1]"
+                  ></sup>
+                </span>
+                <span v-else v-html="prod.price"></span>
+                <span v-if="general_texts.currecySide == 'right'">
+                  <sup v-html="general_texts.currency"></sup>
+                </span>
+              </div>
+
+              <div v-html="prod.addInf2"></div>
             </div>
           </div>
         </div>
@@ -131,6 +149,7 @@
     </div>
   </div>
 </template>
+
 
 <script>
 import stars from "./stars.vue";
@@ -147,6 +166,7 @@ export default {
     Prods: Array,
     PRandIndx: Array,
     prodDB: Object,
+    seenProds: Array,
     SponsoredProdId: Number,
     texts: Object,
     cFilters: Object,
@@ -155,14 +175,94 @@ export default {
   },
   data() {
     return {
-      show_banner: this.skinProps.LayoutProps.show_banner
+      show_banner: this.skinProps.LayoutProps.show_banner,
+      recentScroll: false
       // SortArr: this.texts.filters.SortArr
       // SortBy: null
     };
   },
-  created() {
+  watch: {
+    SortBy: {
+      handler: function(val, oldVal) {
+        this.DelayedStoreViewProd();
+      },
+      deep: true
+    }
+  },
+  mounted() {
     window.scrollTo(0, 0);
-    // this.SortBy = this.SortArr[0];
+    window.addEventListener("scroll", this.ProdScroll);
+    window.addEventListener("resize", this.ProdScroll);
+    this.ProdScroll();
+  },
+
+  destroyed() {
+    window.removeEventListener("scroll", this.ProdScroll);
+    window.removeEventListener("resize", this.ProdScroll);
+  },
+
+  methods: {
+    DelayedStoreViewProd() {
+      window.setTimeout(() => {
+        this.ProdScroll();
+      }, 500);
+    },
+    ProdScroll() {
+      $.fn.isInViewport = function() {
+        var correction = $(window).width() < 600 ? 90 : 280;
+        var elementTop = $(this).offset().top + correction; //280;
+        var elementBottom = elementTop + $(this).outerHeight();
+        var elementHeight = $(this).outerHeight();
+
+        var viewportTop = window.pageYOffset; //$(window).scrollTop();
+        var viewportBottom = viewportTop + $(window).height();
+
+        return elementBottom > viewportTop && elementTop < viewportBottom;
+      };
+      console.log("scroll");
+
+      // $("#viz_5").isInViewport();
+      // $("#viz_6").isInViewport();
+      // debugger;
+
+      let vueObj = this;
+
+      // do something
+      if (!this.recentScroll && vueObj.Prods.length > vueObj.seenProds.length) {
+        this.recentScroll = true;
+        let vizArr = [];
+        $(".isVizibil").each(function(i, val) {
+          if ($(this).isInViewport()) {
+            vizArr.push(
+              $(this)
+                .attr("id")
+                .replace("viz_", "")
+            );
+          }
+        });
+        this.$emit("SaveViewed", vizArr);
+        // console.log(vizArr);
+        window.setTimeout(() => {
+          this.recentScroll = false;
+        }, 100);
+      }
+    },
+    UpdateFilter(filter, value) {
+      this.$emit("updFilter", { fil: filter, val: value });
+      this.ProdScroll();
+    },
+    SelectSponsProd() {
+      let vueObj = this;
+      let SponsProd = this.Prods.find(
+        x => x.id == this.prodDB.SponsoredProd.id
+      );
+      this.Selected(SponsProd);
+      this.$emit("StoreBnr", "TopBnr");
+    },
+    Selected(prod) {
+      this.$emit("selProd", prod);
+      this.$emit("updtLvl", { lvl: "Prdct" });
+    }
   },
   computed: {
     productsArr() {
@@ -248,22 +348,6 @@ export default {
       }
 
       return returned;
-    }
-  },
-  methods: {
-    UpdateFilter(filter, value) {
-      this.$emit("updFilter", { fil: filter, val: value });
-    },
-    SelectSponsProd() {
-      let vueObj = this;
-      let SponsProd = this.Prods.find(
-        x => x.id == this.prodDB.SponsoredProd.id
-      );
-      this.Selected(SponsProd);
-    },
-    Selected(prod) {
-      this.$emit("selProd", prod);
-      this.$emit("updtLvl", { lvl: "Prdct" });
     }
   }
 };
@@ -375,4 +459,7 @@ export default {
 #sortContainer {
   margin-top: 10px;
 }
+/* .isVizibil {
+  background: lightgreen;
+} */
 </style>

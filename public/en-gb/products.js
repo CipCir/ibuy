@@ -10,7 +10,7 @@ var ProductsArr = [
   {
     id: 0,
     brand: "Rexona",
-    lbl: "Rexona Women Biorythm Ultra Dry Deo Stick Anti-Perspirant 48h 40 ml",
+    lbl: "Rexona Women", // Biorythm Ultra Dry Deo Stick Anti-Perspirant 48h 40 ml",
 
     imgArr: [
       { type: "img", imgSrc: "R0.jpg" },
@@ -22,12 +22,7 @@ var ProductsArr = [
         videoSrc: "http://techslides.com/demos/sample-videos/small.mp4"
       }
     ],
-    detailsImgArr: [
-      "ProdDetailsCart_Mob.jpg",
-      "ProdDetailsCart_Mob.jpg",
-      "ProdDetailsCart.jpg",
-      "ProdDetailsCart.jpg"
-    ],
+    detailsImgArr: ["ProdDetailsCart_Mob.jpg", "ProdDetailsCart.jpg"],
     hasBnrCartImg: true,
     hasBnrDetailsImg: true,
     by: null,
@@ -47,12 +42,7 @@ var ProductsArr = [
       { type: "img", imgSrc: "R0.jpg" },
       { type: "img", imgSrc: "R2.jpg" }
     ],
-    detailsImgArr: [
-      "ProdDetailsCart_Mob.jpg",
-      "ProdDetailsCart_Mob.jpg",
-      "ProdDetailsCart.jpg",
-      "ProdDetailsCart.jpg"
-    ],
+    detailsImgArr: ["ProdDetailsCart_Mob.jpg", "ProdDetailsCart.jpg"],
     hasBnrCartImg: true,
     hasBnrDetailsImg: false,
     by: null,
@@ -72,12 +62,7 @@ var ProductsArr = [
       { type: "img", imgSrc: "R0.jpg" },
       { type: "img", imgSrc: "R1.jpg" }
     ],
-    detailsImgArr: [
-      "ProdDetailsCart_Mob.jpg",
-      "ProdDetailsCart_Mob.jpg",
-      "ProdDetailsCart.jpg",
-      "ProdDetailsCart.jpg"
-    ],
+    detailsImgArr: ["ProdDetailsCart_Mob.jpg", "ProdDetailsCart.jpg"],
 
     by: null,
     rating: 5,
@@ -97,12 +82,7 @@ var ProductsArr = [
       { type: "img", imgSrc: "R1.jpg" },
       { type: "img", imgSrc: "R2.jpg" }
     ],
-    detailsImgArr: [
-      "ProdDetailsCart_Mob.jpg",
-      "ProdDetailsCart_Mob.jpg",
-      "ProdDetailsCart.jpg",
-      "ProdDetailsCart.jpg"
-    ],
+    detailsImgArr: ["ProdDetailsCart_Mob.jpg", "ProdDetailsCart.jpg"],
 
     by: null,
     rating: 5,
@@ -122,12 +102,7 @@ var ProductsArr = [
       { type: "img", imgSrc: "R1.jpg" },
       { type: "img", imgSrc: "R2.jpg" }
     ],
-    detailsImgArr: [
-      "ProdDetailsCart_Mob.jpg",
-      "ProdDetailsCart_Mob.jpg",
-      "ProdDetailsCart.jpg",
-      "ProdDetailsCart.jpg"
-    ],
+    detailsImgArr: ["ProdDetailsCart_Mob.jpg", "ProdDetailsCart.jpg"],
 
     by: null,
     rating: 4,
@@ -149,12 +124,7 @@ var ProductsArr = [
       { type: "img", imgSrc: "R1.jpg" },
       { type: "img", imgSrc: "R2.jpg" }
     ],
-    detailsImgArr: [
-      "ProdDetailsCart_Mob.jpg",
-      "ProdDetailsCart_Mob.jpg",
-      "ProdDetailsCart.jpg",
-      "ProdDetailsCart.jpg"
-    ],
+    detailsImgArr: ["ProdDetailsCart_Mob.jpg", "ProdDetailsCart.jpg"],
 
     by: null,
     rating: 3,
@@ -176,12 +146,7 @@ var ProductsArr = [
       { type: "img", imgSrc: "R1.jpg" },
       { type: "img", imgSrc: "R2.jpg" }
     ],
-    detailsImgArr: [
-      "ProdDetailsCart_Mob.jpg",
-      "ProdDetailsCart_Mob.jpg",
-      "ProdDetailsCart.jpg",
-      "ProdDetailsCart.jpg"
-    ],
+    detailsImgArr: ["ProdDetailsCart_Mob.jpg", "ProdDetailsCart.jpg"],
 
     by: "<span style='color:gray;'>by Rexona</span>",
     rating: null,
@@ -202,12 +167,7 @@ var ProductsArr = [
       { type: "img", imgSrc: "R1.jpg" },
       { type: "img", imgSrc: "R2.jpg" }
     ],
-    detailsImgArr: [
-      "ProdDetailsCart_Mob.jpg",
-      "ProdDetailsCart_Mob.jpg",
-      "ProdDetailsCart.jpg",
-      "ProdDetailsCart.jpg"
-    ],
+    detailsImgArr: ["ProdDetailsCart_Mob.jpg", "ProdDetailsCart.jpg"],
 
     by: null,
     rating: 4,
@@ -228,12 +188,7 @@ var ProductsArr = [
       { type: "img", imgSrc: "R1.jpg" },
       { type: "img", imgSrc: "R2.jpg" }
     ],
-    detailsImgArr: [
-      "ProdDetailsCart_Mob.jpg",
-      "ProdDetailsCart_Mob.jpg",
-      "ProdDetailsCart.jpg",
-      "ProdDetailsCart.jpg"
-    ],
+    detailsImgArr: ["ProdDetailsCart_Mob.jpg", "ProdDetailsCart.jpg"],
     by: "<span style='color:gray;'>by Tom's of Maine</span>",
     rating: 4,
     reviews: "<span style='color:#0066c0;'>300</span>",

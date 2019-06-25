@@ -5,13 +5,13 @@
         class="MobFilter1 clickable"
         v-html="filters.FilterLbl1"
         v-if="!show_filters"
-        @click="show_filters=!show_filters"
+        @click="show_filters = !show_filters"
       ></div>
       <div
         class="MobFilter2 clickable"
         v-html="filters.FilterLbl2"
         v-if="show_filters"
-        @click="show_filters=!show_filters"
+        @click="show_filters = !show_filters"
       ></div>
     </div>
 
@@ -22,10 +22,15 @@
         <div class="filterLbl" v-html="filters.FilterRatingLabel"></div>
 
         <div
-          v-for="(rating) in skinProps.LayoutProps.ratingMaxVal"
+          v-for="rating in skinProps.LayoutProps.ratingMaxVal"
           :key="rating"
           class="paddingBox clickable"
-          @click="$emit('SelectedStar',skinProps.LayoutProps.ratingMaxVal-rating+1)"
+          @click="
+            $emit(
+              'SelectedStar',
+              skinProps.LayoutProps.ratingMaxVal - rating + 1
+            )
+          "
         >
           <!-- <label> -->
           <!-- <input
@@ -35,8 +40,14 @@
                 :value="filters.RatingMaxVal-rating+1"
                 v-model="scFilters.rating"
           >-->
-          <span :for="'rating_'+rating" :class="{'selected':SelectedStarF(rating)}">
-            <stars :rating="skinProps.LayoutProps.ratingMaxVal-rating+1" :skinProps="skinProps"></stars>
+          <span
+            :for="'rating_' + rating"
+            :class="{ selected: SelectedStarF(rating) }"
+          >
+            <stars
+              :rating="skinProps.LayoutProps.ratingMaxVal - rating + 1"
+              :skinProps="skinProps"
+            ></stars>
             <!-- <span v-if="rating!=1">{{filters.RatingLabel}}</span> -->
           </span>
           <!-- </label> -->
@@ -45,38 +56,47 @@
       <!-- brand filter -->
       <div id="BrandFilterCont">
         <div class="filterLbl" v-html="filters.FilterBrandLabel"></div>
-        <form id="BrandFilterForm" action="#">
-          <div v-for="(brand,index) in filters.brand" :key="brand" class="paddingBox">
-            <label>
-              <input
-                type="checkbox"
-                class="filled-in"
-                :id="'brand_'+index"
-                :value="brand"
-                v-model="scFilters.brand"
-              >
-              <span :for="'brand_'+index">{{brand}}</span>
-            </label>
-          </div>
-        </form>
+
+        <div
+          id="BrandFilterForm"
+          v-for="(brand, index) in filters.brand"
+          :key="brand"
+          class="paddingBox"
+        >
+          <label>
+            <input
+              type="checkbox"
+              class="filled-in"
+              :id="'brand_' + index"
+              :value="brand"
+              v-model="scFilters.brand"
+              @change="$emit('filterUpd')"
+            />
+            <span :for="'brand_' + index">{{ brand }}</span>
+          </label>
+        </div>
       </div>
       <!-- price filter -->
       <div id="PriceFilterCont">
         <div class="filterLbl" v-html="filters.FilterPriceLabel"></div>
-        <form id="PriceFilterForm" action="#">
-          <div v-for="(price,index) in filters.price" :key="price.val" class="paddingBox">
-            <label>
-              <input
-                type="checkbox"
-                class="filled-in chec_box"
-                :id="'price_'+index"
-                :value="price.val"
-                v-model="scFilters.price"
-              >
-              <span :for="'price_'+index">{{price.lbl}}</span>
-            </label>
-          </div>
-        </form>
+
+        <div
+          v-for="(price, index) in filters.price"
+          :key="price.val"
+          class="paddingBox"
+        >
+          <label>
+            <input
+              type="checkbox"
+              class="filled-in chec_box"
+              :id="'price_' + index"
+              :value="price.val"
+              v-model="scFilters.price"
+              @change="$emit('filterUpd')"
+            />
+            <span :for="'price_' + index">{{ price.lbl }}</span>
+          </label>
+        </div>
       </div>
 
       <!-- end filter -->
@@ -96,7 +116,7 @@ export default {
     isMobile: Boolean,
     scFilters: Object,
     filters: Object,
-    skinProps:Object
+    skinProps: Object
   },
   data() {
     return {
@@ -109,7 +129,8 @@ export default {
     SelectedStarF(rating) {
       if (this.scFilters.rating != null) {
         return (
-          this.skinProps.LayoutProps.ratingMaxVal - rating + 1 >= this.scFilters.rating
+          this.skinProps.LayoutProps.ratingMaxVal - rating + 1 >=
+          this.scFilters.rating
         );
       }
 

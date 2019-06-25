@@ -5,7 +5,7 @@
         <span
           class="btn"
           :class="skinProps.LayoutProps.nav_buttons_class"
-          @click="$emit('updtLvl', { lvl: 'Products' })"
+          @click="updateLevel('Products')"
           >{{ general_texts.btn.bckResults }}</span
         >
       </span>
@@ -13,7 +13,7 @@
         <span
           class="btn"
           :class="skinProps.LayoutProps.nav_buttons_class"
-          @click="$emit('updtLvl', { lvl: 'Cart' })"
+          @click="updateLevel('Cart')"
           >{{ general_texts.btn.gtCheckout }}</span
         >
       </span>
@@ -156,24 +156,14 @@
         <!-- under the products -->
         <div class="BtmProdCont row">
           <img
-            class="btm_img show-on-small"
+            class="btm_img hide-on-med-and-up	show-on-medium"
             :src="prodDB.prodMediaPath + Prdct.detailsImgArr[0]"
             alt="additional image 1 here"
           />
           <img
-            class="btm_img show-on-medium"
+            class="btm_img hide-on-med-and-down"
             :src="prodDB.prodMediaPath + Prdct.detailsImgArr[1]"
             alt="additional image 2 here"
-          />
-          <img
-            class="btm_img show-on-large"
-            :src="prodDB.prodMediaPath + Prdct.detailsImgArr[2]"
-            alt="additional image 3 here"
-          />
-          <img
-            class="btm_img show-on-extra-large"
-            :src="prodDB.prodMediaPath + Prdct.detailsImgArr[3]"
-            alt="additional image 4 here"
           />
         </div>
         <!-- bannder details sponsored -->
@@ -183,18 +173,18 @@
           @click="$emit('StoreBnr', 'Details')"
         >
           <img
-            class="btm_img show-on-small show-on-medium"
+            class="btm_img hide-on-med-and-up	show-on-medium"
             :src="
               prodDB.prodMediaPath + prodDB.SponsoredProd.bannerDetailsImg[0]
             "
-            alt="additional image 1 here"
+            alt="BtmProdCont image 1 here"
           />
           <img
-            class="btm_img show-on-large show-on-extra-large"
+            class="btm_img hide-on-med-and-down"
             :src="
               prodDB.prodMediaPath + prodDB.SponsoredProd.bannerDetailsImg[1]
             "
-            alt="additional image 2 here"
+            alt="BtmProdCont image 2 here"
           />
         </div>
       </div>
@@ -215,7 +205,7 @@
             />
           </div>
           <div id="modalVideoContainer" v-if="PrdImg.type == 'video'">
-            <video id="modalVideo" controls>
+            <video id="modalVideo" controls @play="playV()">
               <source :src="PrdImg.videoSrc" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
@@ -257,7 +247,10 @@ export default {
   },
   data() {
     return {
-      quantity: 1
+      quantity: 1,
+      // imgSeen: [0],
+      usedZoom: false,
+      videoPlayed: false
     };
   },
   computed: {
@@ -282,12 +275,29 @@ export default {
     });
   },
   methods: {
+    playV() {
+      // this.videoPlayed = true;
+      this.$emit("storePrdInfo", {
+        ID: this.Prdct.id,
+        prmName: "videoPlayed",
+        prmVal: true
+      });
+    },
+    updateLevel(pay) {
+      this.$emit("updtLvl", {
+        lvl: pay
+      });
+    },
     addToCart() {
       this.$emit("addInCart", this.quantity);
-      this.$emit("updtLvl", { lvl: "Products" });
+      this.updateLevel("Products");
     },
     updMainImg(val) {
-      this.$emit("updImgIndx", val);
+      // this.imgSeen.push(val);
+      this.$emit("updImgIndx", {
+        prodId: this.Prdct.id,
+        imgInx: val
+      });
     },
     slideImg(value) {
       let currIndex = this.ImgIndx; //this.Prdct.imgArr.indexOf(this.PrdImg);
@@ -300,6 +310,12 @@ export default {
       }
     },
     imageClicked() {
+      this.usedZoom = true;
+      this.$emit("storePrdInfo", {
+        ID: this.Prdct.id,
+        prmName: "usedZoom",
+        prmVal: true
+      });
       M.Modal.getInstance($("#modal1")).open();
     }
   }
@@ -361,9 +377,9 @@ export default {
   max-width: 100%;
   max-height: 50vh;
 }
-.btm_img {
+/* .btm_img {
   display: none;
-}
+} */
 #mainImgContMob {
   padding: 0px;
 }

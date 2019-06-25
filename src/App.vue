@@ -56,6 +56,7 @@
       :Prods="ProductsArr"
       :PRandIndx="ProdRandIndx"
       :prodDB="prodDB"
+      :seenProds="output.prod_seen"
       :SponsoredProdId="prodDB.SponsoredProd.id"
       :texts="texts"
       :cFilters="controls.filters"
@@ -65,6 +66,8 @@
       v-on:updtLvl="UpdateLvl($event)"
       v-on:updFilter="UpdateFilters($event)"
       v-on:SaveProdOrdr="SaveIndexProd($event)"
+      v-on:StoreBnr="StoreBnrClick($event)"
+      v-on:SaveViewed="SaveViewedProds($event)"
     />
     <lvlPrdct
       v-if="controls.showLevel == 'Prdct'"
@@ -76,6 +79,7 @@
       :ImgIndx="ImgIndx"
       v-on:addInCart="AddProdInCart($event)"
       v-on:updtLvl="UpdateLvl($event)"
+      v-on:storePrdInfo="StorePrdctInfo($event)"
       v-on:StoreBnr="StoreBnrClick($event)"
       v-on:updImgIndx="UpdateImgIndx($event)"
     />
@@ -127,6 +131,7 @@ import inputs from "./components/xInputs.vue";
 import outputs from "./components/xOutput.vue";
 
 import footerComp from "./components/footerComp.vue";
+import { debuglog } from "util";
 
 export default {
   name: "app",
@@ -159,13 +164,15 @@ export default {
         prod_addedInCart: [],
         prod_removedCart: [],
         prod_BnrClick: [],
+        prodInfo: {},
         filterUsed: null,
         sortUsed: null
       },
       SortBy: {},
       aux: {
         beginTime: null,
-        endTime: null
+        endTime: null,
+        prodStartTime: null
       },
       ImgIndx: 0,
       controls: {
@@ -201,21 +208,88 @@ export default {
   },
 
   methods: {
+    SaveViewedProds(pay) {
+      console.log(pay);
+      let vueArr = this.output.prod_seen;
+
+      pay.forEach(elm => {
+        if (vueArr.indexOf(elm) == -1) {
+          vueArr.push(elm);
+        }
+      });
+    },
     UpdateImgIndx(pay) {
-      this.ImgIndx = pay;
+      //store img indx
+      this.StorePrdctInfo({
+        ID: pay.prodId,
+        prmName: "imgSeen",
+        prmVal: pay.imgInx
+      });
+
+      this.ImgIndx = pay.imgInx;
+    },
+    StorePrdctInfo(pay) {
+      // debugger;
+      //check if record exists
+      if (this.output.prodInfo[pay.ID]) {
+        if (pay.prmName == "imgSeen") {
+          this.output.prodInfo[pay.ID].info[pay.prmName].push(pay.prmVal);
+        } else {
+          this.output.prodInfo[pay.ID].info[pay.prmName] = pay.prmVal;
+        }
+      } else {
+        // add record with defaults
+        if (pay.prmName == "imgSeen") {
+          this.output.prodInfo[pay.ID] = {
+            info: {
+              imgSeen: [pay.prmVal],
+              usedZoom: false,
+              videoPlayed: false
+            },
+            timeSpent: 0
+          };
+        }
+        // else {
+        //   this.output.prodInfo[pay.ID] = {
+        //     info: {
+        //       imgSeen: [],
+        //       usedZoom: pay.prmVal,
+        //       videoPlayed: false
+        //     }
+        //   };
+        // }
+      }
+    },
+    StorePrdctTimers(pay) {
+      let prodTime = new Date() - new Date(this.aux.prodStartTime);
+
+      //store output
+      //check if record exists
+
+      this.output.prodInfo[this.controls.sel_Prdct.id].timeSpent += prodTime;
     },
     StoreBnrClick(pay) {
-      let recrd = {
-        id: this.controls.sel_Prdct.id,
-        bnr: pay
-      };
-
+      let recrd = {};
+      if (pay == "TopBnr") {
+        recrd = {
+          id: -1,
+          bnr: "TopBnr"
+        };
+      } else {
+        recrd = {
+          id: this.controls.sel_Prdct.id,
+          bnr: pay
+        };
+      }
       this.StoreInArr(this.output.prod_BnrClick, recrd);
       this.controls.sel_Prdct = this.ProductsArr.find(
         x => x.id == prodDB.SponsoredProd.id
       );
-      this.ImgIndx = 0;
+      this.UpdateImgIndx({ prodId: this.controls.sel_Prdct.id, imgInx: 0 });
+
       window.scrollTo(0, 0);
+      //start product view time
+      this.aux.prodStartTime = Date();
     },
     StoreInArr(arr, elVal) {
       arr.push(elVal);
@@ -286,6 +360,10 @@ export default {
       this.controls.sel_Prdct = pay;
       //save prod in output
       this.StoreInArr(this.output.prod_clicked, pay.id);
+      //save prod img indx
+      this.UpdateImgIndx({ prodId: pay.id, imgInx: 0 });
+      //start product view time
+      this.aux.prodStartTime = Date();
     },
     RefreshCart() {
       this.cart.shift();
@@ -315,7 +393,6 @@ export default {
 
       //update output
       this.StoreInArr(this.output.prod_addedInCart, this.controls.sel_Prdct.id);
-      this.controls.sel_Prdct = null;
     },
     DeleteProdCart(prod) {
       let index = this.cart.findIndex(i => i.id === prod.id);
@@ -324,7 +401,11 @@ export default {
     },
 
     UpdateLvl(pay) {
-      // debugger;
+      // if last value was product, store prod timers
+      if (this.controls.showLevel == "Prdct") {
+        this.StorePrdctTimers();
+        this.controls.sel_Prdct = null;
+      }
       this.controls.showLevel = pay.lvl;
       // this.controls.selected1_Cat=payload.cat
       // this.controls.selected2_AisleCat=pay.AisleCat
