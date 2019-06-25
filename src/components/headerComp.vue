@@ -21,12 +21,12 @@
         @click="UpdateLvl('Cart')"
       >
         <div>
-          {{ nr_cart }}
+          {{ cart.nrProd }}
           <i class="material-icons small">shopping_cart</i>
         </div>
         <div v-if="skinProps.LayoutProps.hasVoucher" id="voucher">
           {{ texts.general_texts.voucher }}: {{ texts.general_texts.currency }}
-          {{ voucherVal }}
+          {{ cart.remV }}
         </div>
       </div>
       <div
@@ -88,12 +88,12 @@
         @click="UpdateLvl('Cart')"
       >
         <div>
-          {{ nr_cart }}
+          {{ cart.nrProd }}
           <i class="material-icons small">shopping_cart</i>
         </div>
         <div v-if="skinProps.LayoutProps.hasVoucher" id="voucher">
           {{ texts.general_texts.voucher }}: {{ texts.general_texts.currency }}
-          {{ voucherVal }}
+          {{ cart.remV }}
         </div>
       </div>
     </div>
@@ -105,9 +105,8 @@ export default {
   name: "headerComp",
   props: {
     skinProps: Object,
-    nr_cart: Number,
     texts: Object,
-    voucherVal: String
+    cart: Object
   },
   methods: {
     UpdateLvl(level) {

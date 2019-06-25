@@ -2,10 +2,9 @@
   <div id="app" v-bind:style="{ 'background-color': skinProps.body_bk_color }">
     <headerComp
       :skinProps="skinProps"
-      :nr_cart="cartNumb"
       :texts="texts"
+      :cart="updatedCart"
       v-on:updtLvl="UpdateLvl($event)"
-      :voucherVal="setVoucher"
     />
     <!-- <lvlMain
       v-if="controls.showLevel=='Main'"
@@ -87,14 +86,14 @@
       v-if="controls.showLevel == 'Cart'"
       :general_texts="texts.general_texts"
       :prodMediaPath="prodDB.prodMediaPath"
-      :Cart="cart"
       :texts="texts"
       :skinProps="skinProps"
+      :updCart="updatedCart"
+      :CartArr="cart"
       v-on:updtLvl="UpdateLvl($event)"
       v-on:remProd="DeleteProdCart($event)"
       v-on:RCart="RefreshCart()"
       v-on:checkOut="CheckOut()"
-      v-on:updVoucher="UpdateVoucher($event)"
       v-on:updCartTime="UpdateCartTime($event)"
     />
     <inputs
@@ -187,9 +186,9 @@ export default {
           price: []
         }
       },
-      cart: [{ id: -1, quantity: 0 }],
-      cartSum: 0,
-      voucher: null
+      cart: [{ id: -1, quantity: 0 }]
+      // cartSum: 0,
+      // voucher: null
     };
   },
   mounted() {
@@ -300,9 +299,6 @@ export default {
     UpdateCartTime(pay) {
       this.output.time_cart += new Date() - pay;
     },
-    UpdateVoucher(pay) {
-      this.voucher = pay;
-    },
     UpdateFilters(pay) {
       if (this.controls.filters[pay.fil] == pay.val) {
         this.controls.filters[pay.fil] = null;
@@ -311,10 +307,10 @@ export default {
       }
     },
     CheckOut() {
-      //set filters and sort
+      //save filters and sort
       this.output.filterUsed = this.controls.filters;
       this.output.sortUsed = this.SortBy.lbl;
-      //set cart prod
+      //save cart prod
       this.output.cart_prod = [];
       this.cart
         .filter(itm => itm.id != -1)
@@ -334,13 +330,7 @@ export default {
       this.output.time_total = new Date() - this.aux.beginTime;
 
       // set value
-      this.output.cart_val = 0;
-      this.cart.forEach(prod => {
-        if (prod.id != -1) {
-          this.output.cart_val += prod.quantity * parseFloat(prod.price);
-        }
-      });
-      this.output.cart_val = this.output.cart_val.toFixed(2);
+      this.output.cart_val = this.updatedCart.sum.toFixed(2);
 
       //display outputs
       this.controls.showLevel = "output";
@@ -383,11 +373,13 @@ export default {
       }
       // debugger
       this.cart.shift();
-      let cartSum = 0;
-      this.cart.forEach(prod => {
-        cartSum += prod.quantity * parseFloat(prod.price);
-      });
-      this.voucher = (this.skinProps.LayoutProps.voucher - cartSum).toFixed(2);
+
+      // this.cart.forEach(prod => {
+      //   this.cartSum += prod.quantity * parseFloat(prod.price);
+      // });
+      // this.voucher = (
+      //   this.skinProps.LayoutProps.voucher - this.cartSum
+      // ).toFixed(2);
 
       this.cart.unshift({ id: -1, quantity: 0 });
 
@@ -416,6 +408,26 @@ export default {
     // skinProps() {
     //   return skinProps;
     // },
+    updatedCart() {
+      let cartSum = 0;
+      let remVoucher = 0;
+      let nrProd = 0;
+
+      this.cart.forEach(prod => {
+        if (prod.id != -1) {
+          cartSum += prod.quantity * parseFloat(prod.price);
+        }
+      });
+      if (this.skinProps.LayoutProps.hasVoucher) {
+        remVoucher = (this.skinProps.LayoutProps.voucher - cartSum).toFixed(2);
+      }
+      nrProd = this.cart.length - 1;
+      return {
+        sum: cartSum,
+        remV: remVoucher,
+        nrProd: nrProd
+      };
+    },
     setVoucher() {
       if (this.skinProps.LayoutProps.hasVoucher) {
         let voucher = 0;

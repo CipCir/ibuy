@@ -9,14 +9,14 @@
     </div>
     <div class="row" style="padding-left:15px">
       <h5>{{ general_texts.cart.cartTitle }}</h5>
-      <div v-if="Cart.length == 1">
+      <div v-if="CartArr.length == 1">
         {{ general_texts.cart.empty }}
       </div>
     </div>
-    <div id="cartRow" class="row" v-if="Cart.length > 1">
+    <div id="cartRow" class="row" v-if="CartArr.length > 1">
       <div
         class="col s12 l10 prodCol"
-        v-for="prod in Cart.filter(itm => {
+        v-for="prod in CartArr.filter(itm => {
           return itm.id > -1;
         })"
         :key="prod.id"
@@ -80,23 +80,25 @@
     </div>
     <div id="totalContainer" class="row center-align">
       <div>
-        {{ general_texts.subTot }} ({{ cartCount }} {{ general_texts.itm }} ):
+        {{ general_texts.subTot }} ({{ updCart.nrProd }}
+        {{ general_texts.itm }} ):
         {{ general_texts.currency }}
-        {{ cartTotal.toFixed(2) }}
+        {{ updCart.sum.toFixed(2) }}
       </div>
       <div
         v-if="skinProps.LayoutProps.hasVoucher"
-        :class="parseInt(remainingV) > 0 ? 'blue-text' : 'red-text'"
+        :class="parseInt(updCart.remV) > 0 ? 'blue-text' : 'red-text'"
       >
         {{ general_texts.remainingV }} {{ general_texts.currency }}
-        {{ remainingV }}
+        {{ updCart.remV }}
       </div>
     </div>
     <div
-      id="CheckoutRow"
-      class="row"
-      v-if="Cart.length > 1 || skinProps.LayoutProps.AllowEmptyCart"
+      id="xxCheckoutRow"
+      class="row "
+      v-if="CartArr.length > 1 || skinProps.LayoutProps.AllowEmptyCart"
     >
+      <!-- <div class="col s12 m4 l2"></div> -->
       <span id="CheckoutCol" class="col s12 m5 l3">
         <span
           id="CheckoutBtn"
@@ -121,21 +123,23 @@ export default {
   props: {
     general_texts: Object,
     prodMediaPath: String,
-    Cart: Array,
+    CartArr: Array,
+    updCart: Object,
     texts: Object,
-    skinProps: Object
+    skinProps: Object,
+
+    Cart: Array,
+    voucher: String,
+    cartVal: Number
   },
   data() {
     return {
-      cartCount: 0,
-      cartTotal: 0,
-      remainingV: 0,
       loadedDate: null
     };
   },
   created() {
     window.scrollTo(0, 0);
-    this.subTotal();
+    // this.subTotal();
     this.loadedDate = new Date();
   },
   methods: {
@@ -149,29 +153,7 @@ export default {
       this.$emit("checkOut");
     },
     UpdateQ() {
-      this.subTotal();
-      // update voucher val
-
-      this.$emit("updVoucher", this.remainingV);
       this.$emit("RCart");
-    },
-    subTotal() {
-      this.cartCount = 0;
-      this.cartTotal = 0;
-
-      let vueObj = this;
-      this.Cart.forEach(prod => {
-        if (prod.id != -1) {
-          vueObj.cartCount += prod.quantity;
-          vueObj.cartTotal += prod.quantity * parseFloat(prod.price);
-        }
-      });
-      this.remainingV = (
-        this.skinProps.LayoutProps.voucher - this.cartTotal
-      ).toFixed(2);
-    },
-    Selected(prod) {
-      this.$emit("updtLvl", { lvl: "Prdct" });
     },
     DeleteProd(prod) {
       this.$emit("remProd", prod);
@@ -281,8 +263,20 @@ select {
   display: flex;
   justify-content: center;
 }
-#CheckoutCol {
+/* #CheckoutCol {
   margin: unset;
+} */
+/* medium */
+@media only screen and (min-width: 601px) {
+  #CheckoutCol {
+    margin-left: 29.333333%;
+  }
+}
+/* large */
+@media only screen and (min-width: 993px) {
+  #CheckoutCol {
+    margin-left: 37.666667%;
+  }
 }
 #CheckoutBtn {
   width: 100%;
