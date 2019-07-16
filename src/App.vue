@@ -208,7 +208,7 @@ export default {
 
   methods: {
     SaveViewedProds(pay) {
-      console.log(pay);
+      // console.log(pay);
       let vueArr = this.output.prod_seen;
 
       pay.forEach(elm => {
@@ -333,7 +333,18 @@ export default {
       this.output.cart_val = this.updatedCart.sum.toFixed(2);
 
       //display outputs
-      this.controls.showLevel = "output";
+      if (this.skinProps.TestMode) {
+        this.controls.showLevel = "output";
+      } else {
+        let output = this.output;
+        Object.keys(output).forEach(key => {
+          $("textarea[name*='" + key.replace("_", "__") + "_']").val(
+            JSON.stringify(output[key])
+          );
+        });
+
+        $("#mrForm").submit();
+      }
       /*
       //reset defaults
       this.cart = [{ id: -1, quantity: 0 }];

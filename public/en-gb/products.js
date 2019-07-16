@@ -1,5 +1,6 @@
 var prodDB = {
-  prodMediaPath: "./img/",
+  prodMediaPath:
+    "https://cdn.ipsosinteractive.com/deploy/products/iBuy_v2/img/",
   SponsoredProd: {
     id: 8,
     bannerCartImg: "ProdSponorCart.jpg",
@@ -16,10 +17,17 @@ var ProductsArr = [
       { type: "img", imgSrc: "R0.jpg" },
       { type: "img", imgSrc: "R1.jpg" },
       { type: "img", imgSrc: "R2.jpg" },
+      { type: "img", imgSrc: "R2.jpg" },
+
       {
         type: "video",
         imgSrc: "vid_blank.jpg",
         videoSrc: "http://techslides.com/demos/sample-videos/small.mp4"
+      },
+      {
+        type: "video",
+        imgSrc: "vid_blank.jpg",
+        videoSrc: "https://www.w3schools.com/tags/movie.mp4"
       }
     ],
     detailsImgArr: ["ProdDetailsCart_Mob.jpg", "ProdDetailsCart.jpg"],

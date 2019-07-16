@@ -96,7 +96,7 @@
     <div
       id="xxCheckoutRow"
       class="row "
-      v-if="CartArr.length > 1 || skinProps.LayoutProps.AllowEmptyCart"
+      v-if="CartArr.length > 1 || skinProps.LayoutProps.allowEmptyCart"
     >
       <!-- <div class="col s12 m4 l2"></div> -->
       <span id="CheckoutCol" class="col s12 m5 l3">
@@ -107,6 +107,17 @@
           >{{ general_texts.cart.checkout }}</span
         >
       </span>
+    </div>
+    <!-- modal -->
+    <div id="modal1" class="modal">
+      <div class="header_container">
+        <span class="modal-close close_modal_btn">X</span>
+      </div>
+      <div class="modal-content">
+        <div id="ProdMediaCont" class="row">
+          {{ general_texts.cart.negVoucher }}
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -142,12 +153,20 @@ export default {
     // this.subTotal();
     this.loadedDate = new Date();
   },
+  mounted() {
+    var modal = document.querySelector(".modal");
+    M.Modal.init(modal);
+  },
   methods: {
     Back() {
       this.$emit("updCartTime", this.loadedDate);
       this.$emit("updtLvl", { lvl: "Products" });
     },
     CheckOut() {
+      if (parseInt(this.updCart.remV) < 0) {
+        M.Modal.getInstance($("#modal1")).open();
+        return false;
+      }
       this.$emit("updtLvl", { lvl: "Products" });
       this.$emit("updCartTime", this.loadedDate);
       this.$emit("checkOut");
@@ -295,4 +314,32 @@ select {
   border-color: #a88734 #9c7e31 #846a29;
   background: linear-gradient(to bottom, #f5d78e, #eeb933);
 } */
+/* .modal-content {
+  height: 90%;
+  
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+.modal {
+  
+  top: 5vh !important;
+  max-height: 90vh;
+  width: 90vw;
+  bottom: 5vh;
+  overflow: hidden;
+} */
+.header_container {
+  text-align: right;
+  padding-right: 13px;
+  padding-top: 10px;
+  font-size: 20px;
+}
+.close_modal_btn {
+  background-color: #26a69a;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
 </style>

@@ -1,11 +1,12 @@
 var skinProps = {
-  TestMode: true,
+  TestMode: false,
   LayoutProps: {
     hasVoucher: true,
     hasSort: true,
     hasFilters: true,
     RandomizeProds_ForNoSort: true,
-    AllowEmptyCart: true,
+    allowEmptyCart: true,
+    allowNegativeVoucher: false,
     voucher: 50,
     show_search: true,
     show_bk_to_top: true,

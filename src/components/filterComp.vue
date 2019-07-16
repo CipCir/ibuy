@@ -136,11 +136,6 @@ export default {
 
       return false;
     }
-  },
-  computed: {
-    example: function(arr) {
-      console.log("aaa");
-    }
   }
 };
 </script>

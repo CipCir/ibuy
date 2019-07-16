@@ -1,4 +1,5 @@
-var lblsMediaPath = "./img/";
+var lblsMediaPath =
+  "https://cdn.ipsosinteractive.com/deploy/products/iBuy_v2/img/";
 var texts = {
   mediaPath: "",
   header: {
@@ -53,7 +54,9 @@ var texts = {
     cart: {
       cartTitle: "Shopping Cart",
       empty: "Your cart is empty",
-      checkout: "Checkout"
+      checkout: "Checkout",
+      negVoucher:
+        "The total amount of products purchased is bigger than the available voucher"
     },
     btn: {
       bckResults: "back to results",

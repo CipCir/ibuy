@@ -219,7 +219,7 @@ export default {
 
         return elementBottom > viewportTop && elementTop < viewportBottom;
       };
-      console.log("scroll");
+      // console.log("scroll");
 
       // $("#viz_5").isInViewport();
       // $("#viz_6").isInViewport();
