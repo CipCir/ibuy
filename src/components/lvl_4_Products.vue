@@ -9,6 +9,7 @@
           :isMobile="true"
           :scFilters="cFilters"
           :skinProps="skinProps"
+          :pFilters="pFilters"
           class="row hide-on-med-and-up"
           v-on:SelectedStar="UpdateFilter('rating', $event)"
           v-on:filterUpd="DelayedStoreViewProd()"
@@ -16,6 +17,7 @@
         <!-- desktop filter -->
         <filterComp
           :texts="texts"
+          :pFilters="pFilters"
           :filters="texts.filters"
           :isMobile="false"
           :scFilters="cFilters"
@@ -171,7 +173,8 @@ export default {
     texts: Object,
     cFilters: Object,
     skinProps: Object,
-    SortBy: Object
+    SortBy: Object,
+    pFilters: Object
   },
   data() {
     return {

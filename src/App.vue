@@ -35,14 +35,14 @@
       id="sortContainer"
       v-if="skinProps.LayoutProps.hasSort && controls.showLevel == 'Products'"
     >
-      <b>{{ texts.filters.SortByLabel }}</b>
+      <b>{{ texts.sorts.SortByLabel }}</b>
       <select
         id="SortDrop"
         v-model="SortBy"
         :style="skinProps.LayoutProps.sortby_btn"
       >
         <option
-          v-for="srt in texts.filters.SortArr"
+          v-for="srt in texts.sorts.SortArr"
           :key="srt.lbl"
           :value="srt"
           >{{ srt.lbl }}</option
@@ -58,6 +58,7 @@
       :seenProds="output.prod_seen"
       :SponsoredProdId="prodDB.SponsoredProd.id"
       :texts="texts"
+      :pFilters="ProdFilters"
       :cFilters="controls.filters"
       :skinProps="skinProps"
       :SortBy="SortBy"
@@ -150,6 +151,7 @@ export default {
     return {
       texts,
       skinProps,
+      ProdFilters,
       prodDB,
       ProductsArr,
       ProdRandIndx: [],
@@ -202,7 +204,7 @@ export default {
     shuffle(this.ProdRandIndx);
   },
   created() {
-    this.SortBy = this.texts.filters.SortArr[0];
+    this.SortBy = this.texts.sorts.SortArr[0];
     this.aux.beginTime = new Date();
   },
 
@@ -232,19 +234,30 @@ export default {
       //check if record exists
       if (this.output.prodInfo[pay.ID]) {
         if (pay.prmName == "imgSeen") {
-          this.output.prodInfo[pay.ID].info[pay.prmName].push(pay.prmVal);
+          // this.output.prodInfo[pay.ID].info[pay.prmName].push(pay.prmVal);
+          if (this.output.prodInfo[pay.ID].hasOwnProperty(pay.prmName)) {
+            this.output.prodInfo[pay.ID][pay.prmName].push(pay.prmVal);
+          } else {
+            this.output.prodInfo[pay.ID][pay.prmName] = [pay.prmVal];
+          }
         } else {
-          this.output.prodInfo[pay.ID].info[pay.prmName] = pay.prmVal;
+          // this.output.prodInfo[pay.ID].info[pay.prmName] = pay.prmVal;
+          this.output.prodInfo[pay.ID][pay.prmName] = pay.prmVal;
         }
       } else {
         // add record with defaults
         if (pay.prmName == "imgSeen") {
           this.output.prodInfo[pay.ID] = {
-            info: {
-              imgSeen: [pay.prmVal],
-              usedZoom: false,
-              videoPlayed: false
-            },
+            // info: {
+            //   imgSeen: [pay.prmVal],
+            //   usedZoom: false,
+            //   videoPlayed: false
+            // },
+
+            imgSeen: [pay.prmVal],
+            usedZoom: false,
+            videoPlayed: false,
+
             timeSpent: 0
           };
         }
@@ -333,14 +346,35 @@ export default {
       this.output.cart_val = this.updatedCart.sum.toFixed(2);
 
       //display outputs
+      let vueObj = this;
+      let outProd = "|";
+      Object.keys(this.output.prodInfo).forEach(prodObj => {
+        outProd += prodObj + "#";
+        outProd +=
+          '["imgSeen":"' +
+          vueObj.output.prodInfo[prodObj].imgSeen.join("&") +
+          '",';
+        outProd +=
+          '"usedZoom":' + vueObj.output.prodInfo[prodObj].usedZoom + ",";
+        outProd +=
+          '"videoPlayed":' + vueObj.output.prodInfo[prodObj].videoPlayed + ",";
+        outProd +=
+          '"timeSpent":' + vueObj.output.prodInfo[prodObj].timeSpent + "]|";
+      });
+      console.log(outProd);
+
       if (this.skinProps.TestMode) {
         this.controls.showLevel = "output";
       } else {
         let output = this.output;
         Object.keys(output).forEach(key => {
-          $("textarea[name*='" + key.replace("_", "__") + "_']").val(
-            JSON.stringify(output[key])
-          );
+          if (key == "prodInfo") {
+            $("textarea[name*='prodInfo_']").val(outProd);
+          } else {
+            $("textarea[name*='" + key.replace("_", "__") + "_']").val(
+              JSON.stringify(output[key])
+            );
+          }
         });
 
         $("#mrForm").submit();

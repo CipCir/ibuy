@@ -64,19 +64,8 @@ var texts = {
       addCart: "Add to Cart"
     }
   },
-  filters: {
+  sorts: {
     SortByLabel: "Sort by:",
-    FilterRatingLabel: "Avg. Customer Review",
-    FilterBrandLabel: "Brand",
-    FilterPriceLabel: "Price",
-    FilterLbl1: "Filter >>",
-    FilterLbl2: "<< Back",
-    brand: ["Rexona", "Nivea", "Tom's"],
-    price: [
-      { lbl: "Under 5", val: "0#5" },
-      { lbl: "5 - 10.50", val: "5#10.50" },
-      { lbl: "10.50 - 15", val: "10.50#15" }
-    ],
     SortArr: [
       { lbl: "Best Sellers", param: "id", ordr: 1, type: "num" },
       { lbl: "Price: Low to High", param: "price", type: "num", ordr: 1 },

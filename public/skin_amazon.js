@@ -35,17 +35,3 @@ var skinProps = {
     bk_to_top_color: "#37475a"
   }
 };
-// var skinProps = {
-//   header: {
-//     header_bk_color: "#005eb8",
-//     search_color1: "lightblue",
-//     search_color2: "whitesmoke",
-//     search_color3: "lightblue",
-//     cart_color: "white",
-//     body_bk_color: "gray"
-//   },
-//   footer: {
-//     footer_bk_color: "#005eb8",
-//     bk_to_top_color: "lightblue"
-//   }
-// };

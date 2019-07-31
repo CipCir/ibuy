@@ -3,13 +3,13 @@
     <div v-if="isMobile">
       <div
         class="MobFilter1 clickable"
-        v-html="filters.FilterLbl1"
+        v-html="pFilters.FilterLbl1"
         v-if="!show_filters"
         @click="show_filters = !show_filters"
       ></div>
       <div
         class="MobFilter2 clickable"
-        v-html="filters.FilterLbl2"
+        v-html="pFilters.FilterLbl2"
         v-if="show_filters"
         @click="show_filters = !show_filters"
       ></div>
@@ -19,7 +19,7 @@
       <!-- start filter -->
       <!-- rating filter -->
       <div id="RatingFilterCont">
-        <div class="filterLbl" v-html="filters.FilterRatingLabel"></div>
+        <div class="filterLbl" v-html="pFilters.FilterRatingLabel"></div>
 
         <div
           v-for="rating in skinProps.LayoutProps.ratingMaxVal"
@@ -55,11 +55,11 @@
       </div>
       <!-- brand filter -->
       <div id="BrandFilterCont">
-        <div class="filterLbl" v-html="filters.FilterBrandLabel"></div>
+        <div class="filterLbl" v-html="pFilters.FilterBrandLabel"></div>
 
         <div
           id="BrandFilterForm"
-          v-for="(brand, index) in filters.brand"
+          v-for="(brand, index) in pFilters.brand"
           :key="brand"
           class="paddingBox"
         >
@@ -78,10 +78,10 @@
       </div>
       <!-- price filter -->
       <div id="PriceFilterCont">
-        <div class="filterLbl" v-html="filters.FilterPriceLabel"></div>
+        <div class="filterLbl" v-html="pFilters.FilterPriceLabel"></div>
 
         <div
-          v-for="(price, index) in filters.price"
+          v-for="(price, index) in pFilters.price"
           :key="price.val"
           class="paddingBox"
         >
@@ -116,7 +116,8 @@ export default {
     isMobile: Boolean,
     scFilters: Object,
     filters: Object,
-    skinProps: Object
+    skinProps: Object,
+    pFilters: Object
   },
   data() {
     return {

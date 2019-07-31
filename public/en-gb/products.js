@@ -1,3 +1,16 @@
+var ProdFilters = {
+  FilterRatingLabel: "Avg. Customer Review",
+  FilterBrandLabel: "Brand",
+  FilterPriceLabel: "Price",
+  FilterLbl1: "Filter >>",
+  FilterLbl2: "<< Back",
+  brand: ["Rexona", "Nivea", "Tom's"],
+  price: [
+    { lbl: "Under 5", val: "0#5" },
+    { lbl: "5 - 10.50", val: "5#10.50" },
+    { lbl: "10.50 - 15", val: "10.50#15" }
+  ]
+};
 var prodDB = {
   prodMediaPath:
     "https://cdn.ipsosinteractive.com/deploy/products/iBuy_v2/img/",
