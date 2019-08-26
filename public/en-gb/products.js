@@ -92,7 +92,8 @@ var ProductsArr = [
     reviews: "<span style='color:#0066c0;'>6</span>",
     price: "14.49",
     addInf1: null,
-    addInf2: null
+    addInf2: null,
+    addInf3:"<div class='green-text'><b>In stock</b></div><div><b>Size</b>: 45 ml</div><div><b>Item model number</b>: 6163130</div><div><b>Amazon Best Sellers Rank</b>: #883 in Beauty & Personal Care</div>"
   },
   {
     id: 2,

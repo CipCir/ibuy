@@ -126,6 +126,11 @@
                 ></span>
               </span>
             </div>
+            <div class="row">
+              <center>
+                <div style="max-width: 220px;text-align: left;" v-html="Prdct.addInf3"></div>
+              </center>
+            </div>
             <div class="row center-align">
               {{ general_texts.qty }}
               <select v-model="quantity">
