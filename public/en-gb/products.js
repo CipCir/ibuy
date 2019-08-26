@@ -1,3 +1,24 @@
+var ProdSkin = {
+  TestMode: false,
+  MediaPath: "https://cdn.ipsosinteractive.com/deploy/products/iBuy_v2/img/",
+  placeholder_search:
+    "<span style='color:darkgray;'>Placeholder text here...</span>",
+  hasVoucher: true,
+  hasSort: true,
+  hasFilters: true,
+  RandomizeProds_ForNoSort: true,
+  allowEmptyCart: true,
+  allowNegativeVoucher: false,
+  voucher: 50,
+  show_search: true,
+  show_bk_to_top: true,
+  show_footer_text: true,
+  show_footer_image: true,
+  show_banner: true,
+  ratingMaxVal: 5,
+  productView: "Grid" //"Grid" "List",
+};
+
 var ProdFilters = {
   FilterRatingLabel: "Avg. Customer Review",
   FilterBrandLabel: "Brand",

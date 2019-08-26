@@ -11,14 +11,15 @@ export default {
   name: "stars",
   props: {
     rating: Number,
-    skinProps: Object
+    skinProps: Object,
+    ProdSkin: Object
   },
   data() {
     return {
       fullstars: 0,
       halfstars: 0,
       remaining: 0,
-      maxStars: skinProps.LayoutProps.ratingMaxVal
+      maxStars: ProdSkin.ratingMaxVal
     };
   },
   mounted() {

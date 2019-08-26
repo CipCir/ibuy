@@ -24,7 +24,7 @@
           {{ cart.nrProd }}
           <i class="material-icons small">shopping_cart</i>
         </div>
-        <div v-if="skinProps.LayoutProps.hasVoucher" id="voucher">
+        <div v-if="ProdSkin.hasVoucher" id="voucher">
           {{ texts.general_texts.voucher }}: {{ texts.general_texts.currency }}
           {{ cart.remV }}
         </div>
@@ -32,7 +32,7 @@
       <div
         class="col s12 m8 l6 valign-wrapper"
         v-bind:style="{ 'background-color': skinProps.header.header_bk_color }"
-        v-if="skinProps.LayoutProps.show_search"
+        v-if="ProdSkin.show_search"
       >
         <div
           class="col s2 searchbar valign-wrapper"
@@ -42,7 +42,7 @@
         <div
           class="col s12 searchbar valign-wrapper"
           v-bind:style="{ 'background-color': skinProps.header.search_color2 }"
-          v-html="texts.header.placeholder_search"
+          v-html="ProdSkin.placeholder_search"
         ></div>
         <div
           class="col s2 searchbar valign-wrapper"
@@ -80,7 +80,7 @@
       ></div>
       <div
         class="col hide-on-small-only m3 l2 valign-wrapper cart_container clickable"
-        :class="{ addMarg: skinProps.LayoutProps.hasVoucher }"
+        :class="{ addMarg: ProdSkin.hasVoucher }"
         v-bind:style="{
           'background-color': skinProps.header.header_bk_color,
           color: skinProps.header.cart_color
@@ -91,7 +91,7 @@
           {{ cart.nrProd }}
           <i class="material-icons small">shopping_cart</i>
         </div>
-        <div v-if="skinProps.LayoutProps.hasVoucher" id="voucher">
+        <div v-if="ProdSkin.hasVoucher" id="voucher">
           {{ texts.general_texts.voucher }}: {{ texts.general_texts.currency }}
           {{ cart.remV }}
         </div>
@@ -106,7 +106,8 @@ export default {
   props: {
     skinProps: Object,
     texts: Object,
-    cart: Object
+    cart: Object,
+    ProdSkin: Object
   },
   methods: {
     UpdateLvl(level) {

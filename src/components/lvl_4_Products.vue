@@ -2,7 +2,7 @@
   <div id="lvl_Main" class="lvl_container">
     <div class="row">
       <!-- mobile filter -->
-      <div id="filtersContainer" v-if="skinProps.LayoutProps.hasFilters">
+      <div id="filtersContainer" v-if="ProdSkin.hasFilters">
         <filterComp
           :texts="texts"
           :filters="texts.filters"
@@ -10,6 +10,7 @@
           :scFilters="cFilters"
           :skinProps="skinProps"
           :pFilters="pFilters"
+          :ProdSkin="ProdSkin"
           class="row hide-on-med-and-up"
           v-on:SelectedStar="UpdateFilter('rating', $event)"
           v-on:filterUpd="DelayedStoreViewProd()"
@@ -22,6 +23,7 @@
           :isMobile="false"
           :scFilters="cFilters"
           :skinProps="skinProps"
+          :ProdSkin="ProdSkin"
           v-on:SelectedStar="UpdateFilter('rating', $event)"
           v-on:filterUpd="DelayedStoreViewProd()"
           class="row hide-on-small-only"
@@ -32,7 +34,7 @@
         <div
           id="ProdsAreaCont"
           class="col s12 "
-          :class="{ 'm9 l10': skinProps.LayoutProps.hasFilters }"
+          :class="{ 'm9 l10': ProdSkin.hasFilters }"
         >
           <!-- top banner -->
           <div
@@ -67,7 +69,7 @@
             <div
               class="col CanSelect s12"
               :class="[
-                skinProps.LayoutProps.productView == 'Grid' ? 'm4 l3' : 'm12',
+                ProdSkin.productView == 'Grid' ? 'm4 l3' : 'm12',
                 index % 4 == 0 && index > 0 ? 'clear_left_4' : '',
                 index % 3 == 0 && index > 0 ? 'clear_left_3' : ''
               ]"
@@ -80,11 +82,7 @@
               <div>
                 <div
                   class="prodImg col"
-                  :class="
-                    skinProps.LayoutProps.productView == 'Grid'
-                      ? 's4 m12'
-                      : 's4 m3'
-                  "
+                  :class="ProdSkin.productView == 'Grid' ? 's4 m12' : 's4 m3'"
                   :style="{
                     'background-image':
                       'url(' +
@@ -95,11 +93,7 @@
                 ></div>
                 <div
                   class="col"
-                  :class="
-                    skinProps.LayoutProps.productView == 'Grid'
-                      ? 's8 m12'
-                      : 's8 m9'
-                  "
+                  :class="ProdSkin.productView == 'Grid' ? 's8 m12' : 's8 m9'"
                 >
                   <!-- <div
                   class="ProdLbl isVizibil"
@@ -174,11 +168,12 @@ export default {
     cFilters: Object,
     skinProps: Object,
     SortBy: Object,
-    pFilters: Object
+    pFilters: Object,
+    ProdSkin: Object
   },
   data() {
     return {
-      show_banner: this.skinProps.LayoutProps.show_banner,
+      show_banner: this.ProdSkin.show_banner,
       recentScroll: false
       // SortArr: this.texts.filters.SortArr
       // SortBy: null
@@ -298,8 +293,8 @@ export default {
         return SortedArr;
       } else {
         if (
-          this.skinProps.LayoutProps.hasSort == false &&
-          this.skinProps.LayoutProps.RandomizeProds_ForNoSort
+          this.ProdSkin.hasSort == false &&
+          this.ProdSkin.RandomizeProds_ForNoSort
         ) {
           // shuffle(this.Prods);
           SortedArr = this.Prods.sort(indxArr);

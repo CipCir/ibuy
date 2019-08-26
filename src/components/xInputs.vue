@@ -5,6 +5,30 @@
         <th>Variable Name</th>
         <th>Value</th>
       </tr>
+      <tr v-for="(elm2, k2) in ProdSkin" :key="k2">
+        <td>{{ k2 }}</td>
+        <td>
+          <label>
+            <input
+              type="checkbox"
+              checked="checked"
+              v-if="typeof elm2 == 'boolean'"
+              v-model="ProdSkin[k2]"
+            />
+            <span></span>
+          </label>
+          <input
+            v-if="typeof elm2 == 'string'"
+            type="text"
+            v-model="ProdSkin[k2]"
+          />
+          <input
+            v-if="typeof elm2 == 'number'"
+            type="number"
+            v-model="ProdSkin[k2]"
+          />
+        </td>
+      </tr>
       <tr v-for="(elm, k, i) in skinProps.LayoutProps" :key="i">
         <td>{{ k }}</td>
         <td>
@@ -46,7 +70,8 @@ export default {
 
   data() {
     return {
-      skinProps
+      skinProps,
+      ProdSkin
     };
   }
 };

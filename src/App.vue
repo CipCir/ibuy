@@ -2,6 +2,7 @@
   <div id="app" v-bind:style="{ 'background-color': skinProps.body_bk_color }">
     <headerComp
       :skinProps="skinProps"
+      :ProdSkin="ProdSkin"
       :texts="texts"
       :cart="updatedCart"
       v-on:updtLvl="UpdateLvl($event)"
@@ -33,7 +34,7 @@
     <div
       class="row right valign-wrapper"
       id="sortContainer"
-      v-if="skinProps.LayoutProps.hasSort && controls.showLevel == 'Products'"
+      v-if="ProdSkin.hasSort && controls.showLevel == 'Products'"
     >
       <b>{{ texts.sorts.SortByLabel }}</b>
       <select
@@ -62,6 +63,7 @@
       :cFilters="controls.filters"
       :skinProps="skinProps"
       :SortBy="SortBy"
+      :ProdSkin="ProdSkin"
       v-on:selProd="SetPrdct($event)"
       v-on:updtLvl="UpdateLvl($event)"
       v-on:updFilter="UpdateFilters($event)"
@@ -91,6 +93,7 @@
       :skinProps="skinProps"
       :updCart="updatedCart"
       :CartArr="cart"
+      :ProdSkin="ProdSkin"
       v-on:updtLvl="UpdateLvl($event)"
       v-on:remProd="DeleteProdCart($event)"
       v-on:RCart="RefreshCart()"
@@ -100,6 +103,7 @@
     <inputs
       v-if="controls.showLevel == 'inputs'"
       :skinProps="skinProps"
+      :ProdSkin="ProdSkin"
       v-on:updtLvl="UpdateLvl($event)"
     />
     <outputs
@@ -108,8 +112,12 @@
       v-on:updtLvl="UpdateLvl($event)"
     />
 
-    <footerComp :skinProps="skinProps" :footer_texts="texts.footer" />
-    <div class="row" v-if="skinProps.TestMode">
+    <footerComp
+      :ProdSkin="ProdSkin"
+      :skinProps="skinProps"
+      :footer_texts="texts.footer"
+    />
+    <div class="row" v-if="ProdSkin.TestMode">
       <a
         class="waves-effect waves-light btn"
         @click="controls.showLevel = 'inputs'"
@@ -151,6 +159,7 @@ export default {
     return {
       texts,
       skinProps,
+      ProdSkin,
       ProdFilters,
       prodDB,
       ProductsArr,
@@ -194,8 +203,8 @@ export default {
     };
   },
   mounted() {
-    if (this.skinProps.LayoutProps.hasVoucher) {
-      this.voucher = parseFloat(this.skinProps.LayoutProps.voucher).toFixed(2);
+    if (this.ProdSkin.hasVoucher) {
+      this.voucher = parseFloat(this.ProdSkin.voucher).toFixed(2);
     }
     this.ProdRandIndx = this.ProductsArr.map(a => a.id);
     function shuffle(array) {
@@ -333,8 +342,8 @@ export default {
 
       //set product index
       if (
-        this.skinProps.LayoutProps.hasSort == false &&
-        this.skinProps.LayoutProps.RandomizeProds_ForNoSort
+        this.ProdSkin.hasSort == false &&
+        this.ProdSkin.RandomizeProds_ForNoSort
       ) {
         this.output.prodIndx = this.ProdRandIndx;
       }
@@ -363,7 +372,7 @@ export default {
       });
       console.log(outProd);
 
-      if (this.skinProps.TestMode) {
+      if (this.ProdSkin.TestMode) {
         this.controls.showLevel = "output";
       } else {
         let output = this.output;
@@ -423,7 +432,7 @@ export default {
       //   this.cartSum += prod.quantity * parseFloat(prod.price);
       // });
       // this.voucher = (
-      //   this.skinProps.LayoutProps.voucher - this.cartSum
+      //   this.ProdSkin.voucher - this.cartSum
       // ).toFixed(2);
 
       this.cart.unshift({ id: -1, quantity: 0 });
@@ -463,8 +472,8 @@ export default {
           cartSum += prod.quantity * parseFloat(prod.price);
         }
       });
-      if (this.skinProps.LayoutProps.hasVoucher) {
-        remVoucher = (this.skinProps.LayoutProps.voucher - cartSum).toFixed(2);
+      if (this.ProdSkin.hasVoucher) {
+        remVoucher = (this.ProdSkin.voucher - cartSum).toFixed(2);
       }
       nrProd = this.cart.length - 1;
       return {
@@ -474,7 +483,7 @@ export default {
       };
     },
     setVoucher() {
-      if (this.skinProps.LayoutProps.hasVoucher) {
+      if (this.ProdSkin.hasVoucher) {
         let voucher = 0;
         let cartTotal = 0;
         this.cart.forEach(prod => {
@@ -482,7 +491,7 @@ export default {
             cartTotal += prod.quantity * parseFloat(prod.price);
           }
         });
-        voucher = (this.skinProps.LayoutProps.voucher - cartTotal).toFixed(2);
+        voucher = (this.ProdSkin.voucher - cartTotal).toFixed(2);
 
         return voucher;
       }

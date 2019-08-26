@@ -86,7 +86,7 @@
         {{ updCart.sum.toFixed(2) }}
       </div>
       <div
-        v-if="skinProps.LayoutProps.hasVoucher"
+        v-if="ProdSkin.hasVoucher"
         :class="parseInt(updCart.remV) > 0 ? 'blue-text' : 'red-text'"
       >
         {{ general_texts.remainingV }} {{ general_texts.currency }}
@@ -96,7 +96,7 @@
     <div
       id="xxCheckoutRow"
       class="row "
-      v-if="CartArr.length > 1 || skinProps.LayoutProps.allowEmptyCart"
+      v-if="CartArr.length > 1 || ProdSkin.allowEmptyCart"
     >
       <!-- <div class="col s12 m4 l2"></div> -->
       <span id="CheckoutCol" class="col s12 m5 l3">
@@ -138,7 +138,7 @@ export default {
     updCart: Object,
     texts: Object,
     skinProps: Object,
-
+    ProdSkin: Object,
     Cart: Array,
     voucher: String,
     cartVal: Number
@@ -163,7 +163,10 @@ export default {
       this.$emit("updtLvl", { lvl: "Products" });
     },
     CheckOut() {
-      if (parseInt(this.updCart.remV) < 0) {
+      if (
+        parseInt(this.updCart.remV) < 0 &&
+        !this.ProdSkin.allowNegativeVoucher
+      ) {
         M.Modal.getInstance($("#modal1")).open();
         return false;
       }
