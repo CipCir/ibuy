@@ -1,17 +1,18 @@
+var txtMediaPath =
+  "https://cdn.ipsosinteractive.com/deploy/products/iBuy_v2/media/img/";
 var texts = {
-  mediaPath: "",
   header: {
-    logo_img: ProdSkin.MediaPath + "amazon_logo_150x50.png",
+    logo_img: txtMediaPath + "amazon_logo_150x50.png",
     opt0: "<span style='color:white;'>24/7 Customer service. Learn more</span>",
     opt1:
       "<span style='color:white;'><img src='" +
-      ProdSkin.MediaPath +
+      txtMediaPath +
       "amazon_opt_1.png'></span>",
     opt2:
       "<br/><div style='color:white;'><b>Departments▾ </b></span><span style='color:lightgray;'>Your Amazon.com Today's Deals Gift Cards Registry Help</span>",
     opt3:
       "<span style='color:white;'><img src='" +
-      ProdSkin.MediaPath +
+      txtMediaPath +
       "amazon_opt_3.png'></span>",
     search_all_text: "All▾"
   },
@@ -25,16 +26,16 @@ var texts = {
       "<span style='color:white;'><b>Amazon Payment Products</b><br/><br/>Amazon Business Card<br/>Shop with Points<br/></span>",
     col4:
       "<span style='color:white;'><b>Let Us Help You</b><br/><br/>Your Account<br/>Your Orders</span>",
-    img1: ProdSkin.MediaPath + "footer_s.png",
-    img2: ProdSkin.MediaPath + "footer_m.png",
-    img3: ProdSkin.MediaPath + "footer_l.png",
-    img4: ProdSkin.MediaPath + "footer_xl.png"
+    img1: txtMediaPath + "footer_s.png",
+    img2: txtMediaPath + "footer_m.png",
+    img3: txtMediaPath + "footer_l.png",
+    img4: txtMediaPath + "footer_xl.png"
   },
   banner: {
-    img1: ProdSkin.MediaPath + "banner_s.png",
-    img2: ProdSkin.MediaPath + "banner_m.png",
-    img3: ProdSkin.MediaPath + "banner_l.png",
-    img4: ProdSkin.MediaPath + "banner_xl.png"
+    img1: txtMediaPath + "banner_s.png",
+    img2: txtMediaPath + "banner_m.png",
+    img3: txtMediaPath + "banner_l.png",
+    img4: txtMediaPath + "banner_xl.png"
   },
   general_texts: {
     voucher: "Voucher",

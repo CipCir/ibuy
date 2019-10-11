@@ -22,10 +22,10 @@
         <div class="filterLbl" v-html="pFilters.FilterRatingLabel"></div>
 
         <div
-          v-for="rating in ProdSkin.ratingMaxVal"
+          v-for="rating in skinProps.ratingMaxVal"
           :key="rating"
           class="paddingBox clickable"
-          @click="$emit('SelectedStar', ProdSkin.ratingMaxVal - rating + 1)"
+          @click="$emit('SelectedStar', skinProps.ratingMaxVal - rating + 1)"
         >
           <!-- <label> -->
           <!-- <input
@@ -40,7 +40,7 @@
             :class="{ selected: SelectedStarF(rating) }"
           >
             <stars
-              :rating="ProdSkin.ratingMaxVal - rating + 1"
+              :rating="skinProps.ratingMaxVal - rating + 1"
               :skinProps="skinProps"
               :ProdSkin="ProdSkin"
             ></stars>
@@ -126,7 +126,9 @@ export default {
   methods: {
     SelectedStarF(rating) {
       if (this.scFilters.rating != null) {
-        return this.ProdSkin.ratingMaxVal - rating + 1 >= this.scFilters.rating;
+        return (
+          this.skinProps.ratingMaxVal - rating + 1 >= this.scFilters.rating
+        );
       }
 
       return false;

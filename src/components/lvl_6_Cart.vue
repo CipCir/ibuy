@@ -39,7 +39,10 @@
               :skinProps="skinProps"
             ></stars
             >&nbsp;
-            <span v-html="prod.reviews"></span>
+
+            <span :style="skinProps.Styles.ProductsArr.reviews">{{
+              prod.reviews
+            }}</span>
           </div>
 
           <div v-html="prod.addInf1"></div>

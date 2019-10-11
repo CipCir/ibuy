@@ -38,7 +38,10 @@
                 </stars
                 >&nbsp;
                 <span class="lowTxt">
-                  <span v-html="Prdct.reviews"></span>&nbsp;
+                  <span :style="skinProps.Styles.ProductsArr.reviews">{{
+                    Prdct.reviews
+                  }}</span>
+                  &nbsp;
                   <span v-html="general_texts.customRev"></span>
                 </span>
               </div>
@@ -128,7 +131,10 @@
             </div>
             <div class="row">
               <center>
-                <div style="max-width: 220px;text-align: left;" v-html="Prdct.addInf3"></div>
+                <div
+                  style="max-width: 220px;text-align: left;"
+                  v-html="Prdct.addInf3"
+                ></div>
               </center>
             </div>
             <div class="row center-align">

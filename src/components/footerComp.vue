@@ -11,7 +11,7 @@
       v-html="footer_texts.back_to_top"
       v-bind:style="{ 'background-color': skinProps.footer.bk_to_top_color }"
     ></div>
-    <div class="row" v-if="ProdSkin.show_footer_text">
+    <div class="row" v-if="skinProps.footer.show_footer_text">
       <div
         class="col center-align s6 m6 l4 xl3"
         v-html="footer_texts.col1"
@@ -29,7 +29,7 @@
         v-html="footer_texts.col4"
       ></div>
     </div>
-    <div class="row footer_img_cont" v-if="ProdSkin.show_footer_image">
+    <div class="row footer_img_cont" v-if="skinProps.footer.show_footer_image">
       <img
         class="footer_img show-on-small"
         :src="footer_texts.img1"

@@ -7,6 +7,11 @@ var skinProps = {
     sortby_btn:
       "background-image: linear-gradient(to right, white 10%, white 90%, gray 50%);border: 1px solid black;"
   },
+  Styles: {
+    placeholder_search: "color:darkgray;",
+    ProductsArr: { reviews: "color:#0066c0;" }
+  },
+  ratingMaxVal: 5,
   header: {
     header_bk_color: "#233040",
     search_color1: "#f3f3f3",
@@ -17,6 +22,8 @@ var skinProps = {
   },
   footer: {
     footer_bk_color: "#233040",
-    bk_to_top_color: "#37475a"
+    bk_to_top_color: "#37475a",
+    show_footer_text: true,
+    show_footer_image: true
   }
 };

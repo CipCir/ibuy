@@ -42,8 +42,12 @@
         <div
           class="col s12 searchbar valign-wrapper"
           v-bind:style="{ 'background-color': skinProps.header.search_color2 }"
-          v-html="ProdSkin.placeholder_search"
-        ></div>
+        >
+          <span
+            :style="skinProps.Styles.placeholder_search"
+            v-html="ProdSkin.placeholder_search"
+          ></span>
+        </div>
         <div
           class="col s2 searchbar valign-wrapper"
           v-bind:style="{ 'background-color': skinProps.header.search_color3 }"

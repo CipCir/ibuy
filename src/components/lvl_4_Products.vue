@@ -79,62 +79,54 @@
               @click="Selected(prod)"
             >
               <hr :id="'viz_' + prod.id" class="isVizibil" />
+
+              <div
+                class="prodImg col"
+                :class="ProdSkin.productView == 'Grid' ? 's5 m12' : 's4 m3'"
+                :style="{
+                  'background-image':
+                    'url(' + prodDB.prodMediaPath + prod.imgArr[0].imgSrc + ')'
+                }"
+              ></div>
+              <!-- <div
+                class="col"
+                :class="ProdSkin.productView == 'Grid' ? 's7 m12' : 's8 m9'"
+              > -->
               <div>
-                <div
-                  class="prodImg col"
-                  :class="ProdSkin.productView == 'Grid' ? 's4 m12' : 's4 m3'"
-                  :style="{
-                    'background-image':
-                      'url(' +
-                      prodDB.prodMediaPath +
-                      prod.imgArr[0].imgSrc +
-                      ')'
-                  }"
-                ></div>
-                <div
-                  class="col"
-                  :class="ProdSkin.productView == 'Grid' ? 's8 m12' : 's8 m9'"
-                >
-                  <!-- <div
-                  class="ProdLbl isVizibil"
-                  :id="'viz_' + prod.id"
-                  v-html="prod.lbl"
-                ></div> -->
-                  <div class="ProdLbl" v-html="prod.lbl"></div>
-                  <!-- 
-                  <div class="isVizibil" :id="'viz_' + prod.id"></div> 
-                  -->
+                <div class="ProdLbl" v-html="prod.lbl"></div>
+
+                <!-- prod by -->
+                <div v-html="prod.by"></div>
+
+                <!-- rating -->
+                <div>
+                  <stars
+                    v-if="prod.rating != null"
+                    :rating="prod.rating"
+                    :skinProps="skinProps"
+                  ></stars>
+                  <span :style="skinProps.Styles.ProductsArr.reviews">{{
+                    prod.reviews
+                  }}</span>
                 </div>
-              </div>
-              <!-- prod by -->
-              <div v-html="prod.by"></div>
 
-              <!-- rating -->
-              <div>
-                <stars
-                  v-if="prod.rating != null"
-                  :rating="prod.rating"
-                  :skinProps="skinProps"
-                ></stars>
-                <span v-html="prod.reviews"></span>
-              </div>
-
-              <div v-html="prod.addInf1"></div>
-              <div class="prodPrice">
-                <span v-if="general_texts.currecySide == 'left'">
-                  <sup v-html="general_texts.currency"></sup>
-                </span>
-                <span v-if="prod.price.toString().indexOf('.') > -1">
-                  <span v-html="prod.price.toString().split('.')[0]"></span>
-                  <sup
-                    class="suprascript"
-                    v-html="prod.price.toString().split('.')[1]"
-                  ></sup>
-                </span>
-                <span v-else v-html="prod.price"></span>
-                <span v-if="general_texts.currecySide == 'right'">
-                  <sup v-html="general_texts.currency"></sup>
-                </span>
+                <div v-html="prod.addInf1"></div>
+                <div class="prodPrice">
+                  <span v-if="general_texts.currecySide == 'left'">
+                    <sup v-html="general_texts.currency"></sup>
+                  </span>
+                  <span v-if="prod.price.toString().indexOf('.') > -1">
+                    <span v-html="prod.price.toString().split('.')[0]"></span>
+                    <sup
+                      class="suprascript"
+                      v-html="prod.price.toString().split('.')[1]"
+                    ></sup>
+                  </span>
+                  <span v-else v-html="prod.price"></span>
+                  <span v-if="general_texts.currecySide == 'right'">
+                    <sup v-html="general_texts.currency"></sup>
+                  </span>
+                </div>
               </div>
 
               <div v-html="prod.addInf2"></div>
@@ -439,6 +431,7 @@ export default {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: 50%;
+  margin-right: 3px;
 }
 .CanSelect:hover {
   /* background: lightblue; */

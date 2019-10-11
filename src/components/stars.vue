@@ -19,7 +19,7 @@ export default {
       fullstars: 0,
       halfstars: 0,
       remaining: 0,
-      maxStars: ProdSkin.ratingMaxVal
+      maxStars: skinProps.ratingMaxVal
     };
   },
   mounted() {
