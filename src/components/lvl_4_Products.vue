@@ -31,11 +31,7 @@
       </div>
 
       <div class="row">
-        <div
-          id="ProdsAreaCont"
-          class="col s12 "
-          :class="{ 'm9 l10': ProdSkin.hasFilters }"
-        >
+        <div id="ProdsAreaCont" class="col s12" :class="{ 'm9 l10': ProdSkin.hasFilters }">
           <!-- top banner -->
           <div
             class="row s12 banner_img_cont clickable"
@@ -64,10 +60,10 @@
             />
           </div>
           <!-- prod grid container -->
-          <div class="col l12 xl11">
+          <div class="row l12 xl11">
             <!-- indiv prod container -->
             <div
-              class="col CanSelect s12"
+              class="CanSelect col s12"
               :class="[
                 ProdSkin.productView == 'Grid' ? 'm4 l3' : 'm12',
                 index % 4 == 0 && index > 0 ? 'clear_left_4' : '',
@@ -79,7 +75,6 @@
               @click="Selected(prod)"
             >
               <hr :id="'viz_' + prod.id" class="isVizibil" />
-
               <div
                 class="prodImg col"
                 :class="ProdSkin.productView == 'Grid' ? 's5 m12' : 's4 m3'"
@@ -91,8 +86,8 @@
               <!-- <div
                 class="col"
                 :class="ProdSkin.productView == 'Grid' ? 's7 m12' : 's8 m9'"
-              > -->
-              <div>
+              >-->
+              <div class="col" :class="ProdSkin.productView == 'Grid' ? 's6 m12' : 's7 m9'">
                 <div class="ProdLbl" v-html="prod.lbl"></div>
 
                 <!-- prod by -->
@@ -100,14 +95,12 @@
 
                 <!-- rating -->
                 <div>
-                  <stars
-                    v-if="prod.rating != null"
-                    :rating="prod.rating"
-                    :skinProps="skinProps"
-                  ></stars>
-                  <span :style="skinProps.Styles.ProductsArr.reviews">{{
+                  <stars v-if="prod.rating != null" :rating="prod.rating" :skinProps="skinProps"></stars>
+                  <span :style="skinProps.Styles.ProductsArr.reviews">
+                    {{
                     prod.reviews
-                  }}</span>
+                    }}
+                  </span>
                 </div>
 
                 <div v-html="prod.addInf1"></div>
@@ -117,10 +110,7 @@
                   </span>
                   <span v-if="prod.price.toString().indexOf('.') > -1">
                     <span v-html="prod.price.toString().split('.')[0]"></span>
-                    <sup
-                      class="suprascript"
-                      v-html="prod.price.toString().split('.')[1]"
-                    ></sup>
+                    <sup class="suprascript" v-html="prod.price.toString().split('.')[1]"></sup>
                   </span>
                   <span v-else v-html="prod.price"></span>
                   <span v-if="general_texts.currecySide == 'right'">

@@ -6,16 +6,14 @@
           class="btn"
           :class="skinProps.LayoutProps.nav_buttons_class"
           @click="updateLevel('Products')"
-          >{{ general_texts.btn.bckResults }}</span
-        >
+        >{{ general_texts.btn.bckResults }}</span>
       </span>
       <span class="right">
         <span
           class="btn"
           :class="skinProps.LayoutProps.nav_buttons_class"
           @click="updateLevel('Cart')"
-          >{{ general_texts.btn.gtCheckout }}</span
-        >
+        >{{ general_texts.btn.gtCheckout }}</span>
       </span>
     </div>
     <div id="prodctCont" class="row">
@@ -30,18 +28,9 @@
                 <span v-html="Prdct.by"></span>
               </div>
               <div>
-                <stars
-                  v-if="Prdct.rating != null"
-                  :rating="Prdct.rating"
-                  :skinProps="skinProps"
-                >
-                </stars
-                >&nbsp;
-                <span class="lowTxt">
-                  <span :style="skinProps.Styles.ProductsArr.reviews">{{
-                    Prdct.reviews
-                  }}</span>
-                  &nbsp;
+                <stars v-if="Prdct.rating != null" :rating="Prdct.rating" :skinProps="skinProps"></stars>&nbsp;
+                <span class="lowTxt" :style="skinProps.Styles.ProductsArr.reviews">
+                  <span>{{Prdct.reviews}}</span>
                   <span v-html="general_texts.customRev"></span>
                 </span>
               </div>
@@ -54,16 +43,9 @@
                 <div class="col s2 navContainer" @click="slideImg(-1)">
                   <i class="medium material-icons">chevron_left</i>
                 </div>
-                <div
-                  id="mainImgContMob"
-                  class="col s8 center-align"
-                  @click="imageClicked()"
-                >
+                <div id="mainImgContMob" class="col s8 center-align" @click="imageClicked()">
                   <div>
-                    <img
-                      class="ProdImgMob"
-                      :src="prodDB.prodMediaPath + PrdImg.imgSrc"
-                    />
+                    <img class="ProdImgMob" :src="prodDB.prodMediaPath + PrdImg.imgSrc" />
                   </div>
                 </div>
                 <div class="col s2 navContainer" @click="slideImg(1)">
@@ -99,16 +81,9 @@
                 </div>
               </div>
               <!-- main img -->
-              <div
-                id="mainImgCont"
-                class="center-align clickable"
-                @click="imageClicked()"
-              >
+              <div id="mainImgCont" class="center-align clickable" @click="imageClicked()">
                 <div class="prodImg">
-                  <img
-                    id="img_displayed"
-                    :src="prodDB.prodMediaPath + PrdImg.imgSrc"
-                  />
+                  <img id="img_displayed" :src="prodDB.prodMediaPath + PrdImg.imgSrc" />
                 </div>
               </div>
             </div>
@@ -118,10 +93,7 @@
             <div class="row center-align">
               <span class="lowTxt" v-html="general_texts.price"></span> :
               <span class="prodPrice">
-                <span
-                  v-if="general_texts.currecySide == 'left'"
-                  v-html="general_texts.currency"
-                ></span>
+                <span v-if="general_texts.currecySide == 'left'" v-html="general_texts.currency"></span>
                 {{ Prdct.price }}
                 <span
                   v-if="general_texts.currecySide == 'right'"
@@ -131,10 +103,7 @@
             </div>
             <div class="row">
               <center>
-                <div
-                  style="max-width: 220px;text-align: left;"
-                  v-html="Prdct.addInf3"
-                ></div>
+                <div :style="skinProps.Styles.ProductsArr.addInf3" v-html="Prdct.addInf3"></div>
               </center>
             </div>
             <div class="row center-align">
@@ -148,9 +117,7 @@
                 class="addCart"
                 @click="addToCart()"
                 :style="skinProps.LayoutProps.cart_btn"
-              >
-                {{ general_texts.btn.addCart }}
-              </div>
+              >{{ general_texts.btn.addCart }}</div>
             </div>
             <!-- cart banner -->
             <div
@@ -158,16 +125,14 @@
               v-if="Prdct.hasBnrCartImg"
               @click="$emit('StoreBnr', 'Cart')"
             >
-              <img
-                :src="prodDB.prodMediaPath + prodDB.SponsoredProd.bannerCartImg"
-              />
+              <img :src="prodDB.prodMediaPath + prodDB.SponsoredProd.bannerCartImg" />
             </div>
           </div>
         </div>
         <!-- under the products -->
         <div class="BtmProdCont row">
           <img
-            class="btm_img hide-on-med-and-up	show-on-medium"
+            class="btm_img hide-on-med-and-up show-on-medium"
             :src="prodDB.prodMediaPath + Prdct.detailsImgArr[0]"
             alt="additional image 1 here"
           />
@@ -184,7 +149,7 @@
           @click="$emit('StoreBnr', 'Details')"
         >
           <img
-            class="btm_img hide-on-med-and-up	show-on-medium"
+            class="btm_img hide-on-med-and-up show-on-medium"
             :src="
               prodDB.prodMediaPath + prodDB.SponsoredProd.bannerDetailsImg[0]
             "
@@ -217,8 +182,7 @@
           </div>
           <div id="modalVideoContainer" v-if="PrdImg.type == 'video'">
             <video id="modalVideo" controls @play="playV()">
-              <source :src="PrdImg.videoSrc" type="video/mp4" />
-              Your browser does not support the video tag.
+              <source :src="prodDB.prodMediaPath + PrdImg.videoSrc" type="video/mp4" />Your browser does not support the video tag.
             </video>
           </div>
         </div>
@@ -333,7 +297,6 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #ProdMediaCont {
   height: 100%;
@@ -342,14 +305,12 @@ export default {
 }
 .modal-content {
   height: 90%;
-  /* background-color: bisque; */
   display: flex;
   align-items: center;
   justify-content: flex-end;
   flex-direction: column;
 }
 .modal {
-  /* border: 1px solid blue; */
   top: 5vh !important;
   max-height: 90vh;
   width: 90vw;
@@ -388,9 +349,7 @@ export default {
   max-width: 100%;
   max-height: 50vh;
 }
-/* .btm_img {
-  display: none;
-} */
+
 #mainImgContMob {
   padding: 0px;
 }
@@ -428,7 +387,6 @@ export default {
   margin: 0 auto;
   position: relative;
   max-width: 100%;
-  /* display: none; */
 }
 .selected {
   box-shadow: 0 0 3px 2px rgba(228, 121, 17, 0.5);
@@ -525,10 +483,7 @@ select {
   text-align: center;
   text-decoration: none !important;
 }
-/* .addCart:hover {
-  border-color: #a88734 #9c7e31 #846a29;
-  background: linear-gradient(to bottom, #f5d78e, #eeb933);
-} */
+
 .reviews {
   font-size: 10px;
 }

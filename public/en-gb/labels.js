@@ -1,31 +1,23 @@
 var txtMediaPath =
-  "https://cdn.ipsosinteractive.com/deploy/products/iBuy_v2/media/img/";
+  "https://media.ipsosinteractive.com/deploy/products/iBuy_v2/media/img/";
 var texts = {
   header: {
     logo_img: txtMediaPath + "amazon_logo_150x50.png",
-    opt0: "<span style='color:white;'>24/7 Customer service. Learn more</span>",
-    opt1:
-      "<span style='color:white;'><img src='" +
-      txtMediaPath +
-      "amazon_opt_1.png'></span>",
+    opt0: "24/7 Customer service. Learn more",
+    opt1: "<img src='" + txtMediaPath + "amazon_opt_1.png'>",
     opt2:
-      "<br/><div style='color:white;'><b>Departments▾ </b></span><span style='color:lightgray;'>Your Amazon.com Today's Deals Gift Cards Registry Help</span>",
-    opt3:
-      "<span style='color:white;'><img src='" +
-      txtMediaPath +
-      "amazon_opt_3.png'></span>",
+      "<br/><div><b>Departments▾ </b></span><span style='color:lightgray;'>Your Amazon.com Today's Deals Gift Cards Registry Help</span>",
+    opt3: "<img src='" + txtMediaPath + "amazon_opt_3.png'>",
     search_all_text: "All▾"
   },
   footer: {
-    back_to_top: "<span style='color:white;'>Back to top</span>",
-    col1:
-      "<span style='color:white;'><b>Get to Know Us</b><br/><br/>Careers<br/>Blog<br/>About Amazon</span>",
+    back_to_top: "Back to top",
+    col1: "<b>Get to Know Us</b><br/><br/>Careers<br/>Blog<br/>About Amazon",
     col2:
-      "<span style='color:white;'><b>Make Money with Us</b><br/><br/>Sell on Amazon<br/>Sell Your Services on Amazon<br/>Sell on Amazon Business<br/>Sell Your Apps on Amazon</span>",
+      "<b>Make Money with Us</b><br/><br/>Sell on Amazon<br/>Sell Your Services on Amazon<br/>Sell on Amazon Business<br/>Sell Your Apps on Amazon",
     col3:
-      "<span style='color:white;'><b>Amazon Payment Products</b><br/><br/>Amazon Business Card<br/>Shop with Points<br/></span>",
-    col4:
-      "<span style='color:white;'><b>Let Us Help You</b><br/><br/>Your Account<br/>Your Orders</span>",
+      "<b>Amazon Payment Products</b><br/><br/>Amazon Business Card<br/>Shop with Points<br/>",
+    col4: "<b>Let Us Help You</b><br/><br/>Your Account<br/>Your Orders",
     img1: txtMediaPath + "footer_s.png",
     img2: txtMediaPath + "footer_m.png",
     img3: txtMediaPath + "footer_l.png",
@@ -44,7 +36,7 @@ var texts = {
     itm: "items",
     currency: "$",
     currecySide: "left",
-    customRev: "<span style='color:#0066c0;'>customer reviews</span>",
+    customRev: "customer reviews",
     price: "Price",
     qty: "Quantity",
     del: "Delete",
