@@ -44,7 +44,7 @@ var ProdFilters = {
 };
 var prodDB = {
   prodMediaPath:
-    "http://media.ipsosinteractive.com/deploy/products/iBuy_v2/media/Cell1/",
+    "https://media.ipsosinteractive.com/deploy/products/iBuy_v2/media/Cell1/",
   SponsoredProd: {
     id: 2,
     bannerCartImg: "ProdSponsorCart.jpg",
