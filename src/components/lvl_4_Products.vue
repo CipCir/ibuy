@@ -31,7 +31,11 @@
       </div>
 
       <div class="row">
-        <div id="ProdsAreaCont" class="col s12" :class="{ 'm9 l10': ProdSkin.hasFilters }">
+        <div
+          id="ProdsAreaCont"
+          class="col s12"
+          :class="{ 'm9 l10': ProdSkin.hasFilters }"
+        >
           <!-- top banner -->
           <div
             class="row s12 banner_img_cont clickable"
@@ -87,19 +91,24 @@
                 class="col"
                 :class="ProdSkin.productView == 'Grid' ? 's7 m12' : 's8 m9'"
               >-->
-              <div class="col" :class="ProdSkin.productView == 'Grid' ? 's6 m12' : 's7 m9'">
+              <div
+                class="col"
+                :class="ProdSkin.productView == 'Grid' ? 's6 m12' : 's7 m9'"
+              >
                 <div class="ProdLbl" v-html="prod.lbl"></div>
 
                 <!-- prod by -->
-                <div v-html="prod.by"></div>
+                <div v-html="general_texts.by + prod.by"></div>
 
                 <!-- rating -->
                 <div>
-                  <stars v-if="prod.rating != null" :rating="prod.rating" :skinProps="skinProps"></stars>
-                  <span :style="skinProps.Styles.ProductsArr.reviews">
-                    {{
-                    prod.reviews
-                    }}
+                  <stars
+                    v-if="prod.rating != null"
+                    :rating="prod.rating"
+                    :skinProps="skinProps"
+                  ></stars>
+                  <span class="Prdct_reviews">
+                    {{ prod.reviews }}
                   </span>
                 </div>
 
@@ -108,11 +117,7 @@
                   <span v-if="general_texts.currecySide == 'left'">
                     <sup v-html="general_texts.currency"></sup>
                   </span>
-                  <span v-if="prod.price.toString().indexOf('.') > -1">
-                    <span v-html="prod.price.toString().split('.')[0]"></span>
-                    <sup class="suprascript" v-html="prod.price.toString().split('.')[1]"></sup>
-                  </span>
-                  <span v-else v-html="prod.price"></span>
+                  <span v-html="prod.price"></span>
                   <span v-if="general_texts.currecySide == 'right'">
                     <sup v-html="general_texts.currency"></sup>
                   </span>
@@ -397,10 +402,6 @@ export default {
   }
 }
 
-#headerComp {
-  height: 100px;
-  background-color: grey;
-}
 #subTitle {
   margin-left: 10px;
   margin-top: 5px;
@@ -408,14 +409,12 @@ export default {
   font-weight: bold;
 }
 .prodegCont {
-  /* background: lightblue; */
   text-align: center;
   padding: 0 20px;
   height: 150px;
 }
 
 .prodImg {
-  /* width: 100% */
   min-height: 200px;
   height: 200px;
   background-repeat: no-repeat;
@@ -424,23 +423,13 @@ export default {
   margin-right: 3px;
 }
 .CanSelect:hover {
-  /* background: lightblue; */
   cursor: pointer;
 }
 
 .paddingBox {
-  /* border: 1px solid red; */
   padding: 0px 15px;
 }
-#SponsCont {
-  background: lightcyan;
-  min-height: 100px;
-}
-
 #sortContainer {
   margin-top: 10px;
 }
-/* .isVizibil {
-  background: lightgreen;
-} */
 </style>

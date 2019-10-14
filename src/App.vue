@@ -1,5 +1,5 @@
 <template>
-  <div id="app" v-bind:style="{ 'background-color': skinProps.body_bk_color }">
+  <div id="app">
     <headerComp
       :skinProps="skinProps"
       :ProdSkin="ProdSkin"
@@ -37,11 +37,7 @@
       v-if="ProdSkin.hasSort && controls.showLevel == 'Products'"
     >
       <b>{{ texts.sorts.SortByLabel }}</b>
-      <select
-        id="SortDrop"
-        v-model="SortBy"
-        :style="skinProps.LayoutProps.sortby_btn"
-      >
+      <select id="SortDrop" class="sortby_btn" v-model="SortBy">
         <option
           v-for="srt in texts.sorts.SortArr"
           :key="srt.lbl"
@@ -511,9 +507,9 @@ export default {
 #app {
   width: 100%;
 }
-body {
+/* body {
   font-family: "Amazon Ember", Arial, sans-serif;
-}
+} */
 .lvl_container {
   width: 100%;
 }
@@ -546,8 +542,6 @@ body {
   display: block;
   float: right;
   width: 200px;
-  background: white;
-
   margin-left: 10px;
   margin-right: 10px;
   height: 30px;

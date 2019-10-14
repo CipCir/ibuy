@@ -2,18 +2,14 @@
   <div id="lvl_Main" class="lvl_container">
     <div id="navRow" class="row">
       <span class="left">
-        <span
-          class="btn"
-          :class="skinProps.LayoutProps.nav_buttons_class"
-          @click="updateLevel('Products')"
-        >{{ general_texts.btn.bckResults }}</span>
+        <span class="btn nav_buttons_class" @click="updateLevel('Products')">{{
+          general_texts.btn.bckResults
+        }}</span>
       </span>
       <span class="right">
-        <span
-          class="btn"
-          :class="skinProps.LayoutProps.nav_buttons_class"
-          @click="updateLevel('Cart')"
-        >{{ general_texts.btn.gtCheckout }}</span>
+        <span class="btn nav_buttons_class" @click="updateLevel('Cart')">{{
+          general_texts.btn.gtCheckout
+        }}</span>
       </span>
     </div>
     <div id="prodctCont" class="row">
@@ -24,13 +20,19 @@
             <!-- prod name and review -->
             <div class="row">
               <div>
-                <span v-html="Prdct.lbl"></span> &nbsp;
-                <span v-html="Prdct.by"></span>
+                <span v-html="Prdct.lbl"></span>&nbsp;<span
+                  v-html="general_texts.by + Prdct.by"
+                ></span>
               </div>
               <div>
-                <stars v-if="Prdct.rating != null" :rating="Prdct.rating" :skinProps="skinProps"></stars>&nbsp;
-                <span class="lowTxt" :style="skinProps.Styles.ProductsArr.reviews">
-                  <span>{{Prdct.reviews}}</span>
+                <stars
+                  v-if="Prdct.rating != null"
+                  :rating="Prdct.rating"
+                  :skinProps="skinProps"
+                ></stars
+                >&nbsp;
+                <span class="lowTxt Prdct_reviews">
+                  <span>{{ Prdct.reviews }}&nbsp;</span>
                   <span v-html="general_texts.customRev"></span>
                 </span>
               </div>
@@ -43,22 +45,29 @@
                 <div class="col s2 navContainer" @click="slideImg(-1)">
                   <i class="medium material-icons">chevron_left</i>
                 </div>
-                <div id="mainImgContMob" class="col s8 center-align" @click="imageClicked()">
+                <div
+                  id="mainImgContMob"
+                  class="col s8 center-align"
+                  @click="imageClicked()"
+                >
                   <div>
-                    <img class="ProdImgMob" :src="prodDB.prodMediaPath + PrdImg.imgSrc" />
+                    <img
+                      class="ProdImgMob"
+                      :src="prodDB.prodMediaPath + PrdImg.imgSrc"
+                    />
                   </div>
                 </div>
                 <div class="col s2 navContainer" @click="slideImg(1)">
                   <i class="medium material-icons">chevron_right</i>
                 </div>
               </div>
-              <!-- thumbs -->
+              <!-- thumbs  :class="{ selected: PrdImg == thumb }" -->
               <div id="tumbContMob" class="row s12 center-align noMargin">
                 <div
                   v-for="(thumb, ind) in Prdct.imgArr"
                   :key="ind"
                   class="tumbImg"
-                  :class="{ selected: PrdImg == thumb }"
+                  :class="PrdImg == thumb ? 'SelectedThumb' : ''"
                   @click="updMainImg(ind)"
                 >
                   <img :src="prodDB.prodMediaPath + thumb.imgSrc" />
@@ -74,16 +83,23 @@
                   v-for="(thumb, ind) in Prdct.imgArr"
                   :key="ind"
                   class="tumbImg"
-                  :class="{ selected: PrdImg == thumb }"
+                  :class="PrdImg == thumb ? 'SelectedThumb' : ''"
                   @click="updMainImg(ind)"
                 >
                   <img :src="prodDB.prodMediaPath + thumb.imgSrc" />
                 </div>
               </div>
               <!-- main img -->
-              <div id="mainImgCont" class="center-align clickable" @click="imageClicked()">
+              <div
+                id="mainImgCont"
+                class="center-align clickable"
+                @click="imageClicked()"
+              >
                 <div class="prodImg">
-                  <img id="img_displayed" :src="prodDB.prodMediaPath + PrdImg.imgSrc" />
+                  <img
+                    id="img_displayed"
+                    :src="prodDB.prodMediaPath + PrdImg.imgSrc"
+                  />
                 </div>
               </div>
             </div>
@@ -93,7 +109,10 @@
             <div class="row center-align">
               <span class="lowTxt" v-html="general_texts.price"></span> :
               <span class="prodPrice">
-                <span v-if="general_texts.currecySide == 'left'" v-html="general_texts.currency"></span>
+                <span
+                  v-if="general_texts.currecySide == 'left'"
+                  v-html="general_texts.currency"
+                ></span>
                 {{ Prdct.price }}
                 <span
                   v-if="general_texts.currecySide == 'right'"
@@ -103,21 +122,19 @@
             </div>
             <div class="row">
               <center>
-                <div :style="skinProps.Styles.ProductsArr.addInf3" v-html="Prdct.addInf3"></div>
+                <div class="Prdct_addInf3" v-html="Prdct.addInf3"></div>
               </center>
             </div>
             <div class="row center-align">
               {{ general_texts.qty }}
-              <select v-model="quantity">
+              <select v-model="quantity" class="qSelect">
                 <option v-for="n in 10" :key="n" :value="n">{{ n }}</option>
               </select>
             </div>
             <div class="row center-align">
-              <div
-                class="addCart"
-                @click="addToCart()"
-                :style="skinProps.LayoutProps.cart_btn"
-              >{{ general_texts.btn.addCart }}</div>
+              <div class="addCart cart_btn" @click="addToCart()">
+                {{ general_texts.btn.addCart }}
+              </div>
             </div>
             <!-- cart banner -->
             <div
@@ -125,7 +142,9 @@
               v-if="Prdct.hasBnrCartImg"
               @click="$emit('StoreBnr', 'Cart')"
             >
-              <img :src="prodDB.prodMediaPath + prodDB.SponsoredProd.bannerCartImg" />
+              <img
+                :src="prodDB.prodMediaPath + prodDB.SponsoredProd.bannerCartImg"
+              />
             </div>
           </div>
         </div>
@@ -182,7 +201,11 @@
           </div>
           <div id="modalVideoContainer" v-if="PrdImg.type == 'video'">
             <video id="modalVideo" controls @play="playV()">
-              <source :src="prodDB.prodMediaPath + PrdImg.videoSrc" type="video/mp4" />Your browser does not support the video tag.
+              <source
+                :src="prodDB.prodMediaPath + PrdImg.videoSrc"
+                type="video/mp4"
+              />
+              Your browser does not support the video tag.
             </video>
           </div>
         </div>
@@ -192,7 +215,7 @@
             v-for="(thumb, ind) in Prdct.imgArr"
             :key="ind"
             class="tumbImg"
-            :class="{ selected: PrdImg == thumb }"
+            :class="PrdImg == thumb ? 'SelectedThumb' : ''"
             @click="updMainImg(ind)"
           >
             <img :src="prodDB.prodMediaPath + thumb.imgSrc" />
@@ -339,12 +362,7 @@ export default {
   padding-top: 10px;
   font-size: 20px;
 }
-.close_modal_btn {
-  background-color: #26a69a;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 5px;
-}
+
 #img_displayed {
   max-width: 100%;
   max-height: 50vh;
@@ -363,10 +381,7 @@ export default {
 #ProdImgContMob {
   display: flex;
 }
-#ProdImgCont,
-#ProdImgContMob {
-  font-size: 21px;
-}
+
 .noMargin {
   margin-left: 0px !important;
   margin-right: 0px !important;
@@ -387,9 +402,6 @@ export default {
   margin: 0 auto;
   position: relative;
   max-width: 100%;
-}
-.selected {
-  box-shadow: 0 0 3px 2px rgba(228, 121, 17, 0.5);
 }
 .extraCol {
   display: none;
@@ -422,7 +434,7 @@ export default {
   align-items: center;
 
   width: 35px;
-  border-color: #a2a6ac;
+
   border-radius: 2px;
 
   border-style: solid;
@@ -436,36 +448,12 @@ export default {
 .tumbImg > img {
   width: 100%;
 }
-.tumbImg:hover {
-  border-color: #a2a6ac #979aa1 #82858a;
-}
+
 .tumbImg > img {
   max-height: 90%;
   max-width: 90%;
 }
-.lowTxt {
-  font-size: 13px;
-  line-height: 19px;
-  color: #555;
-}
-.prodPrice {
-  font-size: 21px;
-  line-height: 1.3;
-  color: #b12704;
-}
 
-#cartCont {
-  padding-left: 5px;
-  box-shadow: -4px 0px 3px -2px #ccc;
-}
-select {
-  display: inline-block;
-  background-color: white;
-  border: 1px solid #ddd;
-  width: auto;
-  padding: 5px;
-  border-radius: 2px;
-}
 .addCart {
   display: inline-block;
   padding: 3px;
@@ -482,10 +470,6 @@ select {
   border-width: 1px;
   text-align: center;
   text-decoration: none !important;
-}
-
-.reviews {
-  font-size: 10px;
 }
 </style>
 

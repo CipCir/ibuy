@@ -30,6 +30,7 @@ var texts = {
     img4: txtMediaPath + "banner_xl.png"
   },
   general_texts: {
+    by: "by ",
     voucher: "Voucher",
     remainingV: "Remaining voucher",
     subTot: "Subtotal",

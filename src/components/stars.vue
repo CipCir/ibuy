@@ -44,32 +44,16 @@ export default {
   }
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.fullstar {
-  background-image: url("https://cdn.ipsosinteractive.com/deploy/products/iBuy_v2/media/img/stars/amazon_full_star.png");
-}
-
-.halfstar {
-  background-image: url("https://cdn.ipsosinteractive.com/deploy/products/iBuy_v2/media/img/stars/amazon_half_star.png");
-}
-
-.emptystar {
-  background-image: url("https://cdn.ipsosinteractive.com/deploy/products/iBuy_v2/media/img/stars/amazon_empty_star.png");
-}
-
 .star {
   width: 20px;
   height: 20px;
   background-repeat: round;
   display: inline-flex;
 }
-
 .stars_container {
   display: inline-flex;
 }
-
 .starsrev {
   display: inline-flex;
   margin: auto 0px auto 10px;

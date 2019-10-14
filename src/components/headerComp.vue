@@ -1,15 +1,15 @@
 <template>
-  <div id="headerComp" v-bind:style="{ 'background-color': skinProps.header.header_bk_color }">
+  <div id="headerComp">
     <div class="row_header_first row">
-      <div class="col s7 m3 l3 valign-wrapper clickable" @click="UpdateLvl('Products')">
+      <div
+        class="col s7 m3 l3 valign-wrapper clickable"
+        @click="UpdateLvl('Products')"
+      >
         <img :src="texts.header.logo_img" alt="logo image here" />
       </div>
       <!--small device -->
       <div
-        class="col hide-on-med-and-up s5 valign-wrapper cart_container clickable"
-        v-bind:style="{          
-          color: skinProps.header.cart_color
-        }"
+        class="col hide-on-med-and-up s5 valign-wrapper cart_container clickable Head_cart_color"
         @click="UpdateLvl('Cart')"
       >
         <div>
@@ -23,54 +23,42 @@
       </div>
       <div class="col s12 m8 l6 valign-wrapper" v-if="ProdSkin.show_search">
         <div
-          class="col s2 valign-wrapper"
+          class="col s2 valign-wrapper searchBar_gen searchBar_seg1"
           v-html="texts.header.search_all_text"
-          v-bind:style="skinProps.searchBar.gen+skinProps.searchBar.seg1"
         ></div>
-        <div
-          class="col s12 valign-wrapper"
-          v-bind:style="skinProps.searchBar.gen+skinProps.searchBar.seg2"
-        >
-          <span :style="skinProps.Styles.placeholder_search" v-html="ProdSkin.placeholder_search"></span>
+        <div class="col s12 valign-wrapper searchBar_gen  searchBar_seg2">
+          <span
+            class="placeholder_search"
+            v-html="ProdSkin.placeholder_search"
+          ></span>
         </div>
-        <div
-          class="col s2 valign-wrapper"
-          v-bind:style="skinProps.searchBar.gen+skinProps.searchBar.seg3"
-        >
+        <div class="col s2 valign-wrapper searchBar_gen  searchBar_seg3">
           <i class="material-icons small">search</i>
         </div>
       </div>
       <!-- hide-on-med-and-down -->
       <div
-        class="col hide-on-med-and-down l3 right right-align"
-        v-bind:style="skinProps.Styles.header.opt0"
+        class="col hide-on-med-and-down l3 right right-align header_opt_0"
         v-html="texts.header.opt0"
       ></div>
     </div>
     <!-- second row -->
     <div class="row_header_second row">
       <div
-        class="col hide-on-small-only m3 l3 white_space_pre"
-        v-bind:style="skinProps.Styles.header.opt1"
+        class="col hide-on-small-only m3 l3 white_space_pre  header_opt_1"
         v-html="texts.header.opt1"
       ></div>
       <div
-        class="col hide-on-small-only m6 l5 white_space_pre forced_line"
-        v-bind:style="skinProps.Styles.header.opt2"
+        class="col hide-on-small-only m6 l5 white_space_pre forced_line  header_opt_2"
         v-html="texts.header.opt2"
       ></div>
       <div
-        class="col hide-on-med-and-down l2 white_space_pre"
-        v-bind:style="skinProps.Styles.header.opt3"
+        class="col hide-on-med-and-down l2 white_space_pre  header_opt_3"
         v-html="texts.header.opt3"
       ></div>
       <div
-        class="col hide-on-small-only m3 l2 valign-wrapper cart_container clickable"
+        class="col hide-on-small-only m3 l2 valign-wrapper cart_container clickable Head_cart_color"
         :class="{ addMarg: ProdSkin.hasVoucher }"
-        v-bind:style="{
-          
-          color: skinProps.header.cart_color
-        }"
         @click="UpdateLvl('Cart')"
       >
         <div>
