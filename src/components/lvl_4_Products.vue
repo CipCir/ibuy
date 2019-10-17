@@ -98,7 +98,7 @@
                 <div class="ProdLbl" v-html="prod.lbl"></div>
 
                 <!-- prod by -->
-                <div v-html="general_texts.by + prod.by"></div>
+                <div class="ProdBy" v-html="general_texts.by + prod.by"></div>
 
                 <!-- rating -->
                 <div>
@@ -114,13 +114,7 @@
 
                 <div v-html="prod.addInf1"></div>
                 <div class="prodPrice">
-                  <span v-if="general_texts.currecySide == 'left'">
-                    <sup v-html="general_texts.currency"></sup>
-                  </span>
-                  <span v-html="prod.price"></span>
-                  <span v-if="general_texts.currecySide == 'right'">
-                    <sup v-html="general_texts.currency"></sup>
-                  </span>
+                  <span v-html="FormatPrice(prod)"></span>
                 </div>
               </div>
 
@@ -187,6 +181,39 @@ export default {
   },
 
   methods: {
+    FormatPrice(prodOBJ) {
+      let priceFormat = "";
+      let FixedDecimalPrice = parseFloat(prodOBJ.price).toFixed(
+        this.skinProps.PriceFormats.FixedDecimals
+      );
+      //curency left
+      if (this.skinProps.PriceFormats.CurrencySideLeft) {
+        if (this.skinProps.PriceFormats.CurrencyUpper) {
+          priceFormat += "<sup>" + this.general_texts.currency + "</sup> ";
+        } else {
+          priceFormat += this.general_texts.currency + " ";
+        }
+      }
+      //format price value
+      if (this.skinProps.PriceFormats.Upper) {
+        let priceArr = FixedDecimalPrice.split(".");
+        priceFormat += priceArr[0];
+        if (priceArr[1]) {
+          priceFormat += "<sup>" + priceArr[1] + "</sup>";
+        }
+      } else {
+        priceFormat += FixedDecimalPrice;
+      }
+      //curency right
+      if (!this.skinProps.PriceFormats.CurrencySideLeft) {
+        if (this.skinProps.PriceFormats.CurrencyUpper) {
+          priceFormat += " <sup>" + this.general_texts.currency + "</sup>";
+        } else {
+          priceFormat += " " + this.general_texts.currency;
+        }
+      }
+      return priceFormat;
+    },
     DelayedStoreViewProd() {
       window.setTimeout(() => {
         this.ProdScroll();

@@ -10,10 +10,9 @@ var ProdSkin = {
   voucher: 50,
   show_search: true,
   show_bk_to_top: true,
-  show_footer_text: true,
-  show_footer_image: true,
+
   show_banner: true,
-  ratingMaxVal: 5,
+
   productView: "Grid" //"Grid" "List",
 };
 var ProdFilters = {
@@ -75,7 +74,7 @@ var ProductsArr = [
     by: "Primor",
     rating: 4.5,
     reviews: "14",
-    price: "25<sup>00</sup>",
+    price: 2.286,
     addInf1: null,
     addInf2: null,
     addInf3: "Size: <b>NET 64 fl oz (1.89 l)</b>"
@@ -113,7 +112,7 @@ var ProductsArr = [
     by: "WTRMLN",
     rating: 3.5,
     reviews: "37",
-    price: "17.99",
+    price: 17.99,
     addInf1: null,
     addInf2: null,
     addInf3: "Size: <b>NET 16 fl oz (473 ml)</b>"
@@ -159,7 +158,7 @@ var ProductsArr = [
     by: "Dole",
     rating: 4.5,
     reviews: "151",
-    price: "2.68",
+    price: 2.68,
     addInf1: null,
     addInf2: null,
     addInf3: "Size: <b>NET 23.5 oz (665g)</b>"
@@ -188,7 +187,7 @@ var ProductsArr = [
     by: "Noni Juice",
     rating: 4,
     reviews: "98",
-    price: "32",
+    price: 32,
     addInf1: null,
     addInf2: null,
     addInf3: "Size: <b>NET 32 fl oz (960 ml)</b>"
@@ -221,7 +220,7 @@ var ProductsArr = [
     by: "Fruit Shoot",
     rating: 3.5,
     reviews: "4",
-    price: "14.25",
+    price: 14.25,
     addInf1: null,
     addInf2: null,
     addInf3: "Size: <b>NET 8 x 6.8 fl oz (8 x 200 ml)</b>"
@@ -262,7 +261,7 @@ var ProductsArr = [
     by: "WTRMLN",
     rating: 3.5,
     reviews: "3",
-    price: "34.99",
+    price: 34.99,
     addInf1: null,
     addInf2: null,
     addInf3: "Size: <b>NET 12 fl oz (355 ml)</b>"
@@ -299,7 +298,7 @@ var ProductsArr = [
     by: "DrinkFit",
     rating: 5,
     reviews: "1",
-    price: "24.99",
+    price: 24.99,
     addInf1: null,
     addInf2: null,
     addInf3: "Size: <b>NET 64 fl oz (1.89 l)</b>"
@@ -335,7 +334,7 @@ var ProductsArr = [
     by: "Noni Juice",
     rating: 3,
     reviews: "3",
-    price: "50.00",
+    price: 50.0,
     addInf1: null,
     addInf2: null,
     addInf3: "Size: <b>NET 32 fl oz (960 ml)</b>"
@@ -376,7 +375,7 @@ var ProductsArr = [
     by: "Dole",
     rating: 4.5,
     reviews: "67",
-    price: "2.68",
+    price: 2.68,
     addInf1: null,
     addInf2: null,
     addInf3: "Size: <b>NET 23.5 oz (665g)</b>"
@@ -422,7 +421,7 @@ var ProductsArr = [
     by: "bai",
     rating: 4,
     reviews: "54",
-    price: "11.55",
+    price: 11.55,
     addInf1: null,
     addInf2: null,
     addInf3: "Size: <b>NET 6 x 18 fl oz (6 x 530 ml)</b>"

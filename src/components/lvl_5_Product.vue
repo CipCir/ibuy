@@ -21,6 +21,7 @@
             <div class="row">
               <div>
                 <span v-html="Prdct.lbl"></span>&nbsp;<span
+                  class="ProdBy"
                   v-html="general_texts.by + Prdct.by"
                 ></span>
               </div>
@@ -109,15 +110,7 @@
             <div class="row center-align">
               <span class="lowTxt" v-html="general_texts.price"></span> :
               <span class="prodPrice">
-                <span
-                  v-if="general_texts.currecySide == 'left'"
-                  v-html="general_texts.currency"
-                ></span>
-                {{ Prdct.price }}
-                <span
-                  v-if="general_texts.currecySide == 'right'"
-                  v-html="general_texts.currency"
-                ></span>
+                <span v-html="FormatPrice(Prdct)"></span>
               </span>
             </div>
             <div class="row">
@@ -273,6 +266,39 @@ export default {
     });
   },
   methods: {
+    FormatPrice(prodOBJ) {
+      let priceFormat = "";
+      let FixedDecimalPrice = parseFloat(prodOBJ.price).toFixed(
+        this.skinProps.PriceFormats.FixedDecimals
+      );
+      //curency left
+      if (this.skinProps.PriceFormats.CurrencySideLeft) {
+        if (this.skinProps.PriceFormats.CurrencyUpper) {
+          priceFormat += "<sup>" + this.general_texts.currency + "</sup> ";
+        } else {
+          priceFormat += this.general_texts.currency + " ";
+        }
+      }
+      //format price value
+      if (this.skinProps.PriceFormats.Upper) {
+        let priceArr = FixedDecimalPrice.split(".");
+        priceFormat += priceArr[0];
+        if (priceArr[1]) {
+          priceFormat += "<sup>" + priceArr[1] + "</sup>";
+        }
+      } else {
+        priceFormat += FixedDecimalPrice;
+      }
+      //curency right
+      if (!this.skinProps.PriceFormats.CurrencySideLeft) {
+        if (this.skinProps.PriceFormats.CurrencyUpper) {
+          priceFormat += " <sup>" + this.general_texts.currency + "</sup>";
+        } else {
+          priceFormat += " " + this.general_texts.currency;
+        }
+      }
+      return priceFormat;
+    },
     playV() {
       // this.videoPlayed = true;
       this.$emit("storePrdInfo", {
@@ -321,6 +347,9 @@ export default {
 </script>
 
 <style scoped>
+#cartCont {
+  padding-top: 5px;
+}
 #ProdMediaCont {
   height: 100%;
   display: flex;

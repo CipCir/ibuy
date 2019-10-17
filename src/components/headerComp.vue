@@ -17,8 +17,8 @@
           <i class="material-icons small">shopping_cart</i>
         </div>
         <div v-if="ProdSkin.hasVoucher" id="voucher">
-          {{ texts.general_texts.voucher }}: {{ texts.general_texts.currency }}
-          {{ cart.remV }}
+          {{ texts.general_texts.voucher }}:
+          <span v-html="FormatCartVal()"> </span>
         </div>
       </div>
       <div class="col s12 m8 l6 valign-wrapper" v-if="ProdSkin.show_search">
@@ -66,8 +66,8 @@
           <i class="material-icons small">shopping_cart</i>
         </div>
         <div v-if="ProdSkin.hasVoucher" id="voucher">
-          {{ texts.general_texts.voucher }}: {{ texts.general_texts.currency }}
-          {{ cart.remV }}
+          {{ texts.general_texts.voucher }}:
+          <span v-html="FormatCartVal()"> </span>
         </div>
       </div>
     </div>
@@ -84,6 +84,39 @@ export default {
     ProdSkin: Object
   },
   methods: {
+    FormatCartVal() {
+      let priceFormat = "";
+      let FixedDecimalPrice = this.cart.remV;
+      //curency left
+      if (this.skinProps.PriceFormats.CurrencySideLeft) {
+        if (this.skinProps.PriceFormats.CurrencyUpper) {
+          priceFormat +=
+            "<sup>" + this.texts.general_texts.currency + "</sup> ";
+        } else {
+          priceFormat += this.texts.general_texts.currency + " ";
+        }
+      }
+      //format price value
+      if (this.skinProps.PriceFormats.Upper) {
+        let priceArr = FixedDecimalPrice.split(".");
+        priceFormat += priceArr[0];
+        if (priceArr[1]) {
+          priceFormat += "<sup>" + priceArr[1] + "</sup>";
+        }
+      } else {
+        priceFormat += FixedDecimalPrice;
+      }
+      //curency right
+      if (!this.skinProps.PriceFormats.CurrencySideLeft) {
+        if (this.skinProps.PriceFormats.CurrencyUpper) {
+          priceFormat +=
+            " <sup>" + this.texts.general_texts.currency + "</sup>";
+        } else {
+          priceFormat += " " + this.texts.general_texts.currency;
+        }
+      }
+      return priceFormat;
+    },
     UpdateLvl(level) {
       this.$emit("updtLvl", { lvl: level });
     }

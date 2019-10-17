@@ -36,7 +36,6 @@ var texts = {
     subTot: "Subtotal",
     itm: "items",
     currency: "$",
-    currecySide: "left",
     customRev: "customer reviews",
     price: "Price",
     qty: "Quantity",

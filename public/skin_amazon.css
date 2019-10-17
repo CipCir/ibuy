@@ -18,7 +18,7 @@
   color: darkgray;
 }
 .nav_buttons_class {
-  background-color: #ff9800 !important;
+  background-color: #26a897 !important;
   color: #fff !important;
 }
 .cart_btn {
@@ -85,6 +85,9 @@
 }
 
 /*Product*/
+.ProdBy {
+  color: grey;
+}
 .Prdct_reviews {
   color: #0066c0 !important;
 }

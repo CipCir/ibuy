@@ -2,7 +2,7 @@
   <div id="lvl_cart" class="lvl_container">
     <div id="navRow" class="row">
       <span class="left">
-        <span class="btn orange" @click="Back()">{{
+        <span class="btn nav_buttons_class" @click="Back()">{{
           general_texts.btn.bckResults
         }}</span>
       </span>
@@ -31,7 +31,7 @@
         ></div>
         <div class="col s8 m9">
           <div class="ProdLbl" v-html="prod.lbl"></div>
-          <div v-html="general_texts.by + prod.by"></div>
+          <div class="ProdBy" v-html="general_texts.by + prod.by"></div>
           <div>
             <stars
               v-if="prod.rating != null"
@@ -46,20 +46,7 @@
           <div v-html="prod.addInf1"></div>
           <!-- price -->
           <div class="prodPrice">
-            <span v-if="general_texts.currecySide == 'left'">
-              <sup v-html="general_texts.currency"></sup>
-            </span>
-            <span v-if="prod.price.toString().indexOf('.') > -1">
-              <span v-html="prod.price.toString().split('.')[0]"></span>
-              <sup
-                class="suprascript"
-                v-html="prod.price.toString().split('.')[1]"
-              ></sup>
-            </span>
-            <span v-else v-html="prod.price"></span>
-            <span v-if="general_texts.currecySide == 'right'">
-              <sup v-html="general_texts.currency"></sup>
-            </span>
+            <span v-html="FormatPrice(prod.price)"></span>
           </div>
           <!-- additional info -->
           <div v-html="prod.addInf2"></div>
@@ -83,15 +70,17 @@
       <div>
         {{ general_texts.subTot }} ({{ updCart.nrProd }}
         {{ general_texts.itm }} ):
-        {{ general_texts.currency }}
-        {{ updCart.sum.toFixed(2) }}
+        <span v-html="FormatPrice(updCart.sum)"></span>
+        <!-- {{ general_texts.currency }}
+        {{ updCart.sum.toFixed(skinProps.PriceFormats.FixedDecimals) }} -->
       </div>
       <div
         v-if="ProdSkin.hasVoucher"
         :class="parseInt(updCart.remV) > 0 ? 'blue-text' : 'red-text'"
       >
-        {{ general_texts.remainingV }} {{ general_texts.currency }}
-        {{ updCart.remV }}
+        {{ general_texts.remainingV }} :
+        <span v-html="FormatPrice(updCart.remV)"></span>
+        <!-- {{ updCart.remV }} -->
       </div>
     </div>
     <div
@@ -156,6 +145,39 @@ export default {
     M.Modal.init(modal);
   },
   methods: {
+    FormatPrice(Pvalue) {
+      let priceFormat = "";
+      let FixedDecimalPrice = parseFloat(Pvalue).toFixed(
+        this.skinProps.PriceFormats.FixedDecimals
+      );
+      //curency left
+      if (this.skinProps.PriceFormats.CurrencySideLeft) {
+        if (this.skinProps.PriceFormats.CurrencyUpper) {
+          priceFormat += "<sup>" + this.general_texts.currency + "</sup> ";
+        } else {
+          priceFormat += this.general_texts.currency + " ";
+        }
+      }
+      //format price value
+      if (this.skinProps.PriceFormats.Upper) {
+        let priceArr = FixedDecimalPrice.split(".");
+        priceFormat += priceArr[0];
+        if (priceArr[1]) {
+          priceFormat += "<sup>" + priceArr[1] + "</sup>";
+        }
+      } else {
+        priceFormat += FixedDecimalPrice;
+      }
+      //curency right
+      if (!this.skinProps.PriceFormats.CurrencySideLeft) {
+        if (this.skinProps.PriceFormats.CurrencyUpper) {
+          priceFormat += " <sup>" + this.general_texts.currency + "</sup>";
+        } else {
+          priceFormat += " " + this.general_texts.currency;
+        }
+      }
+      return priceFormat;
+    },
     Back() {
       this.$emit("updCartTime", this.loadedDate);
       this.$emit("updtLvl", { lvl: "Products" });

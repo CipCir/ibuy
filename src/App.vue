@@ -200,7 +200,9 @@ export default {
   },
   mounted() {
     if (this.ProdSkin.hasVoucher) {
-      this.voucher = parseFloat(this.ProdSkin.voucher).toFixed(2);
+      this.voucher = parseFloat(this.ProdSkin.voucher).toFixed(
+        this.skinProps.PriceFormats.FixedDecimals
+      );
     }
     this.ProdRandIndx = this.ProductsArr.map(a => a.id);
     function shuffle(array) {
@@ -348,7 +350,9 @@ export default {
       this.output.time_total = new Date() - this.aux.beginTime;
 
       // set value
-      this.output.cart_val = this.updatedCart.sum.toFixed(2);
+      this.output.cart_val = this.updatedCart.sum.toFixed(
+        this.skinProps.PriceFormats.FixedDecimals
+      );
 
       //display outputs
       let vueObj = this;
@@ -469,7 +473,9 @@ export default {
         }
       });
       if (this.ProdSkin.hasVoucher) {
-        remVoucher = (this.ProdSkin.voucher - cartSum).toFixed(2);
+        remVoucher = (this.ProdSkin.voucher - cartSum).toFixed(
+          this.skinProps.PriceFormats.FixedDecimals
+        );
       }
       nrProd = this.cart.length - 1;
       return {
@@ -487,7 +493,9 @@ export default {
             cartTotal += prod.quantity * parseFloat(prod.price);
           }
         });
-        voucher = (this.ProdSkin.voucher - cartTotal).toFixed(2);
+        voucher = (this.ProdSkin.voucher - cartTotal).toFixed(
+          this.skinProps.PriceFormats.FixedDecimals
+        );
 
         return voucher;
       }
