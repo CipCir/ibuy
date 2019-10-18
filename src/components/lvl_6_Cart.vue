@@ -210,12 +210,6 @@ export default {
 #totalContainer {
   font-weight: bold;
 }
-
-.ProdLbl {
-  font-weight: bold;
-  font-size: 15px !important;
-  line-height: 1.4 !important;
-}
 .prodImg {
   min-height: 200px;
   height: 200px;

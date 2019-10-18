@@ -391,15 +391,6 @@ export default {
 .prodPrice {
   font-size: 21px;
 }
-.ProdLbl {
-  font-weight: bold;
-  font-size: 15px !important;
-  line-height: 1.4 !important;
-  max-height: 88px;
-  overflow: hidden;
-  position: relative;
-  display: block;
-}
 
 .CanSelect {
   /* border: 1px solid red; */
