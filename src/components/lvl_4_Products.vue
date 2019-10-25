@@ -29,8 +29,18 @@
           class="row hide-on-small-only"
         ></filterComp>
       </div>
-
-      <div class="row">
+      <div class="row" v-if="ShowLoader">
+        <table id="LoaderTable">
+          <tr>
+            <td>
+              <div class="progress">
+                <div class="indeterminate"></div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="row" v-else>
         <div
           id="ProdsAreaCont"
           class="col s12"
@@ -79,6 +89,7 @@
               @click="Selected(prod)"
             >
               <hr :id="'viz_' + prod.id" class="isVizibil" />
+
               <div
                 class="prodImg col"
                 :class="ProdSkin.productView == 'Grid' ? 's5 m12' : 's4 m3'"
@@ -124,6 +135,13 @@
         </div>
       </div>
     </div>
+    <div v-images-loaded:on.progress="imageProgress" style="display:none">
+      <img
+        v-for="pImg in prodFilterList"
+        :key="pImg.id"
+        :src="prodDB.prodMediaPath + pImg.imgArr[0].imgSrc"
+      />
+    </div>
   </div>
 </template>
 
@@ -131,12 +149,16 @@
 <script>
 import stars from "./stars.vue";
 import filterComp from "./filterComp.vue";
+import imagesLoaded from "vue-images-loaded";
 
 export default {
   name: "lvl_Prods",
   components: {
     stars,
     filterComp
+  },
+  directives: {
+    imagesLoaded
   },
   props: {
     general_texts: Object,
@@ -155,7 +177,9 @@ export default {
   data() {
     return {
       show_banner: this.ProdSkin.show_banner,
-      recentScroll: false
+      recentScroll: false,
+      ShowLoader: true,
+      LoadedImagesArr: []
       // SortArr: this.texts.filters.SortArr
       // SortBy: null
     };
@@ -169,10 +193,7 @@ export default {
     }
   },
   mounted() {
-    window.scrollTo(0, 0);
-    window.addEventListener("scroll", this.ProdScroll);
-    window.addEventListener("resize", this.ProdScroll);
-    this.ProdScroll();
+    // });
   },
 
   destroyed() {
@@ -181,6 +202,23 @@ export default {
   },
 
   methods: {
+    imageProgress(instance, image) {
+      const result = image.isLoaded ? "loaded" : "broken";
+      // console.log("image is " + result + " for " + image.img.src);
+      if (image.isLoaded) {
+        this.LoadedImagesArr.push(image.img.src);
+      }
+      if (this.LoadedImagesArr.length == this.prodFilterList.length) {
+        let vueObj = this;
+        this.ShowLoader = false;
+        window.setTimeout(() => {
+          window.scrollTo(0, 0);
+          window.addEventListener("scroll", this.ProdScroll);
+          window.addEventListener("resize", this.ProdScroll);
+          vueObj.ProdScroll();
+        }, 1);
+      }
+    },
     FormatPrice(prodOBJ) {
       let priceFormat = "";
       let FixedDecimalPrice = parseFloat(prodOBJ.price).toFixed(
@@ -253,7 +291,7 @@ export default {
           }
         });
         this.$emit("SaveViewed", vizArr);
-        // console.log(vizArr);
+        // console.log(vueObj.seenProds);
         window.setTimeout(() => {
           this.recentScroll = false;
         }, 100);
@@ -449,5 +487,12 @@ export default {
 }
 #sortContainer {
   margin-top: 10px;
+}
+#LoaderTable {
+  width: 66%;
+  display: table;
+  border-collapse: collapse;
+  border-spacing: 0;
+  height: 60vh;
 }
 </style>
