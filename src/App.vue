@@ -75,6 +75,7 @@
       :texts="texts"
       :skinProps="skinProps"
       :ImgIndx="ImgIndx"
+      :ProdSkin="ProdSkin"
       v-on:addInCart="AddProdInCart($event)"
       v-on:updtLvl="UpdateLvl($event)"
       v-on:storePrdInfo="StorePrdctInfo($event)"
@@ -470,6 +471,7 @@ export default {
       this.cart.forEach(prod => {
         if (prod.id != -1) {
           cartSum += prod.quantity * parseFloat(prod.price);
+          nrProd += prod.quantity;
         }
       });
       if (this.ProdSkin.hasVoucher) {
@@ -477,7 +479,7 @@ export default {
           this.skinProps.PriceFormats.FixedDecimals
         );
       }
-      nrProd = this.cart.length - 1;
+      // nrProd = this.cart.length - 1;
       return {
         sum: cartSum,
         remV: remVoucher,

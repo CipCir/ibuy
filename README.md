@@ -30,7 +30,7 @@ npm run test
 npm run lint
 ```
 
-/deploy/products/iBuy_v2/v2
+/deploy/products/iBuy_v2/
 https://media.ipsosinteractive.com/deploy/products/iBuy_v2/index.html
 
 ### Customize configuration

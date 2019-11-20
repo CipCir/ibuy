@@ -104,7 +104,7 @@
               >-->
               <div
                 class="col"
-                :class="ProdSkin.productView == 'Grid' ? 's6 m12' : 's7 m9'"
+                :class="ProdSkin.productView == 'Grid' ? 's6 m12' : 's7 m8 l8'"
               >
                 <div class="ProdLbl" v-html="prod.lbl"></div>
 
@@ -450,11 +450,11 @@ export default {
   }
 }
 @media only screen and (max-width: 992px) {
-  .clear_left_3 {
-    clear: left;
-  }
   .clear_left_4 {
     clear: none;
+  }
+  .clear_left_3 {
+    clear: left;
   }
 }
 

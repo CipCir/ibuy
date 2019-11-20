@@ -77,9 +77,19 @@
             </div>
             <!--  -->
             <!-- desktop -->
-            <div class="row hide-on-small-only" id="TumbAndProd">
+            <div
+              class="row hide-on-small-only"
+              id="TumbAndProd"
+              :class="{
+                flexColumn: ProdSkin.thumbPoz == 'bottom'
+              }"
+            >
               <!-- thumbs -->
-              <div id="tumbCont" class="center-align">
+              <div
+                id="tumbCont"
+                class="center-align"
+                v-if="ProdSkin.thumbPoz == 'left'"
+              >
                 <div
                   v-for="(thumb, ind) in Prdct.imgArr"
                   :key="ind"
@@ -101,6 +111,22 @@
                     id="img_displayed"
                     :src="prodDB.prodMediaPath + PrdImg.imgSrc"
                   />
+                </div>
+              </div>
+              <div
+                id="tumbContMob"
+                class="row s12 center-align noMargin"
+                v-if="ProdSkin.thumbPoz == 'bottom'"
+                style="width:100%"
+              >
+                <div
+                  v-for="(thumb, ind) in Prdct.imgArr"
+                  :key="ind"
+                  class="tumbImg"
+                  :class="PrdImg == thumb ? 'SelectedThumb' : ''"
+                  @click="updMainImg(ind)"
+                >
+                  <img :src="prodDB.prodMediaPath + thumb.imgSrc" />
                 </div>
               </div>
             </div>
@@ -234,6 +260,7 @@ export default {
     Prdct: Object,
     texts: Object,
     skinProps: Object,
+    ProdSkin: Object,
     ImgIndx: Number
   },
   data() {
@@ -499,6 +526,9 @@ export default {
   border-width: 1px;
   text-align: center;
   text-decoration: none !important;
+}
+.flexColumn {
+  flex-direction: column;
 }
 </style>
 

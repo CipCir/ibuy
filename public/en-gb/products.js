@@ -1,5 +1,5 @@
 var ProdSkin = {
-  TestMode: false,
+  TestMode: true,
   placeholder_search: "Fruit juice",
   hasVoucher: true,
   hasSort: true,
@@ -10,9 +10,8 @@ var ProdSkin = {
   voucher: 50,
   show_search: true,
   show_bk_to_top: true,
-
   show_banner: true,
-
+  thumbPoz: "left", //"left" "bottom"
   productView: "Grid" //"Grid" "List",
 };
 var ProdFilters = {
