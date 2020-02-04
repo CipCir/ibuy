@@ -3,11 +3,11 @@ var txtMediaPath =
 var texts = {
   header: {
     logo_img: txtMediaPath + "amazon_logo_150x50.png",
-    opt0: "24/7 Customer service. Learn more",
-    opt1: "<img src='" + txtMediaPath + "amazon_opt_1.png'>",
+    opt0: null,
+    opt1: "<br/><span style='color:white; vertical-align: baseline;'><img src='" + txtMediaPath + "amazon_deliver.png'></span><span style='color:white; vertical-align: top;'> Deliver to your doorstep</span>",
     opt2:
-      "<br/><div><b>Departments▾ </b></span><span style='color:lightgray;'>Your Amazon.com Today's Deals Gift Cards Registry Help</span>",
-    opt3: "<img src='" + txtMediaPath + "amazon_opt_3.png'>",
+      "<br/><div><span style='color:lightgray;'>Today's Deals&nbsp;&nbsp;&nbsp;Help&nbsp;&nbsp;&nbsp;Browsing History&nbsp;&nbsp;&nbsp;My Amazon.com&nbsp;&nbsp;&nbsp;Buy Again&nbsp;&nbsp;&nbsp;Gift Cards</span>",
+    opt3: null,
     search_all_text: "All▾"
   },
   footer: {

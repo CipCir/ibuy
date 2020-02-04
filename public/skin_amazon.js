@@ -1,10 +1,10 @@
 var skinProps = {
   ratingMaxVal: 5,
   PriceFormats: {
-    Upper: false,
+    Upper: true,
     CurrencyUpper: true,
     CurrencySideLeft: true,
-    FixedDecimals: 1
+    FixedDecimals: 2
   },
   footer: {
     show_footer_text: true,

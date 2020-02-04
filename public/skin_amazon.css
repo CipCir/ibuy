@@ -18,7 +18,7 @@
   color: darkgray;
 }
 .nav_buttons_class {
-  background-color: #26a897 !important;
+  background-color: #ff9800 !important;
   color: #fff !important;
 }
 .cart_btn {
@@ -27,7 +27,7 @@
 }
 .CheckoutBtn {
   border-color: #ca7c1b #be751a #a56616;
-  background: #f0c14b;
+  background: linear-gradient(to bottom, #f7dfa5, #f0c14b);
 }
 .sortby_btn {
   background-image: linear-gradient(to right, white 10%, white 90%, gray 50%);
@@ -113,7 +113,7 @@
 .prodPrice {
   font-size: 21px;
   line-height: 1.3;
-  color: #b12704;
+  color: #111;
 }
 .header_opt_0,
 .header_opt_1,
@@ -144,7 +144,7 @@
 }
 .searchBar_seg1 {
   background-color: #f3f3f3;
-  width: 50px;
+  width: 50px !important;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
   padding-left: 5px;
@@ -158,7 +158,7 @@
 }
 .searchBar_seg3 {
   background-color: #febd69;
-  width: 50px;
+  width: 50px !important;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
 }

@@ -158,7 +158,7 @@ var ProductsArr = [
     rating: 4.5,
     reviews: "151",
     price: 2.68,
-    addInf1: null,
+    addInf1: "Free shipping",
     addInf2: null,
     addInf3: "Size: <b>NET 23.5 oz (665g)</b>"
   },
@@ -188,7 +188,7 @@ var ProductsArr = [
     reviews: "98",
     price: 32,
     addInf1: null,
-    addInf2: null,
+    addInf2: "Only 5 left in stock - order soon",
     addInf3: "Size: <b>NET 32 fl oz (960 ml)</b>"
   },
   {
@@ -334,8 +334,8 @@ var ProductsArr = [
     rating: 3,
     reviews: "3",
     price: 50.0,
-    addInf1: null,
-    addInf2: null,
+    addInf1: "Free shipping",
+    addInf2: "Save 5% with coupon",
     addInf3: "Size: <b>NET 32 fl oz (960 ml)</b>"
   },
   {
@@ -422,7 +422,7 @@ var ProductsArr = [
     reviews: "54",
     price: 11.55,
     addInf1: null,
-    addInf2: null,
+    addInf2: "Only 13 left in stock - order soon.",
     addInf3: "Size: <b>NET 6 x 18 fl oz (6 x 530 ml)</b>"
   }
 ];
